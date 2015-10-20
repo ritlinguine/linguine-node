@@ -1,7 +1,7 @@
 (function(){
 
   angular
-    .module('linguine.corpora', ['ui.router', 'angularFileUpload'])
+    .module('linguine.corpora', ['ui.router', 'angularFileUpload','angularSpinner'])
     .config(config);
 
   function config($stateProvider){

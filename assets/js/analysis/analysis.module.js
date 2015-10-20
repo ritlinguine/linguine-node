@@ -1,7 +1,7 @@
 (function(){
 
   angular
-    .module('linguine.analysis', ['ui.router'])
+    .module('linguine.analysis', ['ui.router','angularSpinner'])
     .config(config);
 
   function config($stateProvider){

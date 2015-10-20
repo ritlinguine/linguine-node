@@ -15,6 +15,7 @@
         $scope.analysis = data;
         $scope.defaultView();
         $scope.visualize();
+		usSpinnerService.stop('spinner-1');
       })
 
     $http.get('/api/corpora')

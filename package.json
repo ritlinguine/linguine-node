@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
-    "start": "./bin/www",
-    "ldap": "./fix_ldap.sh"
+    "start": "node ./bin/www",
+    "ldap": "fix_ldap.sh"
   },
   "repository": {
     "type": "git",

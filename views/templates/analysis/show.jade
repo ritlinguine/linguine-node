@@ -9,6 +9,7 @@
         btn.btn.btn-lg.btn-default(ng-click="delete()")
           .glyphicon.glyphicon-trash
   br
+  <span us-spinner spinner-key="spinner-1" spinner-start-active="true"></span>
   h4.no-margin(ng-repeat="corpora_id in analysis.corpora_ids") {{ findCorpus(corpora_id).title }} ({{findCorpus(corpora_id).fileName}})
   tabset(justified='true')
       tab(heading='Visualization')

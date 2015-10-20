@@ -20,10 +20,11 @@
           $rootScope.$emit("event:angularFlash");
         })
     };
-
+	
     $http.get('/api/corpora/' + $stateParams.id)
       .success(function (data) {
         $scope.corpus = data;
+		usSpinnerService.stop('spinner-2');
       })
       .error(function (data) {
         flash.danger.setMessage("You need to be the owner of this corpus to view it");
