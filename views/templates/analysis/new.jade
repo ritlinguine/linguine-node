@@ -1,24 +1,24 @@
 .container.app-container
   form(ng-submit="onCreateAnalysis()")
     tabset(justified='true')
-      tab(heading='1. Select Corpora')
-        .list-group
-          a.list-group-item(ng-repeat="corpus in corpora",ng-class="{active:corpus.active}",ng-click="onCorpusClick(this)")
-            h4.list-group-item-heading
-              strong {{ corpus.title }}
-            p.list-group-item-text
-              | {{ corpus.fileName }}
-
-      tab(heading='2. Analysis Type')
+      tab(id='analysis-tab' active="isActiveTab(0)" ng-click="toCorpusTab()" heading='1. Analysis Type')
         .list-group
           a.list-group-item(ng-repeat="analysis in analysisTypes",ng-class="{active:selectedAnalysis==analysis}",ng-click="onAnalysisClick(this)")
             h4.list-group-item-heading
               strong {{ analysis.name }}
             p.list-group-item-text
               | {{ analysis.description }}
-        button.btn.btn-lg.btn-primary.full-width(type="submit") Create Analysis
-      
-      tab(id='preprocessing-tab' disabled="preprocessingActive" heading='3. Preprocessing' ng-click="onPreprocessingClick(this)")
+        button.btn.btn-lg.btn-primary(type="button" ng-click="toCorpusTab()") Next
+      tab(id='corpus-tab' active="isActiveTab(1)" ng-click="toCorpusTab()" heading='2. Select Corpora')
+        .list-group
+          a.list-group-item(ng-repeat="corpus in corpora",ng-class="{active:corpus.active}",ng-click="onCorpusClick(this)")
+            h4.list-group-item-heading
+              strong {{ corpus.title }}
+            p.list-group-item-text
+              | {{ corpus.fileName }}  
+        button.btn.btn-lg.btn-primary(type="button" ng-click="toAnalysisTab()") Previous
+        button.btn.btn-lg.btn-primary(type="button" ng-click="toPreprocessingTab()") Next
+      tab(id='preprocessing-tab' active="isActiveTab(2)" ng-click="toCorpusTab()" disabled="preprocessingActive" heading='3. Preprocessing' )
         .list-group
           a.list-group-item(ng-repeat="cleanup in cleanupTypes",ng-class="{active:cleanup.active}",ng-click="onCleanupClick(this)")
             h4.list-group-item-heading
@@ -31,3 +31,5 @@
               strong {{ tokenizer.name }}
             p.list-group-item-text
               | {{ tokenizer.description }}
+        button.btn.btn-lg.btn-primary(type="button" ng-click="toCorpusTab()") Previous
+        button.btn.btn-lg.btn-primary(type="submit") Create Analysis

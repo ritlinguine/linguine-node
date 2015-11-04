@@ -6,6 +6,7 @@
 
   function AnalysisNewController($http, $scope, $state, $rootScope, flash) {
     $scope.preprocessingActive = true;
+    $scope.currentTab = 0;
     $scope.analysisTypes = [
       {
         name: "Part of Speech Tagging",
@@ -133,6 +134,24 @@
         $rootScope.$emit("event:angularFlash");
       }
     }
+    $scope.isActiveTab = function(index){
+      return $scope.currentTab == index;
+    }
+    $scope.toCorpusTab = function () {
+      $scope.currentTab = 1;
+    };
+    $scope.toAnalysisTab = function () {
+      $scope.currentTab = 0;
+    };
+    $scope.toPreprocessingTab = function () {
+      if($scope.selectedAnalysis) {
+        $scope.currentTab = 2;
+      }else{
+        flash.danger.setMessage('Please select an analysis before selecting preprocessing options.');
+        $rootScope.$emit("event:angularFlash");
+      }
+    };
+
     $scope.onCreateAnalysis = function () {
       try {
         var payload = {
