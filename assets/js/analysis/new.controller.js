@@ -109,6 +109,15 @@
     $scope.cleanupTypes = {
       "pos_tag": [cleanups.stem_lancaster, cleanups.stem_porter, cleanups.stem_snowball,
         cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp,
+        cleanups.removepunct ],
+      "sentence_tokenize": [cleanups.stem_lancaster, cleanups.stem_porter, cleanups.stem_snowball,
+        cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp,
+        cleanups.removepunct ],
+      "tfidf": [cleanups.stem_lancaster, cleanups.stem_porter, cleanups.stem_snowball,
+        cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp,
+        cleanups.removepunct ],
+      "wordcloudop": [cleanups.stem_lancaster, cleanups.stem_porter, cleanups.stem_snowball,
+        cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp,
         cleanups.removepunct ]
     };
     
@@ -182,7 +191,11 @@
     };
 
     $scope.onTokenizerClick = function(e) {
-      $scope.selectedTokenizer = e.tokenizer;
+      if($scope.selectedTokenizer == e.tokenizer){
+        $scope.selectedTokenizer = null;
+      }else{
+        $scope.selectedTokenizer = e.tokenizer;
+      }
     };
 
     $scope.onPreprocessingTabClick = function(e) {
@@ -231,7 +244,13 @@
             return cleanupType.unfriendly_name;
           }),
           operation: $scope.selectedAnalysis.unfriendly_name,
-          tokenizer: $scope.selectedTokenizer.unfriendly_name,
+          tokenizer: function(){
+            if($scope.selectedTokenizer){
+              return $scope.selectedTokenizer.unfriendly_name;
+            }else{
+              return "";
+            }
+          },
           library: "",
           transaction_id: "",
           user_id: ""
