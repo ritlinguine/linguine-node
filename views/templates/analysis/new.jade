@@ -8,7 +8,7 @@
               strong {{ analysis.name }}
             p.list-group-item-text
               | {{ analysis.description }}
-        button.btn.btn-lg.btn-primary(type="button" ng-click="toCorpusTab()") Next
+        button.btn.btn-lg.btn-primary(class="next-btns" type="button" ng-click="toCorpusTab()") Next
       tab(id='corpus-tab' active="isActiveTab(1)" ng-click="toCorpusTab()" heading='2. Select Corpora')
         .list-group
           a.list-group-item(ng-repeat="corpus in corpora",ng-class="{active:corpus.active}",ng-click="onCorpusClick(this)")
@@ -17,7 +17,7 @@
             p.list-group-item-text
               | {{ corpus.fileName }}  
         button.btn.btn-lg.btn-primary(type="button" ng-click="toAnalysisTab()") Previous
-        button.btn.btn-lg.btn-primary(type="button" ng-click="toPreprocessingTab()") Next
+        button.btn.btn-lg.btn-primary(class="next-btns" type="button" ng-click="toPreprocessingTab()") Next
       tab(id='preprocessing-tab' active="isActiveTab(2)" ng-click="toCorpusTab()" disabled="preprocessingActive" heading='3. Preprocessing' )
         .list-group
           a.list-group-item(ng-repeat="cleanup in cleanupTypes",ng-class="{active:cleanup.active}",ng-click="onCleanupClick(this)")
@@ -32,4 +32,4 @@
             p.list-group-item-text
               | {{ tokenizer.description }}
         button.btn.btn-lg.btn-primary(type="button" ng-click="toCorpusTab()") Previous
-        button.btn.btn-lg.btn-primary(type="submit") Create Analysis
+        button.btn.btn-lg.btn-primary.next-btns(type="submit") Create Analysis
