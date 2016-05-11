@@ -21,6 +21,13 @@
         })
     };
 
+    $scope.confirmDeleteCorpora = function() {
+      if($window.confirm("Are you sure you want to delete this corpora?"))
+      {
+        $scope.delete();
+      }
+    };
+
     $http.get('api/corpora/' + $stateParams.id)
       .success(function (data) {
         $scope.corpus = data;
