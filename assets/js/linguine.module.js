@@ -10,9 +10,10 @@
       ])
     .config(config);
 
-  function config($stateProvider, $locationProvider, $urlRouterProvider){
+  function config($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider){
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
+    $compileProvider.debugInfoEnabled(false);
 
     $stateProvider
       .state('linguine', {
