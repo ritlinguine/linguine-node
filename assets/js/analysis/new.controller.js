@@ -28,6 +28,14 @@
         tokenizerRequired: true
       },
       {
+        name: "Splat",
+        unfriendly_name: "splat",
+        description: "",
+        multipleCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false 
+      },
+      {
         name: "Part of Speech Tagging (Stanford CoreNLP)",
         unfriendly_name: "nlp-pos",
         description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. ",
@@ -109,6 +117,7 @@
       "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
       "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
       "nlp-pos": [],
+      "splat": [],
       "nlp-ner": [],
       "nlp-coref": [],
       "nlp-sentiment": [],
@@ -268,7 +277,6 @@
       }
 
       try {
-
         usSpinnerService.spin('analysisProcSpinner');
         theDate = new Date();
         var payload = {
