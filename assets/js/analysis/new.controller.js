@@ -28,9 +28,9 @@
         tokenizerRequired: true
       },
       {
-        name: "Splat",
-        unfriendly_name: "splat",
-        description: "",
+        name: "Disfluency Analysis (SPLAT)",
+        unfriendly_name: "splat-disfluency",
+        description: "This operation parses the text of the corpus and gathers some metrics for disfluencies, such as 'UH' and 'UM'.",
         multipleCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false 
@@ -117,7 +117,7 @@
       "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
       "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
       "nlp-pos": [],
-      "splat": [],
+      "splat-disfluency": [],
       "nlp-ner": [],
       "nlp-coref": [],
       "nlp-sentiment": [],
