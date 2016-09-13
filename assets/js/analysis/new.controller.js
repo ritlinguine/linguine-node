@@ -33,7 +33,23 @@
         description: "This operation parses the text of the corpus and gathers some metrics for disfluencies, such as 'UH' and 'UM'.",
         multipleCorporaAllowed: false,
         tokenAllowed: false,
-        tokenizerRequired: false 
+        tokenizerRequired: false
+      },
+      {
+        name: "N-gram Analysis (SPLAT)",
+        unfriendly_name: "splat-ngrams",
+        description: "This operation extracts the bigrams and trigrams from the corpus using the NLTK <INSERT_TOKENIZER_NAME>.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenierRequired: false
+      },
+      {
+        name: "Syntactic Complexity Analysis (SPLAT)",
+        unfriendly_name: "splat-complexity",
+        description: "This operation calculates four different types of syntactic complexity: content density, idea density, Yngve score, and Frazier score.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenierRequired: false
       },
       {
         name: "Part of Speech Tagging (Stanford CoreNLP)",
@@ -118,6 +134,8 @@
       "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
       "nlp-pos": [],
       "splat-disfluency": [],
+      "splat-ngrams": [],
+      "splat-complexity": [],
       "nlp-ner": [],
       "nlp-coref": [],
       "nlp-sentiment": [],

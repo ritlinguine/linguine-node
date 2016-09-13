@@ -30,7 +30,9 @@ module.exports = function(app){
       if(users.length === 0) {
         User.create({ dce: user.uid, name: user.cn }, function(err, user){
           var files = ['1928 News article', '2015 News article', 'My Bondage and My Freedom excerpt',
-            'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt'];
+            'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt',
+            '310-C1_Subject_1', '310-C1_Subject_2', '310-C1-Subject_3',
+            '310-C1_Subject_4'];
           files.forEach(function(file) {
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
