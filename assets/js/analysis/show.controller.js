@@ -624,6 +624,18 @@
     $scope.renderPlainText('relation');
   }
 
+  function visualizeSplatNgrams() {
+    console.log('ngrams');
+  }
+  
+  function visualizeSplatComplexity() {
+    console.log('complexity');
+  }
+  
+  function visualizeSplatDisfluency() {
+    console.log('disfluency');
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -647,6 +659,15 @@
           break;
         case "nlp-relation":
           $scope.visualizeRelation();
+          break;
+        case "splat-complexity":
+          visualizeSplatComplexity();
+          break;
+        case "splat-disfluency":
+          visualizeSplatDisfluency();
+          break;
+        case "splat-ngrams":
+          visualizeSplatNgrams();
           break;
         default:
           break;
