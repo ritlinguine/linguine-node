@@ -31,9 +31,16 @@
       $scope.analysis = data;
       var blob = new Blob([JSON.stringify(data.result)], {type: 'text/plain'});
       var url = $window.URL || $window.webkitURL;
+      
+      /* 
+       * When data for an analysis is successfully otained, 
+       * first render the default JSON view, then it's 
+       * cooresponding visualization(s)
+      */
       $scope.fileUrl = url.createObjectURL(blob);
       $scope.defaultView();
       $scope.visualize();
+
     });
 
     $http.get('api/corpora')
@@ -79,20 +86,29 @@
       return d.toLocaleDateString() + " " + d.toLocaleTimeString()
     };
 
+    /*Renders the 'default' JSON viewer with the result of a given
+     * analysis that is bound to scope. This function will truncate 
+     * analysis data depending on the 'analysis' that is performed
+     */
     $scope.defaultView = function() {
-      $scope.results = angular.copy($scope.analysis.result);
-        
-      $scope.sentenceData = $scope.analysis.result.sentences[$scope.sentenceIndex];
-      $scope.sentimentTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].sentiment_json;
-      $scope.depsTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].deps_json;
+      if($scope.analysis.analysis.includes('splat')) {
+        $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
+      }
 
-      for(var i = 0; i < $scope.results.length; i++) {
-        $scope.results[i].deps_json = []; 
-        $scope.results[i].sentiment_json = []; 
+      else {
+        $scope.results = angular.copy($scope.analysis.result);
+          
+        $scope.sentenceData = $scope.analysis.result.sentences[$scope.sentenceIndex];
+        $scope.sentimentTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].sentiment_json;
+        $scope.depsTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].deps_json;
+
+        for(var i = 0; i < $scope.results.length; i++) {
+          $scope.results[i].deps_json = []; 
+          $scope.results[i].sentiment_json = []; 
+        }
       }
 
       // create the editor
-
       var container = document.getElementById("jsoneditor");
       var editor = new JSONEditor(container);
       editor.set($scope.results);
@@ -102,6 +118,11 @@
       expandBtn.parentNode.removeChild(expandBtn);
 
     };
+
+    function truncateSplatResponse(jsonData) {
+      console.log('Heres some data', jsonData);
+      return jsonData;
+    }
 
     $scope.getText = function(id)
     {

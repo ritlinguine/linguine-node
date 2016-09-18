@@ -32,6 +32,7 @@ public
 .idea
 *.swp
 *.swo
+*.swn
 
 # Process kill script (jmp3833)
 kill-procs.sh

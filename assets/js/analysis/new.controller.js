@@ -313,6 +313,7 @@
 
         $http.post('api/analysis', payload)
         .success(function (data) {
+          console.log(data);
           usSpinnerService.stop('analysisProcSpinner');
           $state.go('linguine.analysis.index');
         })
