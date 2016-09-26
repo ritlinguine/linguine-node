@@ -52,7 +52,7 @@
         tokenierRequired: false
       },
       {
-        name: "Part of Speech Tagging (Stanford CoreNLP)",
+        name: "Syntactic Parse Trees w/ Part of Speech Tags (Stanford CoreNLP)",
         unfriendly_name: "nlp-pos",
         description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. ",
         multipleCorporaAllowed: false,

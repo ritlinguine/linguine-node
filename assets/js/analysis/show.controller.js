@@ -630,75 +630,16 @@
   
   function visualizeSplatComplexity() {
     console.log('complexity');
-    var table = '<br><br><table class=".tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}">';
-    table += '<tr><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl"></th><th class="tg-y4wl">Value</th></tr>';
-    table += '<tr><td style="color:green;">Content Density:</td><td>' + $scope.results[0]["content_density"] + '</td></tr>';
-    table += '<tr><td>Idea Density:</td><td>' + $scope.results[0]["idea_density"] + '</td></tr>';
-    table += '<tr><td>Flesch Readability:</td><td>' + $scope.results[0]["flesch_score"] + '</td></tr>';
-    table += '<tr><td>Flesch-Kincaid Score:</td><td>' + $scope.results[0]["kincaid_score"] + '</td></tr>';
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '">';
+    table += '<tr><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th></tr>';
+    table += '<tr><td style="color:green;">Content Density:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["content_density"] + '</td></tr>';
+    table += '<tr><td style="color:green;">Idea Density:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["idea_density"] + '</td></tr>';
+    table += '<tr><td style="color:green;">Flesch Readability:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["flesch_score"] + '</td></tr>';
+    table += '<tr><td style="color:green;">Flesch-Kincaid Score:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["kincaid_score"] + '</td></tr>';
     table += '</table>';
     document.getElementById('graph').innerHTML = table;
-/*    var parsed_data = $scope.results;
-    var TYPE = [];
-    var VALUE = [];
-    $.each(parsed_data, function (k, v) {
-        TYPE.push(k);
-        VALUE.push(v);
-    });
-    var temp_data = [];
-    for (var i = 0; i < TYPE.length; i++) {
-        var temp_item = {};
-        temp_item["TYPE"] = TYPE[i];
-        temp_item["VALUE"] = VALUE[i];
-        temp_data.push(temp_item);
-    }
-
-    // Set the width to be the width of it's container.
-    var data = temp_data;
-    var selection = d3.select("#graph");
-    var width = selection[0][0].clientWidth;
-
-    var height = 300,
-        paddingTop = 20, paddingRight = 20, paddingBottom = 60, paddingLeft = 30,
-        x  = d3.scale.ordinal().rangeRoundBands([0, width - paddingLeft - paddingRight], 0.1),
-        y  = d3.scale.linear().range([height, 0]),
-        yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-width + paddingLeft + paddingRight),
-        xAxis = d3.svg.axis().scale(x).orient('bottom');
-
-    vis = d3.select('#graph')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height + paddingTop + paddingBottom)
-        .append('g')
-        .attr('transform', 'translate(' + paddingLeft + ',' + paddingTop + ')');
-
-    var max = d3.max(data, function(d) { return d.VALUE; });
-    x.domain(data.map(function (d) { return d.TYPE; }));
-    y.domain([0, max]);
-
-    vis.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
-
-    vis.append("g")
-        .attr("class", "x axis")
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis)
-        .selectAll('.x.axis g')
-        // Alter to change which bars get an x-label.
-        .style('display', function (d, i) { return i % 1 != 0  ? 'none' : 'block' });
-
-    var bars = vis.selectAll('g.bar')
-        .data(data)
-        .enter().append('g')
-        .attr('class', 'bar')
-        .style({fill: randomColor});
-
-    bars.append('rect')
-        .attr('width', function() { return x.rangeBand() })
-        .attr('x', function(d) { return x(d.TYPE) })
-        .attr('height', function(d) { return height - y(d.VALUE) })
-        .attr('y', function(d) { return y(d.VALUE) });*/
   }
 
   function visualizeSplatDisfluency() {
