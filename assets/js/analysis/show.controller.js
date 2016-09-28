@@ -631,13 +631,11 @@
   function visualizeSplatPOSFrequencies() {
     console.log('pos_counts');
     console.log($scope.results);
-    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
-    var table = '<table class=' + style + '">';
-    table += '<tr><th class="tg-031e">Tag</th><th>&nbsp;&nbsp;</th><th class="tg-031e">Words</th><th>&nbsp;&nbsp;</th><th class="tg-yw4l">Frequency</th></tr>';
-    //table += '</table>';
-    //var table = '';
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<br><table class=' + style + '">';
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Tag</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-031e" style="text-align: center;">Frequency</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Word types (capitalization maintained)</th></tr>';
     for(var item in $scope.results[0]['pos_tags']) {
-      table += '<tr><td style="color: green;">' + item + '</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["pos_tags"][item].join(", ") + '</td><td>&nbsp;&nbsp;</td><td style="color: red;">' + $scope.results[0]["pos_counts"][item] + '</td></tr>';
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="color: darkgreen; text-align: center;"><b>' + item + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: red; text-align: center;"><b>' + $scope.results[0]["pos_counts"][item] + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.results[0]["pos_tags"][item].join("&nbsp;&nbsp;&nbsp;") + '</b></td></tr>';
     }
     table += '</table>';
     document.getElementById('graph').innerHTML = table;
@@ -647,12 +645,12 @@
     console.log('complexity');
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
-    var table = '<table class=' + style + '">';
-    table += '<tr><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th></tr>';
-    table += '<tr><td style="color:green;">Content Density:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["content_density"] + '</td></tr>';
-    table += '<tr><td style="color:green;">Idea Density:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["idea_density"] + '</td></tr>';
-    table += '<tr><td style="color:green;">Flesch Readability:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["flesch_score"] + '</td></tr>';
-    table += '<tr><td style="color:green;">Flesch-Kincaid Score:</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["kincaid_score"] + '</td></tr>';
+    var table = '<br><table class=' + style + '">';
+    table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Content density is the ratio of open-class words (nouns, verbs, adjectives, adverbs) to closed-class words (pronouns, determiners, etc.)." style="color: darkgreen !important;"><b>Content Density:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["content_density"]).toFixed(3) + '</td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Idea density is the number of expressed prepositions (as, at, by, in, for, etc.) divided by the number of words." style="color: darkgreen !important;"><b>Idea Density:</b><a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["idea_density"]).toFixed(3) + '</td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch_reading_ease" target="_blank" style="color: darkgreen !important;"><b>Flesch Readability:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["flesch_score"]).toFixed(3) + '</td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch-Kincaid_grade_level" target="_blank" style="color:darkgreen !important;"><b>Flesch-Kincaid Score:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["kincaid_score"]).toFixed(3) + '</td></tr>';
     table += '</table>';
     document.getElementById('graph').innerHTML = table;
   }
@@ -660,32 +658,46 @@
   function visualizeSplatDisfluency() {
     console.log('disfluency');
     console.log($scope.results);
-    var display_text = '';
-    for(var item in $scope.results[0]["total_disfluencies"]) {
-      display_text += '<b style="color: red">' + item + ': ' + $scope.results[0]["total_disfluencies"][item] + '&nbsp;&nbsp;</b>';
-    }
-    display_text += '<hr>';
+    var display_text = '<div style="width: 100%;"><br><table style="width: 100%;"><tr><td colspan="8" align="left">';
+    display_text += '<b style="color: black;">Average Disfluencies per Sentence: ' + $scope.results[0]["average_disfluencies_per_sentence"] + '</b></td></tr><tr><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: red;">UM: ' + $scope.results[0]["total_disfluencies"]["UM"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: orangered;">UH: ' + $scope.results[0]["total_disfluencies"]["UH"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: blue;">AH: ' + $scope.results[0]["total_disfluencies"]["AH"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: dodgerblue;">ER: ' + $scope.results[0]["total_disfluencies"]["ER"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: maroon;">HM: ' + $scope.results[0]["total_disfluencies"]["HM"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: purple;">SILENT PAUSE: ' + $scope.results[0]["total_disfluencies"]["SILENT PAUSE"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: darkgreen;">BREAK: ' + $scope.results[0]["total_disfluencies"]["BREAK"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: saddlebrown;">REPETITION: ' + $scope.results[0]["total_disfluencies"]["REPETITION"] + '</b></td></tr></table></div><br>';
     for(var sent in $scope.results[0]["sentences"]) {
       var temp_sent = '';
-      //temp_sent += sent + "<br>" + sent.split(" ") + "<br>";
-      //split_sent = sent.split(" ");
+      var split_sent = sent.split(" ");
       for(num = 0; num < split_sent.length; num++) {
         word = split_sent[num];
         if(word.toLowerCase() == "um") {
-          temp_sent += '<b style="color: blue;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "uh") {
-          temp_sent += '<b style="color: green;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "ah") {
           temp_sent += '<b style="color: red;">' + word + ' </b>';
         }
+        else if(word.toLowerCase() == "uh") {
+          temp_sent += '<b style="color: orangered;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "ah") {
+          temp_sent += '<b style="color: blue;">' + word + ' </b>';
+        }
         else if(word.toLowerCase() == "er") {
-          temp_sent += '<b style="color: orange;">' + word + ' </b>';
+          temp_sent += '<b style="color: dodgerblue;">' + word + ' </b>';
         }
         else if(word.toLowerCase() == "hm") {
+          temp_sent += '<b style="color: maroon;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "{sl}") {
           temp_sent += '<b style="color: purple;">' + word + ' </b>';
         }
+        else if(word.slice(-1) == "-") {
+          temp_sent += '<b style="color: darkgreen;">' + word + ' </b>';
+        }
+        //else if(word.toLowerCase() == split_sent[num+1].toLowerCase()) {
+        //  temp_sent += '<b style="color: saddlebrown;">( ' + word + ' ' + word + ' )</b>';
+        //  num++;
+        //}
         else {
           temp_sent += word + ' ';
         }
