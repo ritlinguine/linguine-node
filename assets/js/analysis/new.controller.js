@@ -52,6 +52,14 @@
         tokenierRequired: false
       },
       {
+        name: "Part of Speech Frequencies (SPLAT)",
+        unfriendly_name: "splat-pos",
+        description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. It then displays a graph of the frequencies of each POS tag.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
+      },
+      {
         name: "Syntactic Parse Trees w/ Part of Speech Tags (Stanford CoreNLP)",
         unfriendly_name: "nlp-pos",
         description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. ",
@@ -136,6 +144,7 @@
       "splat-disfluency": [],
       "splat-ngrams": [],
       "splat-complexity": [],
+      "splat-pos": [],
       "nlp-ner": [],
       "nlp-coref": [],
       "nlp-sentiment": [],

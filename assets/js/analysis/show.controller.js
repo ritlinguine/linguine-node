@@ -627,7 +627,22 @@
   function visualizeSplatNgrams() {
     console.log('ngrams');
   }
-  
+
+  function visualizeSplatPOSFrequencies() {
+    console.log('pos_counts');
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '">';
+    table += '<tr><th class="tg-031e">Tag</th><th>&nbsp;&nbsp;</th><th class="tg-031e">Words</th><th>&nbsp;&nbsp;</th><th class="tg-yw4l">Frequency</th></tr>';
+    //table += '</table>';
+    //var table = '';
+    for(var item in $scope.results[0]['pos_tags']) {
+      table += '<tr><td style="color: green;">' + item + '</td><td>&nbsp;&nbsp;</td><td>' + $scope.results[0]["pos_tags"][item].join(", ") + '</td><td>&nbsp;&nbsp;</td><td style="color: red;">' + $scope.results[0]["pos_counts"][item] + '</td></tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML = table;
+  }
+
   function visualizeSplatComplexity() {
     console.log('complexity');
     console.log($scope.results);
@@ -644,6 +659,40 @@
 
   function visualizeSplatDisfluency() {
     console.log('disfluency');
+    console.log($scope.results);
+    var display_text = '';
+    for(var item in $scope.results[0]["total_disfluencies"]) {
+      display_text += '<b style="color: red">' + item + ': ' + $scope.results[0]["total_disfluencies"][item] + '&nbsp;&nbsp;</b>';
+    }
+    display_text += '<hr>';
+    for(var sent in $scope.results[0]["sentences"]) {
+      var temp_sent = '';
+      //temp_sent += sent + "<br>" + sent.split(" ") + "<br>";
+      //split_sent = sent.split(" ");
+      for(num = 0; num < split_sent.length; num++) {
+        word = split_sent[num];
+        if(word.toLowerCase() == "um") {
+          temp_sent += '<b style="color: blue;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "uh") {
+          temp_sent += '<b style="color: green;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "ah") {
+          temp_sent += '<b style="color: red;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "er") {
+          temp_sent += '<b style="color: orange;">' + word + ' </b>';
+        }
+        else if(word.toLowerCase() == "hm") {
+          temp_sent += '<b style="color: purple;">' + word + ' </b>';
+        }
+        else {
+          temp_sent += word + ' ';
+        }
+      }
+      display_text += temp_sent + '<br>';
+    }
+    document.getElementById("graph").innerHTML = display_text;
   }
 
   $scope.visualize = function(){
@@ -678,6 +727,9 @@
           break;
         case "splat-ngrams":
           visualizeSplatNgrams();
+          break;
+        case "splat-pos":
+          visualizeSplatPOSFrequencies();
           break;
         default:
           break;
