@@ -658,6 +658,47 @@
   function visualizeSplatDisfluency() {
     console.log('disfluency');
     console.log($scope.results);
+    var final_text = ""
+    // For each sentence in the text...
+    var num = 0;
+    var rep_count = 0;
+    for(var sent in $scope.results[0]["sentences"]) {
+      var temp_sent = '';
+      var split_sent = sent.split(" ");
+      // For each word in the current sentence...
+      while(num < split_sent.length) {
+        word = split_sent[num];
+        // If there are repeated words, suround them in square brackets and color them to match the colors above.
+        if( (num+1 < split_sent.length) && (word.toLowerCase() == split_sent[num+1].toLowerCase()) ) {
+          rep_count++;
+          temp_sent += '<b style="color: saddlebrown;"> [ </b> ';
+          if(word.toLowerCase() == "um") { temp_sent += '<b style="color: red;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase() == "uh") { temp_sent += '<b style="color: orangered;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase() == "ah") { temp_sent += '<b style="color: blue;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase() == "er") { temp_sent += '<b style="color: dodgerblue;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase() == "hm") { temp_sent += '<b style="color: maroon;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase() == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' ' + word + ' </b>'; }
+          else if(word.slice(-1) == "-") { temp_sent += '<b style="color: darkgreen;">' + word + ' ' + word + ' </b>'; }
+          else { temp_sent += word + ' ' + word; }
+          temp_sent += '<b style="color: saddlebrown;"> ] </b>';
+          num++;
+        }
+        // If there are no repeated words, color them to match the colors above.
+        else if(word.toLowerCase() == "um") { temp_sent += '<b style="color: red;">' + word + ' </b>'; }
+        else if(word.toLowerCase() == "uh") { temp_sent += '<b style="color: orangered;">' + word + ' </b>'; }
+        else if(word.toLowerCase() == "ah") { temp_sent += '<b style="color: blue;">' + word + ' </b>'; }
+        else if(word.toLowerCase() == "er") { temp_sent += '<b style="color: dodgerblue;">' + word + ' </b>'; }
+        else if(word.toLowerCase() == "hm") { temp_sent += '<b style="color: maroon;">' + word + ' </b>'; }
+        else if(word.toLowerCase() == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' </b>'; }
+        else if(word.slice(-1) == "-") { temp_sent += '<b style="color: darkgreen;">' + word + ' </b>'; }
+        else { temp_sent += word + ' '; }
+        num++;
+      }
+      num = 0;
+      final_text += temp_sent + '<br>';
+    }
+
+    // Colorcode the eight different disfluency types and put them in a table with their frequencies.
     var display_text = '<div style="width: 100%;"><br><table style="width: 100%;"><tr><td colspan="8" align="left">';
     display_text += '<b style="color: black;">Average Disfluencies per Sentence: ' + $scope.results[0]["average_disfluencies_per_sentence"] + '</b></td></tr><tr><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: red;">UM: ' + $scope.results[0]["total_disfluencies"]["UM"] + '</b></td><td align="center" style="width: auto; position: relative;">';
@@ -665,46 +706,12 @@
     display_text += '<b style="color: blue;">AH: ' + $scope.results[0]["total_disfluencies"]["AH"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: dodgerblue;">ER: ' + $scope.results[0]["total_disfluencies"]["ER"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: maroon;">HM: ' + $scope.results[0]["total_disfluencies"]["HM"] + '</b></td><td align="center" style="width: auto; position: relative;">';
-    display_text += '<b style="color: purple;">SILENT PAUSE: ' + $scope.results[0]["total_disfluencies"]["SILENT PAUSE"] + '</b></td><td align="center" style="width: auto; position: relative;">';
-    display_text += '<b style="color: darkgreen;">BREAK: ' + $scope.results[0]["total_disfluencies"]["BREAK"] + '</b></td><td align="center" style="width: auto; position: relative;">';
-    display_text += '<b style="color: saddlebrown;">REPETITION: ' + $scope.results[0]["total_disfluencies"]["REPETITION"] + '</b></td></tr></table></div><br>';
-    for(var sent in $scope.results[0]["sentences"]) {
-      var temp_sent = '';
-      var split_sent = sent.split(" ");
-      for(num = 0; num < split_sent.length; num++) {
-        word = split_sent[num];
-        if(word.toLowerCase() == "um") {
-          temp_sent += '<b style="color: red;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "uh") {
-          temp_sent += '<b style="color: orangered;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "ah") {
-          temp_sent += '<b style="color: blue;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "er") {
-          temp_sent += '<b style="color: dodgerblue;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "hm") {
-          temp_sent += '<b style="color: maroon;">' + word + ' </b>';
-        }
-        else if(word.toLowerCase() == "{sl}") {
-          temp_sent += '<b style="color: purple;">' + word + ' </b>';
-        }
-        else if(word.slice(-1) == "-") {
-          temp_sent += '<b style="color: darkgreen;">' + word + ' </b>';
-        }
-        //else if(word.toLowerCase() == split_sent[num+1].toLowerCase()) {
-        //  temp_sent += '<b style="color: saddlebrown;">( ' + word + ' ' + word + ' )</b>';
-        //  num++;
-        //}
-        else {
-          temp_sent += word + ' ';
-        }
-      }
-      display_text += temp_sent + '<br>';
-    }
-    document.getElementById("graph").innerHTML = display_text;
+    display_text += '<b style="color: purple;">SILENT PAUSES: ' + $scope.results[0]["total_disfluencies"]["SILENT PAUSE"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: darkgreen;">BREAKS: ' + $scope.results[0]["total_disfluencies"]["BREAK"] + '</b></td><td align="center" style="width: auto; position: relative;">';
+    display_text += '<b style="color: saddlebrown;">REPETITIONS: ' + rep_count + '</b></td></tr></table></div><br>';
+
+    // Display the visualization.
+    document.getElementById("graph").innerHTML = '<span style="font-size: 20px;"' + display_text + final_text + '</span>';
   }
 
   $scope.visualize = function(){
