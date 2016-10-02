@@ -588,11 +588,11 @@
     var sentences = $scope.analysis.result.sentences;
     $scope.analysis.result.entities.forEach(function(entity) {
       entity.mentions.forEach(function(mention) {
-        
+
         //Grab every token that has been mentioned by a given entity 
         var tokenString = sentences[mention.sentence]
         .tokens.slice(mention.tokspan_in_sentence[0], mention.tokspan_in_sentence[1] + 1);
-        
+
         //Grab the text from every token and append together
         //to populate the dropdwn list
         var tokenText = tokenString.reduce(function(prev, cur) {
@@ -600,7 +600,7 @@
         });
 
         $scope.corefEntities.push({
-				  'text': tokenText, 
+				  'text': tokenText,
 					'sentence': mention.sentence, 
 					'startInd': mention.tokspan_in_sentence[0],
 					'endInd': mention.tokspan_in_sentence[1]
@@ -608,10 +608,10 @@
 
       });
     });
- 	
-    $scope.selectedEntity = $scope.corefEntities[0];    
 
-    //Render text in document to highlight with entities 
+    $scope.selectedEntity = $scope.corefEntities[0];
+
+    //Render text in document to highlight with entities
     $scope.renderPlainText('coref');
   }
 
@@ -624,8 +624,54 @@
     $scope.renderPlainText('relation');
   }
 
+  function sortObjectByKey(obj) {
+    var keys = Object.keys(obj);
+    var sorted_obj = [];
+
+    // Sort keys
+    keys.sort();
+
+    // Create new array based on Sorted Keys
+    for(var i = 0; i < keys.length; i++) {
+      k = keys[i];
+      sorted_obj.push({'key': k, 'val': obj[k]});
+    }
+    return sorted_obj;
+  }
+
   function visualizeSplatNgrams() {
     console.log('ngrams');
+    console.log($scope.results);
+    // Start building the tables
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;border:none;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;} .tg .tg-yw4l{vertical-align:top}';
+    var super_table = '<div style="width: 100%; font-weight: bold;"><br><table class="' + style + '"><tr><th colspan="3"></th></tr><tr><td valign="top" style="padding: 30px 30px 30px 30px">';
+    var u_table = '<table class="' + style + '"><tr style="border-bottom: 1px solid black"><th class="tg-031e" colspan="2">Unigram Frequencies</th></tr>';
+    var b_table = '<table class="' + style + '"><tr style="border-bottom: 1px solid black"><th class="tg-031e" colspan="2">Bigram Frequencies</th></tr>';
+    var t_table = '<table class="' + style + '"><tr style="border-bottom: 1px solid black"><th class="tg-031e" colspan="2">Trigram Frequencies</th></tr>';
+
+    // New variables for less typing
+    var unigram_freqs = sortObjectByKey($scope.results[0]['unigrams']);
+    var bigram_freqs = sortObjectByKey($scope.results[0]['bigrams']);
+    var trigram_freqs = sortObjectByKey($scope.results[0]['trigrams']);
+
+    // Build unigram table
+    for(var i = 0; i < unigram_freqs.length; i++) {
+      u_table += '<tr><td class="tg-031e" style="color: red;">' + unigram_freqs[i].val + '&nbsp;&nbsp;</td><td class="tg-031e">' + unigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+    }
+    u_table += '</table>';
+    // Build bigram table
+    for(var i = 0; i < bigram_freqs.length; i++) {
+      b_table += '<tr><td class="tg-031e" style="color: red;">' + bigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + bigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+    }
+    b_table += '</table>';
+    // Build trigram table
+    for(var i = 0; i < trigram_freqs.length; i++) {
+      t_table += '<tr><td class="tg-031e" style="color: red;">' + trigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + trigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+    }
+    t_table += '</table>';
+    // Build and display super table
+    super_table += u_table + '</td><td valign="top" style="padding: 30px 30px 30px 30px">' + b_table + '</td><td valign="top" style="padding: 30px 30px 30px 30px">' + t_table + '</td></tr></table></div><br>';
+    document.getElementById('graph').innerHTML = '<span style="font-size: 20px;">' + super_table + '</span>';
   }
 
   function visualizeSplatPOSFrequencies() {
@@ -680,7 +726,7 @@
           else if(word.toLowerCase() == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' ' + word + ' </b>'; }
           else if(word.slice(-1) == "-") { temp_sent += '<b style="color: darkgreen;">' + word + ' ' + word + ' </b>'; }
           else { temp_sent += word + ' ' + word; }
-          temp_sent += '<b style="color: saddlebrown;"> ] </b>';
+          temp_sent += '<b style="color: limegreen;"> ] </b>';
           num++;
         }
         // If there are no repeated words, color them to match the colors above.
@@ -708,7 +754,7 @@
     display_text += '<b style="color: maroon;">HM: ' + $scope.results[0]["total_disfluencies"]["HM"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: purple;">SILENT PAUSES: ' + $scope.results[0]["total_disfluencies"]["SILENT PAUSE"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: darkgreen;">BREAKS: ' + $scope.results[0]["total_disfluencies"]["BREAK"] + '</b></td><td align="center" style="width: auto; position: relative;">';
-    display_text += '<b style="color: saddlebrown;">REPETITIONS: ' + rep_count + '</b></td></tr></table></div><br>';
+    display_text += '<b style="color: limegreen;">REPETITIONS: ' + rep_count + '</b></td></tr></table></div><br>';
 
     // Display the visualization.
     document.getElementById("graph").innerHTML = '<span style="font-size: 20px;"' + display_text + final_text + '</span>';
