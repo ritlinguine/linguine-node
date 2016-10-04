@@ -717,7 +717,7 @@
         // If there are repeated words, suround them in square brackets and color them to match the colors above.
         if( (num+1 < split_sent.length) && (word.toLowerCase() == split_sent[num+1].toLowerCase()) ) {
           rep_count++;
-          temp_sent += '<b style="color: saddlebrown;"> [ </b> ';
+          temp_sent += '<b style="color: limegreen;"> [ </b> ';
           if(word.toLowerCase() == "um") { temp_sent += '<b style="color: red;">' + word + ' ' + word + ' </b>'; }
           else if(word.toLowerCase() == "uh") { temp_sent += '<b style="color: orangered;">' + word + ' ' + word + ' </b>'; }
           else if(word.toLowerCase() == "ah") { temp_sent += '<b style="color: blue;">' + word + ' ' + word + ' </b>'; }
