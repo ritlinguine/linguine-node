@@ -127,6 +127,11 @@
         name: "Remove Stop Words",
         unfriendly_name: "stop_words",
         description: "Removes NLTK's compiled list of stop words like 'and', 'or', 'but', etc."
+      },
+      "removesilence": {
+        name: "Remove Silent Pauses",
+        unfriendly_name: "removesilence",
+        description: "Removes the tokens that represent silent pauses in speech: {SL} and {sl}."
       }
     };
 
@@ -138,17 +143,17 @@
      * Key[analysisUnfriendlyName] => value [cleanupUnfriendlyName1, unfriendlyName2, ... n]
      */
     $scope.cleanupTypes = {
-      "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
-      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words ],
-      "nlp-pos": [],
-      "splat-disfluency": [],
-      "splat-ngrams": [],
-      "splat-complexity": [],
-      "splat-pos": [],
-      "nlp-ner": [],
-      "nlp-coref": [],
-      "nlp-sentiment": [],
-      "nlp-relation": []
+      "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence],
+      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence],
+      "nlp-pos": [cleanups.removesilence],
+      "splat-disfluency": [cleanups.removesilence],
+      "splat-ngrams": [cleanups.removesilence],
+      "splat-complexity": [cleanups.removesilence],
+      "splat-pos": [cleanups.removesilence],
+      "nlp-ner": [cleanups.removesilence],
+      "nlp-coref": [cleanups.removesilence],
+      "nlp-sentiment": [cleanups.removesilence],
+      "nlp-relation": [cleanups.removesilence]
     };
 
     $scope.tokenizerTypes = [
