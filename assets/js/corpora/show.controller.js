@@ -22,7 +22,7 @@
     };
 
     $scope.confirmDeleteCorpora = function() {
-      if($window.confirm("Are you sure you want to delete this corpora?"))
+      if($window.confirm("Are you sure you want to delete this corpus?"))
       {
         $scope.delete();
       }
