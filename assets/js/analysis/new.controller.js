@@ -36,9 +36,9 @@
         tokenizerRequired: false
       },
       {
-        name: "N-gram Analysis (SPLAT)",
+        name: "N-gram Frequency Analysis (SPLAT)",
         unfriendly_name: "splat-ngrams",
-        description: "This operation extracts the bigrams and trigrams from the corpus using the NLTK <INSERT_TOKENIZER_NAME>.",
+        description: "This operation extracts the bigrams and trigrams from the corpus using the Natural Language ToolKit (NLTK).",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenierRequired: false
@@ -54,7 +54,7 @@
       {
         name: "Part of Speech Frequencies (SPLAT)",
         unfriendly_name: "splat-pos",
-        description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. It then displays a graph of the frequencies of each POS tag.",
+        description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. It then displays a table of the frequencies of each (Penn Treebank) POS tag.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
