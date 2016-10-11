@@ -656,17 +656,17 @@
 
     // Build unigram table
     for(var i = 0; i < unigram_freqs.length; i++) {
-      u_table += '<tr><td class="tg-031e" style="color: red;">' + unigram_freqs[i].val + '&nbsp;&nbsp;</td><td class="tg-031e">' + unigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+      u_table += '<tr><td class="tg-031e" style="color: red;">' + unigram_freqs[i].val + '&nbsp;&nbsp;</td><td class="tg-031e">' + unigram_freqs[i].key.replace(/(\s+sl\s+|^(sl)$)/i, "{sl}") + '</td></tr>';
     }
     u_table += '</table>';
     // Build bigram table
     for(var i = 0; i < bigram_freqs.length; i++) {
-      b_table += '<tr><td class="tg-031e" style="color: red;">' + bigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + bigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+      b_table += '<tr><td class="tg-031e" style="color: red;">' + bigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + bigram_freqs[i].key.replace(/(\s+sl\s+|^(sl)$|^(sl)|(sl)$)/i, " {sl} ") + '</td></tr>';
     }
     b_table += '</table>';
     // Build trigram table
     for(var i = 0; i < trigram_freqs.length; i++) {
-      t_table += '<tr><td class="tg-031e" style="color: red;">' + trigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + trigram_freqs[i].key.replace(/(\s*)(sl)(\s*)/i, "$1{sl}$3") + '</td></tr>';
+      t_table += '<tr><td class="tg-031e" style="color: red;">' + trigram_freqs[i].val + '&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e">' + trigram_freqs[i].key.replace(/(\s+sl\s+|^(sl)$|^(sl)|(sl)$)/i, " {sl} ") + '</td></tr>';
     }
     t_table += '</table>';
     // Build and display super table
