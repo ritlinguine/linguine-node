@@ -639,6 +639,19 @@
     return sorted_obj;
   }
 
+  function visualizeSplatSyllables() {
+    console.log('syllables');
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace;font-size:20px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace;font-size:15px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '" style="table-layout: fixed !important;">';
+    table += '<tr style="border-bottom: 1px solid black;"><th class="tg-031e" style="white-space: nowrap !important;">Syllable count</th><th class="tg-yw4l">&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-031e">Word types (capitalization maintained)</th></tr>';
+    for(var item in $scope.results[0]["syllables"]) {
+      table += '<tr style="border-bottom: 1px solid black;"><td class="tg-031e" style="color: red !important; text-align: center;"><b>' + item + '</b></td><td class="tg-yw4l">&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="tg-031e"><b>' + $scope.results[0]["syllables"][item].join(" ").match(/[\s\S]{1,300}/g).join("<br>") + '</b></td></tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML = '<br>' + table
+  }
+
   function visualizeSplatNgrams() {
     console.log('ngrams');
     console.log($scope.results);
@@ -681,7 +694,7 @@
     var table = '<table class=' + style + '">';
     table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Tag</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-031e" style="text-align: center;">Frequency</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Word types (capitalization maintained)</th></tr>';
     for(var item in $scope.results[0]['pos_tags']) {
-      table += '<tr style="border-bottom: 1pt solid black;"><td style="color: darkgreen; text-align: center;"><b>' + item + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: red; text-align: center;"><b>' + $scope.results[0]["pos_counts"][item] + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.results[0]["pos_tags"][item].join("&nbsp;&nbsp;&nbsp;") + '</b></td></tr>';
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="color: darkgreen; text-align: center;"><b>' + item + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color: red; text-align: center;"><b>' + $scope.results[0]["pos_counts"][item] + '</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.results[0]["pos_tags"][item].join("\t").match(/[\s\S]{1,300}/g).join("<br>") + '</b></td></tr>';
     }
     table += '</table>';
     var info = '<br><div style="text-align: left;"><b><a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Click here</a> to see an explanation of the tags listed below. <em>SBAR</em> is used to denote unexpected syntactic structures. <em>PRN</em> is used to denote a parenthesized structure.</b></div>';
@@ -796,6 +809,9 @@
           break;
         case "splat-pos":
           visualizeSplatPOSFrequencies();
+          break;
+        case "splat-syllables":
+          visualizeSplatSyllables();
           break;
         default:
           break;

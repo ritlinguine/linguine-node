@@ -60,6 +60,14 @@
         tokenizerRequired: false
       },
       {
+        name: "Syllable Frequencies (SPLAT)",
+        unfriendly_name: "splat-syllables",
+        description: "This operation counts the number of syllables in each word in the corpus. For each unique syllable count found, words with that many syllables will be grouped together and displayed in a table.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
+      },
+      {
         name: "Syntactic Parse Trees w/ Part of Speech Tags (Stanford CoreNLP)",
         unfriendly_name: "nlp-pos",
         description: "This operation performs a part of speech analysis on each word provided in the corpus. Each word will receive an identifier which represents the appropriate part of speech for the given word. ",
@@ -150,6 +158,7 @@
       "splat-ngrams": [cleanups.removesilence],
       "splat-complexity": [cleanups.removesilence],
       "splat-pos": [cleanups.removesilence],
+      "splat-syllables": [cleanups.removesilence],
       "nlp-ner": [cleanups.removesilence],
       "nlp-coref": [cleanups.removesilence],
       "nlp-sentiment": [cleanups.removesilence],
