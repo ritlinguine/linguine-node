@@ -44,9 +44,9 @@
         tokenierRequired: false
       },
       {
-        name: "Syntactic Complexity Analysis (SPLAT)",
+        name: "Complexity Analysis (SPLAT)",
         unfriendly_name: "splat-complexity",
-        description: "This operation calculates four different types of syntactic complexity: content density, idea density, Flesch readability, and Flesch-Kincaid grade level.",
+        description: "This operation calculates four different types of complexity: content density, idea density, Flesch readability, and Flesch-Kincaid grade level.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenierRequired: false
