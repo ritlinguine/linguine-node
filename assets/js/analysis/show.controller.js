@@ -254,11 +254,11 @@
         }
     };
 
-    $scope.visualizeParseTree = function(sentiment) {
+    $scope.visualizeParseTree = function(isSentimentAnalysis) {
 
       d3.select(".svg-container").remove();
         
-        var dataToConvert = angular.copy(sentiment? $scope.sentimentTreeData : $scope.depsTreeData);
+        var dataToConvert = angular.copy(isSentimentAnalysis ? $scope.sentimentTreeData : $scope.depsTreeData);
 
         data = convertData(dataToConvert);
         renderTree();
@@ -376,7 +376,7 @@
               })
               .style('font-size', '18px')
               .style('fill-opacity', 1);
-            if(!sentiment){
+            if(!isSentimentAnalysis){
             nodeEnter.append('text')
               .attr('y', function (d, i) {
                   return (d.pos == 'root') ? 0 : -30;
