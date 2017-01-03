@@ -156,7 +156,7 @@
       "nlp-pos": [cleanups.removesilence],
       "splat-disfluency": [cleanups.removesilence],
       "splat-ngrams": [cleanups.removesilence],
-      "splat-complexity": [cleanups.removesilence],
+      "splat-complexity": [],
       "splat-pos": [cleanups.removesilence],
       "splat-syllables": [cleanups.removesilence],
       "nlp-ner": [cleanups.removesilence],
