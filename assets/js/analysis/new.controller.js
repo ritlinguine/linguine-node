@@ -38,7 +38,7 @@
       {
         name: "N-gram Frequency Analysis (SPLAT)",
         unfriendly_name: "splat-ngrams",
-        description: "This operation extracts the bigrams and trigrams from the corpus using the Natural Language ToolKit (NLTK).",
+        description: "This operation extracts the unigrams, bigrams, and trigrams from the corpus using the Natural Language ToolKit (NLTK).",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenierRequired: false
@@ -62,7 +62,7 @@
       {
         name: "Syllable Frequencies (SPLAT)",
         unfriendly_name: "splat-syllables",
-        description: "This operation counts the number of syllables in each word in the corpus. For each unique syllable count found, words with that many syllables will be grouped together and displayed in a table.",
+        description: "This operation uses the cmudict to lookup syllable counts for each word in the corpus. For each unique syllable count found, words with that many syllables will be grouped together and displayed in a table. If a word is not found in the cmudict, the python library difflib is used to find the closest matching word in the cmudict, and the syllable count for that closest match is used.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
