@@ -521,8 +521,8 @@
   }
 
   $scope.renderPlainText = function(type) {
-			var canvas = document.getElementById('plaintext-canvas');
-   		if(canvas){canvas.remove(); }
+      var canvas = document.getElementById('plaintext-canvas');
+      if(canvas){canvas.remove(); }
 
       // Create a new div under the #graph div
       var textDiv = document.getElementById("graph");
@@ -532,85 +532,81 @@
 
       var tokens = {};
       $scope.analysis.result.sentences.forEach(function(obj, sentenceIndex){
-					tokens[sentenceIndex] = {}; 
-          obj.tokens.forEach(function(word, tokenIndex){
-					  tokens[sentenceIndex][tokenIndex] = word;
-          })
+        tokens[sentenceIndex] = {};
+        obj.tokens.forEach(function(word, tokenIndex){ tokens[sentenceIndex][tokenIndex] = word; })
       });
 
-      Object.keys(tokens).forEach(function(sk){
-				 Object.keys(tokens[sk]).forEach(function(wk) {
-					 var corefCount = 0;
-					 var word = tokens[sk][wk];
-					 var wordspace = document.createElement('span');
+      Object.keys(tokens).forEach(function(sk) {
+	Object.keys(tokens[sk]).forEach(function(wk) {
+	  var corefCount = 0;
+	  var word = tokens[sk][wk];
+	  var wordspace = document.createElement('span');
 
-					 if(type == 'ner') { wordspace.setAttribute("title", word.token + ": " + word.ner); }
-					 wordspace.innerHTML += word.token + " ";
+	  if(type == 'ner') { wordspace.setAttribute("title", word.token + ": " + word.ner); }
+	  wordspace.innerHTML += word.token + " ";
 
-					 if(type == 'ner' && word.ner !== "O")
-					 {
-							 wordspace.style.fontWeight = 'bold';
-							 wordspace.setAttribute("class", word.ner.toLowerCase());
-           }
+	  if(type == 'ner' && word.ner !== "O") {
+	    wordspace.style.fontWeight = 'bold';
+	    wordspace.setAttribute("class", word.ner.toLowerCase());
+          }
 
-           if(type == 'relation') {
-             var relationTitle = '';
+          if(type == 'relation') {
+            var relationTitle = '';
 
-             $scope.analysis.result.sentences[sk].relations.forEach(function(relation) {
-               var startInd = relation.subject.start;
-               var endInd = relation.object.end - 1;
-               
-               if(wk >= startInd && wk <= endInd) {
-                 wordspace.style.fontWeight = 'bold';
-                 wordspace.style.textDecoration = 'underline';
+            $scope.analysis.result.sentences[sk].relations.forEach(function(relation) {
+              var startInd = relation.subject.start;
+              var endInd = relation.object.end - 1;
 
-                 var relationTriple = relation.subject.lemma + ' (' + relation.relation.lemma + ') ' + relation.object.lemma;
-                 relationTitle += relationTriple + '\n'; 
-               }
-             });
+              if(wk >= startInd && wk <= endInd) {
+                wordspace.style.fontWeight = 'bold';
+                wordspace.style.textDecoration = 'underline';
 
-             wordspace.setAttribute('title', relationTitle);
-           }
+                var relationTriple = relation.subject.lemma + ' (' + relation.relation.lemma + ') ' + relation.object.lemma;
+                relationTitle += relationTriple + '\n'; 
+              }
+            });
 
-					 if(type == 'coref' && 
-					 $scope.selectedEntity.sentence == sk &&
-			     wk >= $scope.selectedEntity.startInd && 
-					 wk <= $scope.selectedEntity.endInd) {
-							 wordspace.style.fontWeight = 'bold';
-					 		 wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
-							 wordspace.setAttribute("class", 'organization');
-							 corefCount++;
-					 }
+            wordspace.setAttribute('title', relationTitle);
+          }
 
-						textNode.appendChild(wordspace);
-			    });
+	  if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
+            console.log(word.token);
+            console.log($scope.selectedEntity.entityID);
+	    wordspace.style.fontWeight = 'bold';
+	    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
+	    wordspace.setAttribute("class", 'organization');
+	    corefCount++;
+
+            if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' [ ' + $scope.selectedEntity.entityID + ' ] '; }
+	  }
+
+	  textNode.appendChild(wordspace);
+	});
       });
       textDiv.appendChild( textNode );
   }
 
   $scope.visualizeCoref = function() {
     var sentences = $scope.analysis.result.sentences;
+    var entityCount = 0;
+    // For each entity...
     $scope.analysis.result.entities.forEach(function(entity) {
+      // For each mention...
       entity.mentions.forEach(function(mention) {
 
         //Grab every token that has been mentioned by a given entity 
-        var tokenString = sentences[mention.sentence]
-        .tokens.slice(mention.tokspan_in_sentence[0], mention.tokspan_in_sentence[1] + 1);
+        var tokenString = sentences[mention.sentence].tokens.slice(mention.tokspan_in_sentence[0], mention.tokspan_in_sentence[1] + 1);
 
-        //Grab the text from every token and append together
-        //to populate the dropdwn list
-        var tokenText = tokenString.reduce(function(prev, cur) {
-          return prev.token? prev.token + ' ' + cur.token : prev + ' ' + cur.token;
-        });
+        //Grab the text from every token and append together to populate the dropdown list
+        var tokenText = tokenString.reduce(function(prev, cur) { return prev.token? prev.token + ' ' + cur.token : prev + ' ' + cur.token; });
 
-        $scope.corefEntities.push({
-				  'text': tokenText,
-					'sentence': mention.sentence, 
-					'startInd': mention.tokspan_in_sentence[0],
-					'endInd': mention.tokspan_in_sentence[1]
-				});
-
+        $scope.corefEntities.push({'text': tokenText,
+                                   'entityID': entityCount,
+			           'sentence': mention.sentence,
+			           'startInd': mention.tokspan_in_sentence[0],
+				   'endInd': mention.tokspan_in_sentence[1]});
       });
+      entityCount++;
     });
 
     $scope.selectedEntity = $scope.corefEntities[0];
@@ -620,8 +616,8 @@
   }
 
   $scope.setEntity = function(index) {
-		$scope.selectedEntity = $scope.corefEntities[index];
-		$scope.renderPlainText('coref');
+    $scope.selectedEntity = $scope.corefEntities[index];
+    $scope.renderPlainText('coref');
   }
 
   $scope.visualizeRelation = function() {
