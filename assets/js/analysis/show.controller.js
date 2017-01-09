@@ -707,19 +707,75 @@
     document.getElementById('graph').innerHTML = info + '<br>' + table + helptable;
   }
 
+  function visualizeSplatPronouns() {
+    console.log('pronouns');
+    console.log($scope.results);
+    var first = $scope.results[0]["first-person"];
+    var first_keys = [];
+    var second = $scope.results[0]["second-person"];
+    var second_keys = [];
+    var third = $scope.results[0]["third-person"];
+    var third_keys = [];
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + ' style="font-weight:bold;">';
+    table += '<tr style="border-bottom:1pt solid black;"><th>Pronoun&nbsp;&nbsp;</th><th>&nbsp;&nbsp;Frequency&nbsp;&nbsp;</th><th>&nbsp;&nbsp;Type</th></tr>';
+    for(var pro in first) {
+      var val = first[pro];
+      if(val[0] > 0) {
+        first_keys.push(pro);
+        table += '<tr style="border-bottom:1pt solid black;"><td style="color:blue;">' + pro + '</td><td style="color:red;text-align:center;">' + val[0] + '</td><td>&nbsp;&nbsp;' + val[2] + ', ' + val[3] + '</td></tr>';
+      }
+    }
+    for(var pro in second) {
+      var val = second[pro];
+      if(val[0] > 0) {
+        second_keys.push(pro);
+        table += '<tr style="border-bottom:1pt solid black;"><td style="color:green;">' + pro + '</td><td style="color:red;text-align:center;">' + val[0] + '</td><td>&nbsp;&nbsp;' + val[2] + ', ' + val[3] + '</td></tr>';
+      }
+    }
+    for(var pro in third) {
+      var val = third[pro];
+      if(val[0] > 0) {
+        third_keys.push(pro);
+        table += '<tr style="border-bottom:1pt solid black;"><td style="color:purple;">' + pro + '</td><td style="color:red;text-align:center;">' + val[0] + '</td><td>&nbsp;&nbsp;' + val[2] + ', ' + val[3] + '</td></tr>';
+      }
+    }
+    table += '</table>';
+    var final_text = "";
+    var num = 0;
+    for(var sent in $scope.results[0]["sentences"]) {
+      var temp_sent = '';
+      var split_sent = $scope.results[0]["sentences"][sent].split(" ");
+      // For each word in the current sentence...
+      while(num < split_sent.length) {
+        word = split_sent[num];
+        if(first_keys.indexOf(word.toUpperCase()) >= 0) { temp_sent += '<b style="color:blue;font-size:16px;">' + word + ' </b>'; }
+        else if(second_keys.indexOf(word.toUpperCase()) >= 0) { temp_sent += '<b style="color:green;font-size:16px;">' + word + ' </b>'; }
+        else if(third_keys.indexOf(word.toUpperCase()) >= 0) { temp_sent += '<b style="color:purple;font-size:16px;">' + word + ' </b>'; }
+        else { temp_sent += word + ' ' }
+        num++;
+      }
+      num = 0;
+      final_text += temp_sent + '<br>';
+    }
+    var help_text = '<br><div style="font-weight:bold;font-size:20px;"><span style="color:blue;">1st-Person</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">2nd-Person</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:purple;">3rd-Person</span></div><br>'
+    document.getElementById('graph').innerHTML = '<table style="width:100%;"><tr><td valign="top" style="width:35%;">' + help_text + table + '</td><td style="width:1%;"></td><td><br><span style="font-weight:bold;">' + final_text + '</span></td></tr></table>';
+  }
+
   function visualizeSplatComplexity() {
     console.log('complexity');
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
     var table = '<br><table style="float:left;" class=' + style + '">';
-    table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th></tr>';
-    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Content density is the ratio of open-class words (nouns, verbs, adjectives, adverbs) to closed-class words (pronouns, determiners, etc.)." style="color: darkgreen !important;"><b>Content Density:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["content_density"]).toFixed(3) + '</td></tr>';
-    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Idea density is the number of expressed propositions to the total number of words." style="color: darkgreen !important;"><b>Idea Density:</b><a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["idea_density"]).toFixed(3) + '</td></tr>';
-    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch_reading_ease" target="_blank" title="Scores typically range from least complex (120) to most complex (0), but negative scores (extremely complex) are also possible." style="color: darkgreen !important;"><b>Flesch Readability:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["flesch_score"]).toFixed(3) + '</td></tr>';
-    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch-Kincaid_grade_level" target="_blank" title="In theory, the lowest possible score (lowest grade level) is -3.4. In theory, there is no upper bound." style="color:darkgreen !important;"><b>Flesch-Kincaid Grade Level:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["kincaid_score"]).toFixed(3) + '</td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Complexity Metric</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th><th></th></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Content density is the ratio of open-class words (nouns, verbs, adjectives, adverbs) to closed-class words (pronouns, determiners, etc.)." style="color: darkgreen !important;"><b>Content Density:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["content_density"]).toFixed(3) + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="Idea density is the number of expressed propositions to the total number of words." style="color: darkgreen !important;"><b>Idea Density:</b><a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["idea_density"]).toFixed(3) + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch_reading_ease" target="_blank" title="Scores typically range from least complex (120) to most complex (0), but negative scores (extremely complex) are also possible." style="color: darkgreen !important;"><b>Flesch Readability:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["flesch_score"]).toFixed(3) + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Flesch-Kincaid_readability_tests#Flesch-Kincaid_grade_level" target="_blank" title="In theory, the lowest possible score (lowest grade level) is -3.4. In theory, there is no upper bound." style="color:darkgreen !important;"><b>Flesch-Kincaid Grade Level:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["kincaid_score"]).toFixed(3) + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" title="This is the ratio of types (number of unique words) to tokens (number of total words). Scores will be greater than 0 and less than or equal to 1, with higher numbers suggesting higher complexity." style="color:darkgreen !important;"><b>Type-Token Ratio:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0]["type_token_ratio"]).toFixed(3) + '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;(' + $scope.results[0]["types"]  + ' / ' + $scope.results[0]["tokens"]  + ')</td></tr>';
     table += '</table>';
     var helptext = '<br><div><b>Hover over each metric below for descriptions. The table below (on the right) describes what the scores for Flesch readability indicate. Flesch-Kincaid grade level directly corresponds to a grade level; a Flesch-Kincaid grade level score of 2 indicates that the text should be easily understood by a second grader.</b></div>';
-    var helptable = '<table style="float:left;margin-left:100px;"><tbody><tr style="border-bottom:1px solid black;"><th>Score</th><th>School Level</th></tr><tr style="border-bottom:1px solid black;"><td>100.00-90.00&nbsp;&nbsp;&nbsp;&nbsp;</td><td>5th grade</td></tr><tr style="border-bottom:1px solid black;"><td>90.0–80.0</td><td>6th grade</td></tr><tr style="border-bottom:1px solid black;"><td>80.0–70.0</td><td>7th grade</td></tr><tr style="border-bottom:1px solid black;"><td>70.0–60.0</td><td>8th &amp; 9th grade</td></tr><tr style="border-bottom:1px solid black;"><td>60.0–50.0</td><td>10th to 12th grade</td></tr><tr style="border-bottom:1px solid black;"><td>50.0–30.0</td><td>College</td></tr><tr style="border-bottom:1px solid black;"><td>30.0–0.0</td><td>College Graduate</td></tr></tbody></table>'
+    var helptable = '<table style="float:left;margin-left:100px;"><tbody><tr style="border-bottom:1px solid black;"><th>Score</th><th>Grade Level</th></tr><tr style="border-bottom:1px solid black;"><td>&gt; 100.0</td><td>&lt; 5th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>100.00-90.00&nbsp;&nbsp;&nbsp;&nbsp;</td><td>5th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>90.0–80.0</td><td>6th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>80.0–70.0</td><td>7th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>70.0–60.0</td><td>8th-9th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>60.0–50.0</td><td>10th-12th Grade</td></tr><tr style="border-bottom:1px solid black;"><td>50.0–30.0</td><td>College Undergraduate</td></tr><tr style="border-bottom:1px solid black;"><td>30.0–0.0</td><td>College Graduate</td></tr></tbody></table>'
     document.getElementById('graph').innerHTML = helptext + table + helptable;
   }
 
@@ -820,6 +876,9 @@
           break;
         case "splat-syllables":
           visualizeSplatSyllables();
+          break;
+        case "splat-pronouns":
+          visualizeSplatPronouns();
           break;
         default:
           break;

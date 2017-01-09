@@ -60,6 +60,14 @@
         tokenizerRequired: false
       },
       {
+        name: "Pronoun Frequency Analysis (SPLAT)",
+        unfriendly_name: "splat-pronouns",
+        description: "This operation counts all of the pronouns within the corpus and displays them.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
+      },
+      {
         name: "Syllable Frequencies (SPLAT)",
         unfriendly_name: "splat-syllables",
         description: "This operation uses the cmudict to lookup syllable counts for each word in the corpus. For each unique syllable count found, words with that many syllables will be grouped together and displayed in a table. If a word is not found in the cmudict, the python library difflib is used to find the closest matching word in the cmudict, and the syllable count for that closest match is used.",
@@ -159,6 +167,7 @@
       "splat-complexity": [],
       "splat-pos": [cleanups.removesilence],
       "splat-syllables": [cleanups.removesilence],
+      "splat-pronouns": [],
       "nlp-ner": [cleanups.removesilence],
       "nlp-coref": [cleanups.removesilence],
       "nlp-sentiment": [cleanups.removesilence],
