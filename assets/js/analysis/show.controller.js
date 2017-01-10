@@ -584,6 +584,7 @@
 	    wordspace.style.fontWeight = 'bold';
 	    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
 	    wordspace.setAttribute("class", 'organization');
+            wordspace.style.backgroundColor = $scope.selectedEntity.color;
 	    corefCount++;
 
             if(wk == $scope.selectedEntity.endInd-1) { wordspace.innerHTML += ' [' + $scope.selectedEntity.entityID + '] '; }
@@ -610,11 +611,53 @@
       console.log(corefText.innerHTML);
   }
 
+  var randColor = (function() {
+    var golden_ratio_conjugate = 0.618033988749895;
+    var h = Math.random();
+    var hslToRgb = function (h, s, l) {
+      var r, g, b;
+      if(s == 0) {
+        r = g = b = l; // achromatic
+      }
+      else {
+        function hue2rgb(p, q, t) {
+          if(t < 0) t += 1;
+          if(t > 1) t -= 1;
+          if(t < 1/6) return p + (q - p) * 6 * t;
+          if(t < 1/2) return q;
+          if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        }
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      return '#'+Math.round(r * 255).toString(16)+Math.round(g * 255).toString(16)+Math.round(b * 255).toString(16);
+    };
+    return function(){
+      h += golden_ratio_conjugate;
+      h %= 1;
+      return hslToRgb(h, 0.5, 0.60);
+    };
+  })();
+
+
+  function getRandColor(brightness){
+    // Six levels of brightness from 0 to 5, 0 being the darkest
+    var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
+    var mix = [brightness*51, brightness*51, brightness*51]; //51 => 255/5
+    var mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x){ return Math.round(x/2.0)})
+    return "rgb(" + mixedrgb.join(",") + ")";
+  }
+
   $scope.visualizeCoref = function() {
     var sentences = $scope.analysis.result.sentences;
     var entityCount = 0;
     // For each entity...
     $scope.analysis.result.entities.forEach(function(entity) {
+      var color = randColor();
       // For each mention...
       entity.mentions.forEach(function(mention) {
 
@@ -628,7 +671,8 @@
                                    'entityID': entityCount,
 		                   'sentence': mention.sentence,
 		                   'startInd': mention.tokspan_in_sentence[0],
-		                   'endInd': mention.tokspan_in_sentence[1]});
+		                   'endInd': mention.tokspan_in_sentence[1],
+                                   'color': color});
       });
       //$scope.corefEntities.push({'text': entityText, 'entityID': entityCount, 'mentions': mentions});
       //console.log(entityText);
