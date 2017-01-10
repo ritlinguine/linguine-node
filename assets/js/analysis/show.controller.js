@@ -577,7 +577,7 @@
 	    wordspace.setAttribute("class", 'organization');
 	    corefCount++;
 
-            if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' [ ' + $scope.selectedEntity.entityID + ' ] '; }
+            if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' [' + $scope.selectedEntity.entityID + '] '; }
 	  }
 
 	  textNode.appendChild(wordspace);
