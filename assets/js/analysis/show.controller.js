@@ -527,9 +527,13 @@
       // Create a new div under the #graph div
       var textDiv = document.getElementById("graph");
       var textNode =  document.createElement('div');
+      var allCorefNode = document.createElement('div');
       textNode.setAttribute("class", "ner-text");
       textNode.setAttribute("id", "plaintext-canvas");
+      allCorefNode.setAttribute("class", "ner-text");
+      allCorefNode.setAttribute("id", "plaintext-canvas");
       var corefText = document.createElement('div');
+      var allCorefText = document.createElement('div');
 
       var tokens = {};
       $scope.analysis.result.sentences.forEach(function(obj, sentenceIndex){
@@ -578,35 +582,97 @@
             wordspace.setAttribute('title', relationTitle);
           }
 
-	  if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd-1) {
-            //console.log(word.token);
-            //console.log($scope.selectedEntity.entityID);
-	    wordspace.style.fontWeight = 'bold';
-	    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
-	    wordspace.setAttribute("class", 'organization');
-            wordspace.style.backgroundColor = $scope.selectedEntity.color;
-	    corefCount++;
+          if(type == 'coref') {
+            if($scope.selectedEntity.entityID == 0) {
+              $scope.corefEntities.forEach( function(entity) {
+                var mentionCount = 0;
+                if(entity.entityID != 0) {
+                  if(entity.sentence == sk && wk >= entity.startInd && wk <= entity.endInd) {
+                    //wordspace.style.backgroundColor = entity.color;
+                    wordspace.style.fontWeight = 'bold';
+                    //wordspace.setAttribute("class", 'organization');
+                    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
+                    mentionCount++;
+                    corefCount++;
 
-            if(wk == $scope.selectedEntity.endInd-1) { wordspace.innerHTML += ' [' + $scope.selectedEntity.entityID + '] '; }
-	  }
+                    if(wk == entity.endInd) {
+                      var subscript = document.createElement('span');
+                      subscript.setAttribute("class", 'organization');
+                      subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
+                      subscript.style.backgroundColor = entity.color;
+                      subscript.innerHTML = ' <sub>[' + entity.entityID + ']</sub> ';
+                      wordspace.innerHTML = ' ' + wordspace.innerHTML + subscript.outerHTML;
+                    }
+                  }
+                }
+              });
+            }
+            else {
+              if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
+                console.log($scope.selectedEntity.entityID);
+                wordspace.style.fontWeight = 'bold';
+                wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
+                wordspace.setAttribute("class", 'organization');
+                wordspace.style.backgroundColor = $scope.selectedEntity.color;
+                corefCount++;
 
-          corefText.innerHTML += wordspace.innerHTML;
-	  textNode.appendChild(wordspace);
-          // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
-          var spanElements = textNode.getElementsByTagName('span');
-          for(var s = 1; s < spanElements.length; s++) {
-            var prev = spanElements[s-1];
-            var curr = spanElements[s];
-            if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-            else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-            else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-            else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+                if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
+              }
+            }
+          }
+
+//	  if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd-1) {
+//            console.log($scope.selectedEntity.entityID);
+//	    wordspace.style.fontWeight = 'bold';
+//	    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
+//	    wordspace.setAttribute("class", 'organization');
+//            wordspace.style.backgroundColor = $scope.selectedEntity.color;
+//	    corefCount++;
+//
+//            if(wk == $scope.selectedEntity.endInd-1) { wordspace.innerHTML += ' <sub>[' + $scope.selectedEntity.entityID + ']</sub> '; }
+//	  }
+
+          if($scope.selectedEntity.entityID == 0) {
+            allCorefText.innerHTML += wordspace.innerHTML;
+            allCorefNode.appendChild(wordspace);
+            // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
+            var spanElements = allCorefNode.getElementsByTagName('span');
+            for(var s = 1; s < spanElements.length; s++) {
+              var prev = spanElements[s-1];
+              var curr = spanElements[s];
+              if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+            }
+          }
+          else {
+            corefText.innerHTML += wordspace.innerHTML;
+	    textNode.appendChild(wordspace);
+            // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
+            var spanElements = textNode.getElementsByTagName('span');
+            for(var s = 1; s < spanElements.length; s++) {
+              var prev = spanElements[s-1];
+              var curr = spanElements[s];
+              if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+            }
           }
           //console.log(textNode.getElementsByTagName('span'));
 	});
         wordcount += 1;
       });
-      textDiv.appendChild( textNode );
+      //textDiv.appendChild( allCorefNode );
+      if($scope.selectedEntity.entityID == 0) {
+        textDiv.appendChild( allCorefNode );
+      }
+      else {
+        textDiv.appendChild( textNode );
+      }
+      //textDiv.appendChild( allCorefNode );
+      //allCorefText.appendChild( textNode );
       //console.log(textDiv);
       console.log(corefText.innerHTML);
   }
@@ -616,16 +682,14 @@
     var h = Math.random();
     var hslToRgb = function (h, s, l) {
       var r, g, b;
-      if(s == 0) {
-        r = g = b = l; // achromatic
-      }
+      if(s == 0) { r = g = b = l; }
       else {
         function hue2rgb(p, q, t) {
-          if(t < 0) t += 1;
-          if(t > 1) t -= 1;
-          if(t < 1/6) return p + (q - p) * 6 * t;
-          if(t < 1/2) return q;
-          if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          if(t < 0) { t += 1; }
+          if(t > 1) { t -= 1; }
+          if(t < 1/6) { return p + (q - p) * 6 * t; }
+          if(t < 1/2) { return q; }
+          if(t < 2/3) { return p + (q - p) * (2/3 - t) * 6; }
           return p;
         }
         var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
@@ -643,19 +707,11 @@
     };
   })();
 
-
-  function getRandColor(brightness){
-    // Six levels of brightness from 0 to 5, 0 being the darkest
-    var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
-    var mix = [brightness*51, brightness*51, brightness*51]; //51 => 255/5
-    var mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x){ return Math.round(x/2.0)})
-    return "rgb(" + mixedrgb.join(",") + ")";
-  }
-
   $scope.visualizeCoref = function() {
     var sentences = $scope.analysis.result.sentences;
     var entityCount = 0;
     // For each entity...
+    $scope.corefEntities.push({'text': "ALL", 'entityID': 0, 'sentence': 9999, 'startInd': 9999, 'endInd': 9999, 'color': 999999});
     $scope.analysis.result.entities.forEach(function(entity) {
       var color = randColor();
       // For each mention...
@@ -667,8 +723,16 @@
         //Grab the text from every token and append together to populate the dropdown list
         var tokenText = tokenString.reduce(function(prev, cur) { return prev.token? prev.token + ' ' + cur.token : prev + ' ' + cur.token; });
 
-        $scope.corefEntities.push({'text': tokenText.replace(/\s+([.,!?;;])/g, '$1'),
-                                   'entityID': entityCount,
+        arrayTokenText = tokenText.replace(/\s+([.,!?;;])/g, '$1').split(" ");
+        if(arrayTokenText.length == -1) {
+           tokenText = arrayTokenText.slice(0, -1).join(" ");
+        }
+        else {
+           tokenText = arrayTokenText.join(" ");
+        }
+
+        $scope.corefEntities.push({'text': tokenText,
+                                   'entityID': entityCount+1,
 		                   'sentence': mention.sentence,
 		                   'startInd': mention.tokspan_in_sentence[0],
 		                   'endInd': mention.tokspan_in_sentence[1],
@@ -679,7 +743,6 @@
       //console.log($scope.corefEntities);
       entityCount++;
     });
-
     $scope.selectedEntity = $scope.corefEntities[0];
 
     //Render text in document to highlight with entities
