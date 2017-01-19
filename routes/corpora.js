@@ -6,7 +6,7 @@ var fs = require('fs');
 
 //Max file size is 35Kb by default (5x length of 'The Raven')
 var maxSize = process.env.LINGUINE_MAX_FILESIZE_KB? 
-  process.env.LINGUINE_MAX_FILESIZE_KB * 1000 : 35 * 1000 
+  process.env.LINGUINE_MAX_FILESIZE_KB * 1000 : 400 * 1000 
 
 // Middleware runs on all corpora API calls
 router.use(function(req, res, next) {

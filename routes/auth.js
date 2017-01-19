@@ -30,9 +30,10 @@ module.exports = function(app){
       if(users.length === 0) {
         User.create({ dce: user.uid, name: user.cn }, function(err, user){
           var files = ['1928 News article', '2015 News article', 'My Bondage and My Freedom excerpt',
-            'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt', '310 DementiaBank1',
-            '310 DementiaBank2', '310 DementiaBank3', '310 DementiaBank4', '470 Shakespeare',
-            '470 Lennox', '470 Dickinson', '470 Doyle'];
+            'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt',
+            '310 DementiaBank1', '310 DementiaBank2', '310 DementiaBank3', '310 DementiaBank4',
+            '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle',
+            '310 Very-Formal', '310 Semi-Formal', '310 Semi-Informal', '310 Very-Informal'];
           files.forEach(function(file) {
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
@@ -54,7 +55,6 @@ module.exports = function(app){
           done(null, user);
 
         });
-
       }else {
         done(null, users[0]);
       }
