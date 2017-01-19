@@ -931,7 +931,7 @@
           else if(word.toLowerCase() == "ah") { temp_sent += '<b style="color: blue;">' + word + ' ' + word + ' </b>'; }
           else if(word.toLowerCase() == "er") { temp_sent += '<b style="color: dodgerblue;">' + word + ' ' + word + ' </b>'; }
           else if(word.toLowerCase() == "hm") { temp_sent += '<b style="color: maroon;">' + word + ' ' + word + ' </b>'; }
-          else if(word.toLowerCase() == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' ' + word + ' </b>'; }
+          else if(word.toLowerCase().replace(/(\.*$|\?*$|,*$\!*$)/g, '') == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' ' + word + ' </b>'; }
           else if(word.slice(-1) == "-") { temp_sent += '<b style="color: darkgreen;">' + word + ' ' + word + ' </b>'; }
           else { temp_sent += word + ' ' + word; }
           temp_sent += '<b style="color: limegreen;"> ] </b>';
@@ -943,7 +943,7 @@
         else if(word.toLowerCase() == "ah") { temp_sent += '<b style="color: blue;">' + word + ' </b>'; }
         else if(word.toLowerCase() == "er") { temp_sent += '<b style="color: dodgerblue;">' + word + ' </b>'; }
         else if(word.toLowerCase() == "hm") { temp_sent += '<b style="color: maroon;">' + word + ' </b>'; }
-        else if(word.toLowerCase() == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' </b>'; }
+        else if(word.toLowerCase().replace(/(\.*$|\?*$|,*$\!*$)/g, '') == "{sl}") { temp_sent += '<b style="color: purple;">' + word + ' </b>'; }
         else if(word.slice(-1) == "-") { temp_sent += '<b style="color: darkgreen;">' + word + ' </b>'; }
         else { temp_sent += word + ' '; }
         num++;
@@ -963,6 +963,8 @@
     display_text += '<b style="color: purple;">SILENT PAUSES: ' + $scope.results[0]["total_disfluencies"]["SILENT PAUSE"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: darkgreen;">BREAKS: ' + $scope.results[0]["total_disfluencies"]["BREAK"] + '</b></td><td align="center" style="width: auto; position: relative;">';
     display_text += '<b style="color: limegreen;">REPETITIONS: ' + rep_count + '</b></td></tr></table></div><br>';
+
+    final_text = final_text.replace(/(\.*$|\?*$|,*$|!*$)/g, '<span style="color: black !important;">' + '$1' + '</span>');
 
     // Display the visualization.
     document.getElementById("graph").innerHTML = '<span style="font-size: 20px;"' + display_text + final_text + '</span>';
