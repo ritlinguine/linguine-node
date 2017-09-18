@@ -44,6 +44,23 @@
 			$scope.corpora = data;
 		});
 
+    		$scope.delete = function () {
+      		$http.delete('api/analysis/' + $stateParams.id)
+      		  .success(function (data) {
+        	    $state.go('linguine.analysis.index')
+      		  })
+      		  .error(function (data) {
+        	    flash.danger.setMessage("An error occured.");
+      		  })
+    		};
+
+    		$scope.confirmDelete = function() {
+        	  if($window.confirm("Are you sure you want to delete this analysis?"))
+        	    {
+            	      $scope.delete();
+        	    }
+    		};
+
 		var timeIntervalInSec = 10; 
 		$interval($scope.fetchAnalyses, 1000 * timeIntervalInSec);
 
