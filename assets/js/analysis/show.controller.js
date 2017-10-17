@@ -11,6 +11,7 @@
 
     $scope.sentenceIndex = 0;
     $scope.corefEntities = [];
+    $scope.nerEntities = [];
 
     $scope.setSentence = function(index) {
         if(index != $scope.sentenceIndex) {
@@ -546,6 +547,7 @@
 	Object.keys(tokens[sk]).forEach(function(wk) {
 	  var corefCount = 0;
 	  var word = tokens[sk][wk];
+	  console.log(word);
 	  var wordspace = document.createElement('span');
 
 	  if(type == 'ner') { wordspace.setAttribute("title", word.token + ": " + word.ner); }
@@ -608,7 +610,7 @@
               });
             }
             else {
-              if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
+              if($scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
                 console.log($scope.selectedEntity.entityID);
                 wordspace.style.fontWeight = 'bold';
                 wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
@@ -632,7 +634,8 @@
 //            if(wk == $scope.selectedEntity.endInd-1) { wordspace.innerHTML += ' <sub>[' + $scope.selectedEntity.entityID + ']</sub> '; }
 //	  }
 
-          if($scope.selectedEntity.entityID == 0) {
+          if(type == 'coref' && $scope.selectedEntity.entityID == 0) {
+	    console.log(allCorefText.innerHTML);
             allCorefText.innerHTML += wordspace.innerHTML;
             allCorefNode.appendChild(wordspace);
             // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
@@ -665,8 +668,13 @@
         wordcount += 1;
       });
       //textDiv.appendChild( allCorefNode );
-      if($scope.selectedEntity.entityID == 0) {
-        textDiv.appendChild( allCorefNode );
+      if(type == 'coref') {
+          if($scope.selectedEntity.entityID == 0) {
+              textDiv.appendChild( allCorefNode );
+          }
+          else {
+              textDiv.appendChild( textNode );
+          }
       }
       else {
         textDiv.appendChild( textNode );

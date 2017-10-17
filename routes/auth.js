@@ -29,11 +29,13 @@ module.exports = function(app){
     User.find({ dce: user.uid }).limit(1).exec(function(err, users){
       if(users.length === 0) {
         User.create({ dce: user.uid, name: user.cn }, function(err, user){
-          var files = ['1928 News article', '2015 News article', 'My Bondage and My Freedom excerpt',
+          var files = ['310 Very-Formal (J)', '310 Semi-Formal (J)', '310 Semi-Informal (J)',
+            '310 Very-Informal (J)', '310 Very-Formal (E)', '310 Semi-Formal (E)',
+            '310 Semi-Informal (E)', '310 Very-Informal (E)', '1928 News article',
+            '2015 News article', 'My Bondage and My Freedom excerpt',
             'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt',
             '310 DementiaBank1', '310 DementiaBank2', '310 DementiaBank3', '310 DementiaBank4',
-            '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle',
-            '310 Very-Formal', '310 Semi-Formal', '310 Semi-Informal', '310 Very-Informal'];
+            '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle'];
           files.forEach(function(file) {
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
