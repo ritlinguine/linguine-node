@@ -39,6 +39,9 @@
       */
       $scope.fileUrl = url.createObjectURL(blob);
       $scope.defaultView();
+
+      console.log($scope.analysis);
+
       $scope.visualize();
 
     });
@@ -548,7 +551,9 @@
 	  var word = tokens[sk][wk];
 	  var wordspace = document.createElement('span');
 
-	  if(type == 'ner') { wordspace.setAttribute("title", word.token + ": " + word.ner); }
+	  if(type == 'ner') {
+            wordspace.setAttribute("title", word.token + ": " + word.ner);
+          }
           //wordspace.innerHTML += word.token;
 
           if(wordcount < tokens[sk].length) {
