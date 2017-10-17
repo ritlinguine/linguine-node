@@ -27,11 +27,11 @@
         button.btn.btn-primary.dropdown-toggle(type="button" data-toggle="dropdown") Select {{analysis.analysis == 'nlp-coref'? 'Entity' : 'Sentence'}} 
           span.caret
         ul.dropdown-menu
-          li(ng-if="analysis.analysis == 'nlp-pos' || analysis.analysis == 'nlp-sentiment'" ng-repeat="result in analysis.result.sentences" ng-click="setSentence($index)") 
-            {{$index}} ) 
+          li(ng-if="analysis.analysis == 'nlp-pos' || analysis.analysis == 'nlp-sentiment'" ng-repeat="result in analysis.result.sentences" ng-click="setSentence($index)")
+            {{$index}} )
             {{joinTokens(result.tokens)}}
-          li(ng-if="analysis.analysis == 'nlp-coref'" ng-repeat="coref in corefEntities track by $index" ng-click="setEntity($index)") 
-            {{$index}} ) 
+          li(ng-if="analysis.analysis == 'nlp-coref'" ng-repeat="coref in corefEntities track by $index" ng-click="setEntity($index)")
+            {{$index}} )
             {{coref.text}}
       
       #senttext

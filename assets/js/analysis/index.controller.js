@@ -40,28 +40,29 @@
 		$scope.reapply = true;
 
 		$http.get('api/corpora')
-		.success(function (data) {
-			$scope.corpora = data;
+  		  .success(function (data) {
+		    $scope.corpora = data;
 		});
 
-    		$scope.delete = function () {
-      		$http.delete('api/analysis/' + $stateParams.id)
-      		  .success(function (data) {
-        	    $state.go('linguine.analysis.index')
-      		  })
-      		  .error(function (data) {
-        	    flash.danger.setMessage("An error occured.");
-      		  })
+    		$scope.errorDelete = function () {
+                  $scope.analyses.forEach(function(analysis) {
+      		    if(!analysis.complete) {
+		      $http.delete('api/analysis/' + analysis._id)
+			.error(function (data) {
+		          flash.danger.setMessage("An error occured trying to delete an erraneous analysis");
+		      });
+		    }
+                  });
     		};
 
-    		$scope.confirmDelete = function() {
-        	  if($window.confirm("Are you sure you want to delete this analysis?"))
+    		$scope.confirmErrorDelete = function() {
+        	  if(window.confirm("Are you sure you want to delete all erroneous analyses?"))
         	    {
-            	      $scope.delete();
+            	      $scope.errorDelete();
         	    }
     		};
 
-		var timeIntervalInSec = 10; 
+		var timeIntervalInSec = 10;
 		$interval($scope.fetchAnalyses, 1000 * timeIntervalInSec);
 
 		$scope.findCorpus = function (id) {
@@ -69,7 +70,7 @@
 		};
 
 		$scope.getEtaTime = function(analysis) {
-			var d = new Date(analysis.time_created); 
+			var d = new Date(analysis.time_created);
 			d.setSeconds(d.getSeconds() + analysis.eta);
 			return d.toLocaleTimeString()
 		};
