@@ -156,7 +156,7 @@
       },
       "remove_hashtags": {
         name: "Remove Hashtags",
-        unfriendly_name: "remove_hashtag",
+        unfriendly_name: "removehashtags",
         description: "Removes the hashtag character ('#')."
       }
     };
