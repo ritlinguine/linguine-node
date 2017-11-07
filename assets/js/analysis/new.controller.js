@@ -148,6 +148,16 @@
         name: "Remove Silent Pauses",
         unfriendly_name: "removesilence",
         description: "Removes the tokens that represent silent pauses in speech: {SL} and {sl}."
+      },
+      "remove_quotes": {
+        name: "Remove Quotes",
+        unfriendly_name: "removequotes",
+        description: "Removes quotations: ', \", ‘, ’, “, ”."
+      },
+      "remove_hashtags": {
+        name: "Remove Hashtags",
+        unfriendly_name: "removehashtags",
+        description: "Removes the hashtag character ('#')."
       }
     };
 
@@ -159,19 +169,19 @@
      * Key[analysisUnfriendlyName] => value [cleanupUnfriendlyName1, unfriendlyName2, ... n]
      */
     $scope.cleanupTypes = {
-      "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence],
-      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence],
-      "nlp-pos": [cleanups.removesilence],
-      "splat-disfluency": [cleanups.removesilence],
-      "splat-ngrams": [cleanups.removesilence],
-      "splat-complexity": [],
-      "splat-pos": [cleanups.removesilence],
-      "splat-syllables": [cleanups.removesilence],
-      "splat-pronouns": [],
-      "nlp-ner": [cleanups.removesilence],
-      "nlp-coref": [cleanups.removesilence],
-      "nlp-sentiment": [cleanups.removesilence],
-      "nlp-relation": [cleanups.removesilence]
+      "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "nlp-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-disfluency": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-complexity": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-syllables": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-pronouns": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "nlp-ner": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "nlp-coref": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
     };
 
     $scope.tokenizerTypes = [
