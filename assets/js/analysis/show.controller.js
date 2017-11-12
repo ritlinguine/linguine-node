@@ -519,123 +519,147 @@
         }
     };
 
+//  $scope.visualizeNER = function() {
+//    console.log($scope);
+//    $scope.renderPlainText('ner');
+//  }
   $scope.visualizeNER = function() {
-    $scope.renderPlainText('ner');
+    var canvas = document.getElementById('plaintext-canvas');
+    if(canvas) { canvas.remove(); }
+
+    var textDiv = document.getElementById("graph");
+    var textNode =  document.createElement('div');
+    textNode.setAttribute("class", "ner-text");
+    textNode.setAttribute("id", "plaintext-canvas");
+    var tokens = {};
+    $scope.analysis.result.sentences.forEach(function(obj, sentenceIndex){
+      tokens[sentenceIndex] = {}; 
+      obj.tokens.forEach(function(word, tokenIndex){
+        tokens[sentenceIndex][tokenIndex] = word;
+      })
+    });
+
+    Object.keys(tokens).forEach(function(sk){
+      Object.keys(tokens[sk]).forEach(function(wk) {
+        var corefCount = 0;
+        var word = tokens[sk][wk];
+        var wordspace = document.createElement('span');
+             
+        wordspace.setAttribute("title", word.token + ": " + word.ner);
+        wordspace.innerHTML += word.token + " ";
+            
+        if(word.ner !== "O") {
+          wordspace.style.fontWeight = 'bold';
+          wordspace.setAttribute("class", word.ner.toLowerCase());
+        }
+        textNode.appendChild(wordspace);
+      })
+    })
+    textDiv.appendChild( textNode );
   }
 
   $scope.renderPlainText = function(type) {
-      var canvas = document.getElementById('plaintext-canvas');
-      if(canvas){canvas.remove(); }
+    var canvas = document.getElementById('plaintext-canvas');
+    if(canvas){canvas.remove(); }
 
-      // Create a new div under the #graph div
-      var textDiv = document.getElementById("graph");
-      var textNode =  document.createElement('div');
-      var allCorefNode = document.createElement('div');
-      textNode.setAttribute("class", "ner-text");
-      textNode.setAttribute("id", "plaintext-canvas");
-      allCorefNode.setAttribute("class", "ner-text");
-      allCorefNode.setAttribute("id", "plaintext-canvas");
-      var corefText = document.createElement('div');
-      var allCorefText = document.createElement('div');
+    // Create a new div under the #graph div
+    var textDiv = document.getElementById("graph");
+    var textNode =  document.createElement('div');
+    var allCorefNode = document.createElement('div');
+    textNode.setAttribute("class", "ner-text");
+    textNode.setAttribute("id", "plaintext-canvas");
+    allCorefNode.setAttribute("class", "ner-text");
+    allCorefNode.setAttribute("id", "plaintext-canvas");
+    var corefText = document.createElement('div');
+    var allCorefText = document.createElement('div');
 
-      var tokens = {};
-      $scope.analysis.result.sentences.forEach(function(obj, sentenceIndex){
-        tokens[sentenceIndex] = {};
-        obj.tokens.forEach(function(word, tokenIndex){ tokens[sentenceIndex][tokenIndex] = word; })
-      });
+    var tokens = {};
+    $scope.analysis.result.sentences.forEach(function(obj, sentenceIndex){
+      tokens[sentenceIndex] = {};
+      obj.tokens.forEach(function(word, tokenIndex){ tokens[sentenceIndex][tokenIndex] = word; })
+    });
 
-      Object.keys(tokens).forEach(function(sk) {
-        var wordcount = 0;
-	Object.keys(tokens[sk]).forEach(function(wk) {
-	  var corefCount = 0;
-	  var word = tokens[sk][wk];
-	  var wordspace = document.createElement('span');
+    Object.keys(tokens).forEach(function(sk) {
+      var wordcount = 0;
+    	Object.keys(tokens[sk]).forEach(function(wk) {
+	      var corefCount = 0;
+    	  var word = tokens[sk][wk];
+	      var wordspace = document.createElement('span');
 
-	  if(type == 'ner') {
-            wordspace.setAttribute("title", word.token + ": " + word.ner);
-          }
-          //wordspace.innerHTML += word.token;
+    	  if(type == 'ner') {
+          wordspace.setAttribute("title", word.token + ": " + word.ner);
+          console.log(type);
+        }
+        //wordspace.innerHTML += word.token;
 
-          if(wordcount < tokens[sk].length) {
-            wordspace.innerHTML += (tokens[sk][wk+1].indexOf('.') == -1 || tokens[sk][wk+1].indexOf(',') == -1)? word.token + ' ' : word.token;
-          }
-          else {
-            wordspace.innerHTML += word.token + ' ';
-          }
+        if(wordcount < tokens[sk].length) {
+          wordspace.innerHTML += (tokens[sk][wk+1].indexOf('.') == -1 || tokens[sk][wk+1].indexOf(',') == -1)? word.token + ' ' : word.token;
+        }
+        else {
+          wordspace.innerHTML += word.token + ' ';
+        }
 
-	  if(type == 'ner' && word.ner !== "O") {
-	    wordspace.style.fontWeight = 'bold';
-	    wordspace.setAttribute("class", word.ner.toLowerCase());
-          }
+	      if(type == 'ner' && word.ner !== "O") {
+    	    wordspace.style.fontWeight = 'bold';
+	        wordspace.setAttribute("class", word.ner.toLowerCase());
+        }
 
-          if(type == 'relation') {
-            var relationTitle = '';
+        if(type == 'relation') {
+          var relationTitle = '';
 
-            $scope.analysis.result.sentences[sk].relations.forEach(function(relation) {
-              var startInd = relation.subject.start;
-              var endInd = relation.object.end - 1;
+          $scope.analysis.result.sentences[sk].relations.forEach(function(relation) {
+            var startInd = relation.subject.start;
+            var endInd = relation.object.end - 1;
 
-              if(wk >= startInd && wk <= endInd) {
-                wordspace.style.fontWeight = 'bold';
-                wordspace.style.textDecoration = 'underline';
+            if(wk >= startInd && wk <= endInd) {
+              wordspace.style.fontWeight = 'bold';
+              wordspace.style.textDecoration = 'underline';
 
-                var relationTriple = relation.subject.lemma + ' (' + relation.relation.lemma + ') ' + relation.object.lemma;
-                relationTitle += relationTriple + '\n'; 
-              }
-            });
+              var relationTriple = relation.subject.lemma + ' (' + relation.relation.lemma + ') ' + relation.object.lemma;
+              relationTitle += relationTriple + '\n'; 
+            }
+          });
 
-            wordspace.setAttribute('title', relationTitle);
-          }
+          wordspace.setAttribute('title', relationTitle);
+        }
 
-          if(type == 'coref') {
-            if($scope.selectedEntity.entityID == 0) {
-              $scope.corefEntities.forEach( function(entity) {
-                var mentionCount = 0;
-                if(entity.entityID != 0) {
-                  if(entity.sentence == sk && wk >= entity.startInd && wk <= entity.endInd) {
-                    //wordspace.style.backgroundColor = entity.color;
-                    wordspace.style.fontWeight = 'bold';
-                    //wordspace.setAttribute("class", 'organization');
-                    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
-                    mentionCount++;
-                    corefCount++;
+        if(type == 'coref') {
+          if($scope.selectedEntity.entityID == 0) {
+            $scope.corefEntities.forEach( function(entity) {
+              var mentionCount = 0;
+              if(entity.entityID != 0) {
+                if(entity.sentence == sk && wk >= entity.startInd && wk <= entity.endInd) {
+                  //wordspace.style.backgroundColor = entity.color;
+                  wordspace.style.fontWeight = 'bold';
+                  //wordspace.setAttribute("class", 'organization');
+                  wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
+                  mentionCount++;
+                  corefCount++;
 
-                    if(wk == entity.endInd) {
-                      var subscript = document.createElement('span');
-                      subscript.setAttribute("class", 'organization');
-                      subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
-                      subscript.style.backgroundColor = entity.color;
-                      subscript.innerHTML = ' <sub>[' + entity.entityID + ']</sub> ';
-                      wordspace.innerHTML = ' ' + wordspace.innerHTML + subscript.outerHTML;
-                    }
+                  if(wk == entity.endInd) {
+                    var subscript = document.createElement('span');
+                    subscript.setAttribute("class", 'organization');
+                    subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
+                    subscript.style.backgroundColor = entity.color;
+                    subscript.innerHTML = ' <sub>[' + entity.entityID + ']</sub> ';
+                    wordspace.innerHTML = ' ' + wordspace.innerHTML + subscript.outerHTML;
                   }
                 }
-              });
-            }
-            else {
-              if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
-                console.log($scope.selectedEntity.entityID);
-                wordspace.style.fontWeight = 'bold';
-                wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
-                wordspace.setAttribute("class", 'organization');
-                wordspace.style.backgroundColor = $scope.selectedEntity.color;
-                corefCount++;
-
-                if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
               }
+            });
+          }
+          else {
+            if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
+              console.log($scope.selectedEntity.entityID);
+              wordspace.style.fontWeight = 'bold';
+              wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
+              wordspace.setAttribute("class", 'organization');
+              wordspace.style.backgroundColor = $scope.selectedEntity.color;
+              corefCount++;
+              if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
             }
           }
-
-//	  if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd-1) {
-//            console.log($scope.selectedEntity.entityID);
-//	    wordspace.style.fontWeight = 'bold';
-//	    wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
-//	    wordspace.setAttribute("class", 'organization');
-//            wordspace.style.backgroundColor = $scope.selectedEntity.color;
-//	    corefCount++;
-//
-//            if(wk == $scope.selectedEntity.endInd-1) { wordspace.innerHTML += ' <sub>[' + $scope.selectedEntity.entityID + ']</sub> '; }
-//	  }
+            //}
 
           if($scope.selectedEntity.entityID == 0) {
             allCorefText.innerHTML += wordspace.innerHTML;
@@ -653,7 +677,7 @@
           }
           else {
             corefText.innerHTML += wordspace.innerHTML;
-	    textNode.appendChild(wordspace);
+	          textNode.appendChild(wordspace);
             // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
             var spanElements = textNode.getElementsByTagName('span');
             for(var s = 1; s < spanElements.length; s++) {
@@ -665,21 +689,23 @@
               else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
             }
           }
+      }
           //console.log(textNode.getElementsByTagName('span'));
-	});
+    });
         wordcount += 1;
-      });
+        //});
       //textDiv.appendChild( allCorefNode );
-      if($scope.selectedEntity.entityID == 0) {
-        textDiv.appendChild( allCorefNode );
-      }
-      else {
-        textDiv.appendChild( textNode );
-      }
+      //console.log($scope.selectedEntity.entityID);
+      console.log($scope.selectedEntity);
+      console.log($scope.selectedEntity.entityID);
+      if($scope.selectedEntity.entityID == 0) { textDiv.appendChild( allCorefNode ); }
+      else { textDiv.appendChild( textNode ); }
       //textDiv.appendChild( allCorefNode );
       //allCorefText.appendChild( textNode );
       //console.log(textDiv);
       console.log(corefText.innerHTML);
+    //});
+  });
   }
 
   var randColor = (function() {
