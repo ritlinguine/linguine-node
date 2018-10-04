@@ -114,6 +114,14 @@
         tokenAllowed: false,
         multipleCorporaAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Character N-gram Frequency Analysis (SPLAT)",
+        unfriendly_name: "char-ngrams",
+        description: "This operation extracts the character unigrams, bigrams, and trigrams from the corpus using the Natural Language ToolKit (NLTK).",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     
@@ -181,7 +189,8 @@
       "nlp-ner": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-coref": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
+      "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
     };
 
     $scope.tokenizerTypes = [

@@ -94,7 +94,7 @@
      * analysis data depending on the 'analysis' that is performed
      */
     $scope.defaultView = function() {
-      if($scope.analysis.analysis.includes('splat')) {
+      if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
 
@@ -1032,6 +1032,7 @@
           visualizeSplatDisfluency();
           break;
         case "splat-ngrams":
+        case "char-ngrams":
           visualizeSplatNgrams();
           break;
         case "splat-pos":
