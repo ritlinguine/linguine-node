@@ -628,7 +628,7 @@
             $scope.corefEntities.forEach( function(entity) {
               var mentionCount = 0;
               if(entity.entityID != 0) {
-                if(entity.sentence == sk && wk >= entity.startInd && wk <= entity.endInd) {
+                if(entity.sentence == sk && wk >= entity.startInd && wk < entity.endInd) {
                   //wordspace.style.backgroundColor = entity.color;
                   wordspace.style.fontWeight = 'bold';
                   //wordspace.setAttribute("class", 'organization');
@@ -636,7 +636,7 @@
                   mentionCount++;
                   corefCount++;
 
-                  if(wk == entity.endInd) {
+                  if(wk == entity.endInd - 1) {
                     var subscript = document.createElement('span');
                     subscript.setAttribute("class", 'organization');
                     subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
@@ -649,14 +649,14 @@
             });
           }
           else {
-            if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk <= $scope.selectedEntity.endInd) {
+            if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk < $scope.selectedEntity.endInd) {
               console.log($scope.selectedEntity.entityID);
               wordspace.style.fontWeight = 'bold';
               wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
               wordspace.setAttribute("class", 'organization');
               wordspace.style.backgroundColor = $scope.selectedEntity.color;
               corefCount++;
-              if(wk == $scope.selectedEntity.endInd) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
+              if(wk == $scope.selectedEntity.endInd - 1) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
             }
           }
             //}
@@ -709,7 +709,7 @@
   }
 
   var randColor = (function() {
-    var golden_ratio_conjugate = 0.618033988749895;
+    var golden_ratio_conjugate = 0.618033988749895; // 2 / (1 + sqrt(5))
     var h = Math.random();
     var hslToRgb = function (h, s, l) {
       var r, g, b;
@@ -738,21 +738,38 @@
     };
   })();
 
+  var getColor = function(num) {
+      // List from https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/
+      distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c',
+        '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080']
+       if (num <= distinct_colors.length)
+       {
+         return distinct_colors[num - 1];
+       } else {return randColor();}
+  };
+
   $scope.visualizeCoref = function() {
     var sentences = $scope.analysis.result.sentences;
     var entityCount = 0;
     // For each entity...
     $scope.corefEntities.push({'text': "ALL", 'entityID': 0, 'sentence': 9999, 'startInd': 9999, 'endInd': 9999, 'color': 999999});
     $scope.analysis.result.entities.forEach(function(entity) {
-      var color = randColor();
+      var color = getColor(entity.entityid);
       // For each mention...
       entity.mentions.forEach(function(mention) {
 
-        //Grab every token that has been mentioned by a given entity 
-        var tokenString = sentences[mention.sentence].tokens.slice(mention.tokspan_in_sentence[0], mention.tokspan_in_sentence[1] + 1);
+        //Grab every token that has been mentioned by a given entity
+        var tokenString = sentences[mention.sentence].tokens.slice(mention.tokspan_in_sentence[0], mention.tokspan_in_sentence[1]);
 
         //Grab the text from every token and append together to populate the dropdown list
-        var tokenText = tokenString.reduce(function(prev, cur) { return prev.token? prev.token + ' ' + cur.token : prev + ' ' + cur.token; });
+        if (tokenString.length === 1)
+        {
+          var tokenText = tokenString[0].token;
+        } else {
+          var tokenText = tokenString.reduce(function (prev, cur) {
+            return prev.token ? prev.token + ' ' + cur.token : prev + ' ' + cur.token;
+          });
+        }
 
         arrayTokenText = tokenText.replace(/\s+([.,!?;;])/g, '$1').split(" ");
         if(arrayTokenText.length == -1) {
