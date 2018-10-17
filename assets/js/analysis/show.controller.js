@@ -635,14 +635,18 @@
                   wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
                   mentionCount++;
                   corefCount++;
+                  
+                  if(wk == entity.startInd) {
+                    wordspace.innerHTML = ' [ ' + wordspace.innerHTML;
+                  }
 
                   if(wk == entity.endInd - 1) {
                     var subscript = document.createElement('span');
                     subscript.setAttribute("class", 'organization');
                     subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
                     subscript.style.backgroundColor = entity.color;
-                    subscript.innerHTML = ' <sub>[' + entity.entityID + ']</sub> ';
-                    wordspace.innerHTML = ' ' + wordspace.innerHTML + subscript.outerHTML;
+                    subscript.innerHTML = ' <sub>{' + entity.entityID + '}</sub> ';
+                    wordspace.innerHTML = ' ' + wordspace.innerHTML + ']' + subscript.outerHTML;
                   }
                 }
               }
@@ -656,7 +660,7 @@
               wordspace.setAttribute("class", 'organization');
               wordspace.style.backgroundColor = $scope.selectedEntity.color;
               corefCount++;
-              if(wk == $scope.selectedEntity.endInd - 1) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">[' + $scope.selectedEntity.entityID + ']</sub> '; }
+              if(wk == $scope.selectedEntity.endInd - 1) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">{' + $scope.selectedEntity.entityID + '}</sub> '; }
             }
           }
             //}
@@ -741,7 +745,7 @@
   var getColor = function(num) {
       // List from https://sashat.me/2017/01/11/list-of-20-simple-distinct-colors/
       distinct_colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c',
-        '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080']
+        '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#808080']
        if (num <= distinct_colors.length)
        {
          return distinct_colors[num - 1];
@@ -1067,3 +1071,4 @@
   };
   }
 })();
+
