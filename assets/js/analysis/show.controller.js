@@ -799,6 +799,26 @@
 
     //Render text in document to highlight with entities
     $scope.renderPlainText('coref');
+
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '">';
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">ID</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Text</th></tr>';
+    var corefEntitiesTable = {};
+
+    $scope.corefEntities.forEach(function(item) {
+      if (corefEntitiesTable[item.entityID] == undefined)
+      {
+        corefEntitiesTable[item.entityID] = {'color' : item.color,
+        'text' : []};
+      }
+      corefEntitiesTable[item.entityID].text.push(item.text);
+    });
+    for (var i in corefEntitiesTable){
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="background-color: black;color: ' + corefEntitiesTable[i].color + '; text-align: center;"><b>' + i + '</b></td>';
+      table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + corefEntitiesTable[i].text.join("<br>") + '</b></td></tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML += table;
   }
 
   $scope.setEntity = function(index) {
