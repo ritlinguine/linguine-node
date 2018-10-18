@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rigatoni/linguine-node"
+    "url": "https://github.com/ritlinguine/linguine-node"
   },
-  "author": "Team Rigatoni",
+  "author": "RIT CLaSP",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rigatoni/linguine-node/issues"
+    "url": "https://github.com/ritlinguine/linguine/issues"
   },
-  "homepage": "https://github.com/rigatoni/linguine-node",
+  "homepage": "https://github.com/ritlinguine/linguine-node",
   "dependencies": {
     "asn1": "^0.2.2",
     "assert-plus": "^0.1.5",
