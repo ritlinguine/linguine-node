@@ -122,6 +122,14 @@
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Word and Sentence Length Analysis",
+        unfriendly_name: "length-stats",
+        description: "This operation simple statistics for a text, such as characters per word and words per sentence.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     
@@ -190,7 +198,8 @@
       "nlp-coref": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
+      "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
     };
 
     $scope.tokenizerTypes = [
