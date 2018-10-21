@@ -130,6 +130,14 @@
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Topic Modelling",
+        unfriendly_name: "topic-model",
+        description: "This operation creates a topic model using a LDA with 30 topics and can work with multiple documents at a time.",
+        multiCorporaAllowed: true,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     
@@ -199,7 +207,8 @@
       "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
+      "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "topic-model": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
     };
 
     $scope.tokenizerTypes = [

@@ -94,7 +94,8 @@
      * analysis data depending on the 'analysis' that is performed
      */
     $scope.defaultView = function() {
-      if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams' ||  $scope.analysis.analysis === 'length-stats') {
+      if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
+        ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis === 'topic-model') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
 
@@ -1058,6 +1059,22 @@
     }
   }
 
+  function visualizeTopicModel() {
+    console.log('topic-model');
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
+    for (var item in $scope.results) {
+      var title = '<br><h3 class=' + style + '">' + item + ':</h3>';
+      var table = '<table class=' + style + '">';
+      table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Probability</th><th></th></tr>';
+      for (var word in $scope.results[item]) {
+        table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item][word].word + '</td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[item][word].probability).toFixed(8) + '</td><td></td></tr>';
+      }
+      table += '</table>';
+      document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table;
+    }
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -1103,6 +1120,9 @@
           break;
         case "length-stats":
           visualizeLengthStatistics();
+          break;
+        case "topic-model":
+          visualizeTopicModel();
           break;
         default:
           break;
