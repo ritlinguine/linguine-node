@@ -138,6 +138,14 @@
         multiCorporaAllowed: true,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Word Vectors",
+        unfriendly_name: "word-vector",
+        description: "This operation carries out calculations on GloVe word vectors.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     
@@ -208,7 +216,8 @@
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "topic-model": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags]
+      "topic-model": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "word-vector": []
     };
 
     $scope.tokenizerTypes = [

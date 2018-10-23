@@ -95,7 +95,8 @@
      */
     $scope.defaultView = function() {
       if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
-        ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis === 'topic-model') {
+        ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis === 'topic-model'
+        ||  $scope.analysis.analysis === 'word-vector') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
 
@@ -1075,6 +1076,44 @@
     }
   }
 
+  function visualizeWordVector() {
+    console.log('word-vector');
+    console.log($scope.results);
+    var instructions = "<p>To use this analysis, create a text file with one of the following commands per line, starting with the specific command followed by its arguments. If you do not use this format, the analysis will fail to run.</p>";
+    instructions += "<p>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, <kbd>sim_score universities colleges</kbd> is used to find the similary between 'universities' and 'colleges'.</p>";
+    instructions += "<p>The similarity equation command has one or more arguments, which are the words used in the equation. Each word is prefixed by its operation. For example, <kbd>sim_math +woman +king -man</kbd> is used to find the result of 'woman + king - man'.</p>";
+    document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + instructions;
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
+    for (var item in $scope.results) {
+      if ($scope.results[item].type === "sim_score"){
+        var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' (Similarity Score):</h3>';
+        var table = '<table class=' + style + '">';
+        table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word 1</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Word 2</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Score</th><th></th></tr>';
+        table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].word1 + '</td><td>&nbsp;&nbsp;</td><td style="color:darkgreen;">' + $scope.results[item].word2 + '</td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[item].score).toFixed(8) + '</td><td></td></tr>';
+        table += '</table>';
+        document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table;
+      } else if ($scope.results[item].type === "sim_math"){
+        var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' (Similarity Equation):</h3>';
+        var table0 = '<table class=' + style + '">';
+        table0 += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Operation</th><th></th></tr>';
+        for (var word in $scope.results[item].pos) {
+          table0 += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].pos[word] + '</td><td>&nbsp;&nbsp;</td><td align="right">+</td><td></td></tr>';
+        }
+        for (var word in $scope.results[item].neg) {
+          table0 += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].neg[word] + '</td><td>&nbsp;&nbsp;</td><td align="right">-</td><td></td></tr>';
+        }
+        table0 += '</table><br>';
+        var table = '<table class=' + style + '">';
+        table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Score</th><th></th></tr>';
+        for (var ans in $scope.results[item].answer) {
+          table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].answer[ans].word + '</td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[item].answer[ans].score).toFixed(8) + '</td><td></td></tr>';
+        }
+        table += '</table>';
+        document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table0 + table;
+      }
+    }
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -1123,6 +1162,9 @@
           break;
         case "topic-model":
           visualizeTopicModel();
+          break;
+        case "word-vector":
+          visualizeWordVector();
           break;
         default:
           break;
