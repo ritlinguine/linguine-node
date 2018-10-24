@@ -1049,7 +1049,7 @@
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
     for (var item in $scope.results[0]) {
-      var title = '<br><h3 class=' + style + '">' + item + ':</h3>';
+      var title = '<br><h3 class=' + style + '">' + item.charAt(0).toUpperCase() + item.substr(1) + ':</h3>';
       var table = '<table class=' + style + '">';
       table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Calculation</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th><th></th></tr>';
       table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Mean" target="_blank" style="color:darkgreen !important;"><b>Mean:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0][item]["mean"]).toFixed(3) + '</td><td></td></tr>';
@@ -1080,7 +1080,7 @@
     console.log('word-vector');
     console.log($scope.results);
     var instructions = "<p>To use this analysis, create a text file with one of the following commands per line, starting with the specific command followed by its arguments. If you do not use this format, the analysis will fail to run.</p>";
-    instructions += "<p>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, <kbd>sim_score universities colleges</kbd> is used to find the similary between 'universities' and 'colleges'.</p>";
+    instructions += "<p>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, <kbd>sim_score universities colleges</kbd> is used to find the similarity between 'universities' and 'colleges'.</p>";
     instructions += "<p>The similarity equation command has one or more arguments, which are the words used in the equation. Each word is prefixed by its operation. For example, <kbd>sim_math +woman +king -man</kbd> is used to find the result of 'woman + king - man'.</p>";
     document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + instructions;
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
