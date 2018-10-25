@@ -132,9 +132,9 @@
         tokenizerRequired: false
       },
       {
-        name: "Topic Modelling",
+        name: "Topic Modeling",
         unfriendly_name: "topic-model",
-        description: "This operation creates a topic model using a LDA with 30 topics and can work with multiple documents at a time.",
+        description: "This operation creates a topic model using a LDA with 30 topics.",
         multiCorporaAllowed: true,
         tokenAllowed: false,
         tokenizerRequired: false
