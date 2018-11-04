@@ -146,6 +146,14 @@
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Morphology Induction (Linguistica 5)",
+        unfriendly_name: "unsup-morph",
+        description: "This operation determines likely patterns for suffixed words in a corpus.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     
@@ -217,7 +225,8 @@
       "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "topic-model": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "word-vector": []
+      "word-vector": [],
+      "unsup-morph": []
     };
 
     $scope.tokenizerTypes = [

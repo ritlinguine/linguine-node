@@ -96,7 +96,7 @@
     $scope.defaultView = function() {
       if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
         ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis === 'topic-model'
-        ||  $scope.analysis.analysis === 'word-vector') {
+        ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
 
@@ -1114,6 +1114,21 @@
     }
   }
 
+  function visualizeUnsupMorph() {
+    console.log('unsup-morph');
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '">';
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Suffixes</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Roots (Random 15)</th></tr>';
+
+    for (var i in $scope.results[0]) {
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + $scope.results[0][i].affixes.join("<br>") + '</b></td>';
+      table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.results[0][i].roots.join("<br>") + '</b></td></tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML += table;
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -1165,6 +1180,9 @@
           break;
         case "word-vector":
           visualizeWordVector();
+          break;
+        case "unsup-morph":
+          visualizeUnsupMorph();
           break;
         default:
           break;
