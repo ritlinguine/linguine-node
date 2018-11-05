@@ -95,7 +95,7 @@
      */
     $scope.defaultView = function() {
       if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
-        ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis === 'topic-model'
+        ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis.includes('topic-model')
         ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
@@ -1175,7 +1175,8 @@
         case "length-stats":
           visualizeLengthStatistics();
           break;
-        case "topic-model":
+        case "topic-model-10":
+        case "topic-model-30":
           visualizeTopicModel();
           break;
         case "word-vector":

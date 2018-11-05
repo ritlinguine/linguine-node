@@ -132,15 +132,23 @@
         tokenizerRequired: false
       },
       {
-        name: "Topic Modeling",
-        unfriendly_name: "topic-model",
+        name: "Topic Modeling (10 Topics) (Gensim)",
+        unfriendly_name: "topic-model-10",
+        description: "This operation creates a topic model using a LDA with 10 topics.",
+        multiCorporaAllowed: true,
+        tokenAllowed: false,
+        tokenizerRequired: false
+      },
+      {
+        name: "Topic Modeling (30 Topics) (Gensim)",
+        unfriendly_name: "topic-model-30",
         description: "This operation creates a topic model using a LDA with 30 topics.",
         multiCorporaAllowed: true,
         tokenAllowed: false,
         tokenizerRequired: false
       },
       {
-        name: "Word Vectors",
+        name: "Word Vectors (Gensim)",
         unfriendly_name: "word-vector",
         description: "This operation carries out calculations on GloVe word vectors.",
         multiCorporaAllowed: false,
@@ -224,7 +232,8 @@
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "topic-model": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "topic-model-10": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "topic-model-30": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "word-vector": [],
       "unsup-morph": []
     };
