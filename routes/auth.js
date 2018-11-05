@@ -34,8 +34,9 @@ module.exports = function(app){
             '310 DementiaBank1', '310 DementiaBank2', '310 DementiaBank3', '310 DementiaBank4',
             '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle',
             '310 Very-Formal (E)', '310 Semi-Formal (E)', '310 Semi-Informal (E)', '310 Very-Informal (E)',
-            '310 Very-Formal (J)', '310 Semi-Formal (J)', '310 Semi-Informal (J)', '310 Very-Informal (J)'];
-            files.forEach(function(file){ 
+            '310 Very-Formal (J)', '310 Semi-Formal (J)', '310 Semi-Informal (J)', '310 Very-Informal (J)',
+            'UnknownWS_Long', 'UnknownWS_Short'];
+            files.forEach(function(file){
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
               if(err) {
@@ -45,7 +46,7 @@ module.exports = function(app){
                 user_id: user._id,
                 contents: data,
                 title: file,
-                fileSize: 0, 
+                fileSize: 0,
                 fileName: file,
                 fileType: 'plaintext'
               };
