@@ -35,7 +35,9 @@ module.exports = function(app){
             '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle',
             '310 Very-Formal (E)', '310 Semi-Formal (E)', '310 Semi-Informal (E)', '310 Very-Informal (E)',
             '310 Very-Formal (J)', '310 Semi-Formal (J)', '310 Semi-Informal (J)', '310 Very-Informal (J)',
-            'UnknownWS_Long', 'UnknownWS_Short'];
+            'UnknownWS_Long', 'UnknownWS_Short', 'WordVector_Example',
+            'Dialogue_RJ1 Short', 'Dialogue_RJ2 Short', 'Dialogue_RJ Long',
+            'Dialogue_SB1 Short', 'Dialogue_SB2 Short', 'Dialogue_SB Long'];
             files.forEach(function(file){
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
