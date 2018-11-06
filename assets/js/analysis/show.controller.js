@@ -213,7 +213,7 @@
         var words = getWords().children;
 
         // setup for the word cloud
-        d3.layout.cloud().size([1000, 600])// width, height
+        var layout = d3.layout.cloud().size([1000, 600])// width, height
             .words(words)
             .rotate(function() {
                 return (~~(Math.random() * 6) - 3) * 30;
@@ -222,20 +222,18 @@
             .fontSize(function(d) {
                 return 8* Math.sqrt(d.frequency);
             })
-            .on("end", draw)
-            .start();
+            .on("end", draw);
+            layout.start();
 
 
         // draw the word cloud out
         function draw(words) {
             var cloud = d3.select("#graph").style('overflow', 'scroll').style('width', '1140px').style('height', '600px')
                         .append("svg")
-                        .attr("class", "cloud")
-                        .attr("viewBox", "0 0 500 400")
-                        .attr("width", '110%')
-                        .attr("height", '130%')
+                        .attr("width", layout.size()[0])
+                        .attr("height", layout.size()[1])
                         .append("g")
-                        .attr("transform", "translate(150,150)")
+                        .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
                         // individual text
                         .selectAll("text")
                         .data(words)
