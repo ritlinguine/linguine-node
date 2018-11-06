@@ -177,6 +177,11 @@
         unfriendly_name: "stem_porter",
         description: "Stem words using the NLTK Porter Stemmer. Converts inflected words in the corpus to their base form. This is a good general purpose stemmer to use."
       },
+      "removecapsgreedy": {
+        name: "Remove Capitalization (Greedy)",
+        unfriendly_name: "removecapsgreedy",
+        description: "Convert all uppercase letters to lowercase letters."
+      },
       "removecapsnnp": {
         name: "Remove Capitalization (NNP)",
         unfriendly_name: "removecapsnnp",
@@ -218,7 +223,7 @@
      */
     $scope.cleanupTypes = {
       "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsgreedy, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-disfluency": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
