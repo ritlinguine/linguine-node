@@ -1046,16 +1046,23 @@
     console.log('length-statistics');
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
-    for (var item in $scope.results[0]) {
-      var title = '<br><h3 class=' + style + '">' + item.charAt(0).toUpperCase() + item.substr(1) + ':</h3>';
+
+    var instructions = "<p>To make this analysis language-agnostic, we assume that sentences are separated by standard ending punctuation (.?!) and words are separated by whitespace.</p>";
+    document.getElementById('graph').innerHTML += instructions;
+
+    function drawTable(contents, title){
+      var formattedTitle = '<br><h3 class=' + style + '">' + title + ':</h3>';
       var table = '<table class=' + style + '">';
       table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Calculation</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th><th></th></tr>';
-      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Mean" target="_blank" style="color:darkgreen !important;"><b>Mean:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0][item]["mean"]).toFixed(3) + '</td><td></td></tr>';
-      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Median" target="_blank" style="color:darkgreen !important;"><b>Median:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0][item]["median"]).toFixed(3) + '</td><td></td></tr>';
-      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Standard_deviation" target="_blank" style="color:darkgreen !important;"><b>Standard Deviation:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0][item]["std"]).toFixed(3) + '</td><td></td></tr>';
+      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Mean" target="_blank" style="color:darkgreen !important;" title="The sum of values divided by the number of values"><b>Mean:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat(contents["mean"]).toFixed(3) + '</td><td></td></tr>';
+      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Median" target="_blank" style="color:darkgreen !important;" title="The middle value when values are sorted"><b>Median:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat(contents["median"]).toFixed(3) + '</td><td></td></tr>';
+      table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Standard_deviation" target="_blank" style="color:darkgreen !important;" title="The amount of variance from the mean for a set of values"><b>Standard Deviation:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat(contents["std"]).toFixed(3) + '</td><td></td></tr>';
       table += '</table>';
-      document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table;
+      document.getElementById('graph').innerHTML += formattedTitle + table;
     }
+
+    drawTable($scope.results[0]["words"], "Characters per Word");
+    drawTable($scope.results[0]["sentences"], "Words per Sentence");
   }
 
   function visualizeTopicModel() {
@@ -1077,9 +1084,13 @@
   function visualizeWordVector() {
     console.log('word-vector');
     console.log($scope.results);
-    var instructions = "<p>To use this analysis, create a text file with one of the following commands per line, starting with the specific command followed by its arguments. If you do not use this format, the analysis will fail to run.</p>";
-    instructions += "<p>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, use <kbd>sim_score universities colleges</kbd> to find the similarity between <em>universities</em> and <em>colleges</em>.</p>";
-    instructions += "<p>The similarity equation command has one or more arguments, which are the words used in the equation. Each word is prefixed by its operation. For example, use <kbd>sim_math +woman +king -man</kbd> to find the result of <em>woman + king - man</em>.</p>";
+    var instructions = "<p>To use this analysis, create a text file (.txt) with one of the following commands per line, starting with the specific command followed by its arguments. If you do not use this format, the analysis will fail to run.</p>";
+    instructions += "<p>There are two available commands:</p>";
+    instructions += "<dl>";
+    instructions += "<dt>Similarity Score</dt><dd>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, use <kbd>sim_score universities colleges</kbd> to find the similarity between <em>universities</em> and <em>colleges</em>. The score ranges from 0 to 1, with 0 the least similar and 1 the most similar.</dd>";
+    instructions += "<dt>Similarity Equation</dt><dd>The similarity equation command has one or more arguments, which are the words used in the equation. Each word is prefixed by its operation (+ or -). For example, use <kbd>sim_math +woman +king -man</kbd> to find the result of <em>woman + king - man</em>. The top ten most likely answers are displayed. The scores range from 0 to 1, with 0 the least likely solution and 1 the most likely solution.</dd>";
+    instructions += "</dl>";
+    instructions += "<p>For a better understanding of word vectors, <a href='https://www.tensorflow.org/tutorials/representation/word2vec'>Vector Representations of Words | TensorFlow</a> has some useful information and diagrams.</p>";
     document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + instructions;
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
     for (var item in $scope.results) {
@@ -1115,9 +1126,14 @@
   function visualizeUnsupMorph() {
     console.log('unsup-morph');
     console.log($scope.results);
+
+    var instructions = "<p>The NULL suffix shown for some rows represents the plain stem form (so-called <a href='https://en.wikipedia.org/wiki/Null_morpheme'>zero suffix</a>), showing that the word exists in text without another suffix. (Goldsmith 2001, '<a href='https://dl.acm.org/citation.cfm?id=972668'>Unsupervised learning of the morphology of a natural language</a>')</p>";
+    instructions += "<p>The categories are ranked, starting with the most confident suffix pattern. A random sample of associated stems are provided with each category, with up to 15 being displayed.</p>";
+    document.getElementById('graph').innerHTML += instructions;
+
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
     var table = '<table class=' + style + '">';
-    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Suffixes</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Roots (Random 15)</th></tr>';
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Suffixes</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Stems (Sample)</th></tr>';
 
     for (var i in $scope.results[0]) {
       table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + $scope.results[0][i].affixes.join("<br>") + '</b></td>';
