@@ -22,7 +22,7 @@
       {
         name: "Term Frequency Analysis",
         unfriendly_name: "wordcloudop",
-        description: "This operation uses the NLTK Punkt tokenizer to separate terms. Used for finding the most frequent words a single corpus.",
+        description: "This operation separates terms in a corpus and creates a word cloud with them, with the most frequent words being the largest.",
         multipleCorporaAllowed: false,
         tokenAllowed: true,
         tokenizerRequired: true
@@ -86,7 +86,7 @@
       {
         name: "Coreference Resolution (Stanford CoreNLP)",
         unfriendly_name: "nlp-coref",
-        description: "Determine entities in the given corpus and show where each entity is mentioned",
+        description: "This operation determines entities in the given corpus and show where each entity is mentioned.",
         multipleCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
@@ -94,7 +94,7 @@
       {
         name: "Named Entity Recognition (Stanford CoreNLP)",
         unfriendly_name: "nlp-ner",
-        description: "This operation will classify each word in the corpus based on its status as a place, organization, location, or expression of time. If a term does not match as a named entity, it will recieve a status of '0' ", 
+        description: "This operation will classify each word in the corpus based on its status as a place, organization, location, or expression of time. If a term does not match as a named entity, it will recieve a status of '0' ",
         tokenAllowed: false,
         multipleCorporaAllowed: false,
         tokenizerRequired: false
@@ -134,7 +134,7 @@
       {
         name: "Topic Modeling (10 Topics) (Gensim)",
         unfriendly_name: "topic-model-10",
-        description: "This operation creates a topic model using a LDA with 10 topics.",
+        description: "This operation creates a topic model using an LDA with 10 topics. It expects multiple \"documents\", which need to be separated by an empty line in the processed corpus.",
         multiCorporaAllowed: true,
         tokenAllowed: false,
         tokenizerRequired: false
@@ -142,7 +142,7 @@
       {
         name: "Topic Modeling (30 Topics) (Gensim)",
         unfriendly_name: "topic-model-30",
-        description: "This operation creates a topic model using a LDA with 30 topics.",
+        description: "This operation creates a topic model using an LDA with 30 topics. It expects multiple \"documents\", which need to be separated by an empty line in the processed corpus.",
         multiCorporaAllowed: true,
         tokenAllowed: false,
         tokenizerRequired: false
@@ -191,7 +191,7 @@
         description: "Stem words using the NLTK Porter Stemmer. Converts inflected words in the corpus to their base form. This is a good general purpose stemmer to use."
       },
       "removecapsgreedy": {
-        name: "Remove Capitalization (Greedy)",
+        name: "Remove Capitalization (Naive)",
         unfriendly_name: "removecapsgreedy",
         description: "Convert all uppercase letters to lowercase letters."
       },
