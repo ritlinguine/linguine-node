@@ -162,6 +162,14 @@
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Bigram Array (SPLAT)",
+        unfriendly_name: "bigram-array",
+        description: "This operation displays a bigram array showing co-occurrences of characters.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     $scope.analysisTypes.sort(function(a, b) {
@@ -248,12 +256,13 @@
       "nlp-coref": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "char-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "char-ngrams": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "topic-model-10": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "topic-model-30": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "word-vector": [],
-      "unsup-morph": []
+      "unsup-morph": [],
+      "bigram-array": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
     };
 
     $scope.tokenizerTypes = [

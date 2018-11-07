@@ -96,7 +96,8 @@
     $scope.defaultView = function() {
       if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
         ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis.includes('topic-model')
-        ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph') {
+        ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph'
+        ||  $scope.analysis.analysis === 'bigram-array') {
         $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
       }
 
@@ -1147,6 +1148,31 @@
     document.getElementById('graph').innerHTML += table;
   }
 
+  function visualizeBigramArray() {
+    console.log('bigram-array');
+    console.log($scope.results);
+
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+    var table = '<table class=' + style + '">';
+
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;"> </th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
+    headerRows = [];
+    $scope.results[0].chars.forEach(function (item) { headerRows.push('<th class="tg-031e" style="text-align: center;">' + item + '</th>')});
+    table += headerRows.join('<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>');
+    table += '</tr>';
+
+    for (var i in $scope.results[0].chars) {
+      first = $scope.results[0].chars[i]
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + first + '</b></td><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
+      row = [];
+      $scope.results[0].chars.forEach(function (item) { row.push('<td>' + $scope.results[0].array[first][item] + '</td>')});
+      table += row.join('<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>');
+      table += '</tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML += table;
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -1202,6 +1228,9 @@
           break;
         case "unsup-morph":
           visualizeUnsupMorph();
+          break;
+        case "bigram-array":
+          visualizeBigramArray();
           break;
         default:
           break;
