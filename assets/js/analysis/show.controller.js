@@ -1119,6 +1119,10 @@
         }
         table += '</table>';
         document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table0 + table;
+      } else if ($scope.results[item].type === "error") {
+        var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' - Unrecognized:</h3>';
+        var description = 'The command <kbd>' + $scope.results[item].command + '</kbd> could not be processed.';
+        document.getElementById('graph').innerHTML += title + description;
       }
     }
   }
