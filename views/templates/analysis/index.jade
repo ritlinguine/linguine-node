@@ -24,7 +24,9 @@
               strong {{ analysis.analysis_name }} 
               strong.tag-background(ng-show="{{!analysis.complete}}") INCOMPLETE - Refresh to update 
             p.list-group-item-text
-              div(ng-repeat="corpora_id in analysis.corpora_ids") 
+              div(ng-repeat="corpora_id in analysis.corpora_ids")
+                span #[b Corpora]: {{ findCorpus(corpora_id).title }}
+                br
                 span #[b Analysis]: {{analysis.analysis}}
                 br
                 span #[b Cleanups]:
