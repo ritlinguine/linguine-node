@@ -158,7 +158,7 @@
       {
         name: "Morphology Induction (Linguistica 5)",
         unfriendly_name: "unsup-morph",
-        description: "This operation determines likely patterns for suffixed words in a corpus.",
+        description: "This operation determines likely patterns for suffixed words in a corpus. This requires a larger corpus; several paragraphs of text is not sufficient.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
