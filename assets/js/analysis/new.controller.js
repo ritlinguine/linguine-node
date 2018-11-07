@@ -126,7 +126,7 @@
       {
         name: "Word and Sentence Length Analysis",
         unfriendly_name: "length-stats",
-        description: "This operation simple statistics for a text, such as characters per word and words per sentence.",
+        description: "This operation calculates simple statistics for a text, such as characters per word and words per sentence.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false

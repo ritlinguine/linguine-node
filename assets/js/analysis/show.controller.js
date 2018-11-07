@@ -1168,7 +1168,11 @@
       first = $scope.results[0].chars[i]
       table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + first + '</b></td><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
       row = [];
-      $scope.results[0].chars.forEach(function (item) { row.push('<td>' + $scope.results[0].array[first][item] + '</td>')});
+      $scope.results[0].chars.forEach(function (item) {
+        var count = $scope.results[0].array[first][item];
+        if (count > 0) count = '<b>' + count + '</b>';
+        row.push('<td>' + count + '</td>');
+      });
       table += row.join('<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>');
       table += '</tr>';
     }
