@@ -1048,7 +1048,7 @@
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
 
-    var instructions = "<p>To make this analysis language-agnostic, we assume that sentences are separated by standard ending punctuation (.?!) and words are separated by whitespace.</p>";
+    var instructions = "<p>To make this analysis language-agnostic, it assumes that sentences are separated by standard ending punctuation (.?!) and words are separated by whitespace.</p>";
     document.getElementById('graph').innerHTML += instructions;
 
     function drawTable(contents, title){
@@ -1132,7 +1132,7 @@
     console.log('unsup-morph');
     console.log($scope.results);
 
-    var instructions = "<p>The NULL suffix shown for some rows represents the plain stem form (so-called <a href='https://en.wikipedia.org/wiki/Null_morpheme'>zero suffix</a>), showing that the word exists in text without another suffix. (Goldsmith 2001, '<a href='https://dl.acm.org/citation.cfm?id=972668'>Unsupervised learning of the morphology of a natural language</a>')</p>";
+    var instructions = "<p>The NULL suffix shown for some rows represents the plain stem form (so-called <a href='https://en.wikipedia.org/wiki/Null_morpheme'>zero suffix</a>).</p>";
     instructions += "<p>The categories are ranked, starting with the most confident suffix pattern. A random sample of associated stems are provided with each category, with up to 15 being displayed.</p>";
     document.getElementById('graph').innerHTML += instructions;
 
@@ -1160,17 +1160,17 @@
 
     table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;"> </th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
     headerRows = [];
-    $scope.results[0].chars.forEach(function (item) { headerRows.push('<th class="tg-031e" style="text-align: center;">' + item + '</th>')});
+    $scope.results[0].chars.forEach(function (item) { headerRows.push('<th class="tg-031e" style="text-align: center;color:darkred;">' + item + '</th>')});
     table += headerRows.join('<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>');
     table += '</tr>';
 
     for (var i in $scope.results[0].chars) {
       first = $scope.results[0].chars[i]
-      table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + first + '</b></td><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;color:darkred;"><b>' + first + '</b></td><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>'
       row = [];
       $scope.results[0].chars.forEach(function (item) {
         var count = $scope.results[0].array[first][item];
-        if (count > 0) count = '<b>' + count + '</b>';
+        if (count > 0) count = '<b style="color:darkgreen;">' + count + '</b>';
         row.push('<td>' + count + '</td>');
       });
       table += row.join('<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>');
