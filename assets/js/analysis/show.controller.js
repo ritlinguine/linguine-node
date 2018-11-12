@@ -1152,7 +1152,7 @@
     console.log('bigram-array');
     console.log($scope.results);
 
-    var instructions = "<p>The top axis contains the first character in the bigram. The left axis contains the second character in the bigram.</p>";
+    var instructions = "<p>The left axis contains the first character in the bigram. The top axis contains the second character in the bigram.</p>";
     document.getElementById('graph').innerHTML += instructions;
 
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
