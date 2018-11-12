@@ -98,7 +98,12 @@
         ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis.includes('topic-model')
         ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph'
         ||  $scope.analysis.analysis === 'bigram-array') {
-        $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
+        if (typeof $scope.analysis.result == "string") {
+          $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
+        }
+        else if  (typeof $scope.analysis.result == "object") {
+          $scope.results = angular.copy($scope.analysis.result);
+        }
       }
 
       else {
