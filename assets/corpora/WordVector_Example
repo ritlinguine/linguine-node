@@ -2,3 +2,4 @@ sim_score universities colleges
 sim_score universities fish
 sim_math +woman +king -man
 sim_math +strong +darker -dark
+sim_math +fish +fly -swim
