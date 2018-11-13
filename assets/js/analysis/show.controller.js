@@ -11,6 +11,7 @@
 
     $scope.sentenceIndex = 0;
     $scope.corefEntities = [];
+    $scope.corefEntitiesTable = [];
 
     $scope.setSentence = function(index) {
         if(index != $scope.sentenceIndex) {
@@ -569,6 +570,7 @@
     if(canvas){canvas.remove(); }
 
     // Create a new div under the #graph div
+    var sentDiv = document.getElementById("senttext");
     var textDiv = document.getElementById("graph");
     var textNode =  document.createElement('div');
     var allCorefNode = document.createElement('div');
@@ -630,93 +632,97 @@
         }
 
         if(type == 'coref') {
-          if($scope.selectedEntity.entityID == 0) {
-            $scope.corefEntities.forEach( function(entity) {
-              var mentionCount = 0;
-              if(entity.entityID != 0) {
-                if(entity.sentence == sk && wk >= entity.startInd && wk < entity.endInd) {
-                  //wordspace.style.backgroundColor = entity.color;
-                  wordspace.style.fontWeight = 'bold';
-                  //wordspace.setAttribute("class", 'organization');
-                  wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
-                  mentionCount++;
-                  corefCount++;
-                  
-                  if(wk == entity.startInd) {
-                    wordspace.innerHTML = ' [ ' + wordspace.innerHTML;
-                  }
+          var removeSpaces = function(parent) {
+            // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
+            var spanElements = parent.getElementsByTagName('span');
+            for(var s = 1; s < spanElements.length; s++) {
+              var prev = spanElements[s-1];
+              var curr = spanElements[s];
+              if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+              else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
+            }
+          };
 
-                  if(wk == entity.endInd - 1) {
-                    var subscript = document.createElement('span');
-                    subscript.setAttribute("class", 'organization');
-                    subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
-                    subscript.style.backgroundColor = entity.color;
-                    subscript.innerHTML = ' <sub>{' + entity.entityID + '}</sub> ';
-                    wordspace.innerHTML = ' ' + wordspace.innerHTML + ']' + subscript.outerHTML;
+          if($scope.selectedEntity.id == 0) {
+            $scope.corefEntitiesTable.forEach( function(chain) {
+              chain.entities.forEach( function(entity) {
+                var mentionCount = 0;
+                if (entity.entityID != 0) {
+                  if (entity.sentence == sk && wk >= entity.startInd && wk < entity.endInd) {
+                    //wordspace.style.backgroundColor = entity.color;
+                    wordspace.style.fontWeight = 'bold';
+                    //wordspace.setAttribute("class", 'organization');
+                    wordspace.setAttribute("title", word.token + ": "
+                      + JSON.stringify($scope.analysis.result.entities[sk].mentions[mentionCount], null, 2));
+                    mentionCount++;
+                    corefCount++;
+
+                    if (wk == entity.startInd) {
+                      wordspace.innerHTML = ' [ ' + wordspace.innerHTML;
+                    }
+
+                    if (wk == entity.endInd - 1) {
+                      var subscript = document.createElement('span');
+                      subscript.setAttribute("class", 'organization');
+                      subscript.setAttribute("title", '[' + entity.entityID + '] ' + entity.text);
+                      subscript.style.backgroundColor = entity.color;
+                      subscript.innerHTML = ' <sub>{' + entity.entityID + '}</sub> ';
+                      wordspace.innerHTML = ' ' + wordspace.innerHTML + ']' + subscript.outerHTML;
+                    }
                   }
+                }
+              });
+            });
+
+            allCorefText.innerHTML += wordspace.innerHTML;
+            allCorefNode.appendChild(wordspace);
+            removeSpaces(allCorefNode);
+          }
+          else {
+            $scope.selectedEntity.entities.forEach( function(entity) {
+              if(entity.sentence == sk && wk >= entity.startInd && wk < entity.endInd) {
+                //console.log($scope.selectedEntity.entityID);
+                wordspace.style.fontWeight = 'bold';
+                wordspace.setAttribute("title", word.token + ": "
+                  + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
+                wordspace.setAttribute("class", 'organization');
+                wordspace.style.backgroundColor = entity.color;
+                corefCount++;
+                if(wk == entity.endInd - 1) {
+                  wordspace.innerHTML += ' <sub title="' + '[' + entity.entityID + '] ' +
+                    entity.text + '">{' + entity.entityID + '}</sub> ';
                 }
               }
             });
-          }
-          else {
-            if(type == 'coref' && $scope.selectedEntity.sentence == sk && wk >= $scope.selectedEntity.startInd && wk < $scope.selectedEntity.endInd) {
-              console.log($scope.selectedEntity.entityID);
-              wordspace.style.fontWeight = 'bold';
-              wordspace.setAttribute("title", word.token + ": " + JSON.stringify($scope.analysis.result.entities[sk].mentions[corefCount], null, 2));
-              wordspace.setAttribute("class", 'organization');
-              wordspace.style.backgroundColor = $scope.selectedEntity.color;
-              corefCount++;
-              if(wk == $scope.selectedEntity.endInd - 1) { wordspace.innerHTML += ' <sub title="' + '[' + $scope.selectedEntity.entityID + '] ' + $scope.selectedEntity.text + '">{' + $scope.selectedEntity.entityID + '}</sub> '; }
-            }
-          }
-            //}
 
-          if($scope.selectedEntity.entityID == 0) {
-            allCorefText.innerHTML += wordspace.innerHTML;
-            allCorefNode.appendChild(wordspace);
-            // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
-            var spanElements = allCorefNode.getElementsByTagName('span');
-            for(var s = 1; s < spanElements.length; s++) {
-              var prev = spanElements[s-1];
-              var curr = spanElements[s];
-              if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-            }
-          }
-          else {
             corefText.innerHTML += wordspace.innerHTML;
 	          textNode.appendChild(wordspace);
-            // This is insanely verbose, but it removes spaces before punctuation in the coreference visualization.
-            var spanElements = textNode.getElementsByTagName('span');
-            for(var s = 1; s < spanElements.length; s++) {
-              var prev = spanElements[s-1];
-              var curr = spanElements[s];
-              if(curr.innerHTML.indexOf('.') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf(',') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf('!') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-              else if(curr.innerHTML.indexOf('?') != -1) { prev.innerHTML = prev.innerHTML.replace(/\s+$/g, ''); }
-            }
+	          removeSpaces(textNode);
           }
-      }
-          //console.log(textNode.getElementsByTagName('span'));
-    });
-        wordcount += 1;
-        //});
+        }
+        //console.log(textNode.getElementsByTagName('span'));
+    	});
+      wordcount += 1;
+
       //textDiv.appendChild( allCorefNode );
       //console.log($scope.selectedEntity.entityID);
-      console.log($scope.selectedEntity);
-      console.log($scope.selectedEntity.entityID);
-      if($scope.selectedEntity.entityID == 0) { textDiv.appendChild( allCorefNode ); }
-      else { textDiv.appendChild( textNode ); }
+      //console.log($scope.selectedEntity);
+      //console.log($scope.selectedEntity.entityID);
+      if (type == 'coref') {
+        if($scope.selectedEntity.id == 0) { sentDiv.appendChild( allCorefNode ); }
+        else { sentDiv.appendChild( textNode ); }
+      } else {
+        if($scope.selectedEntity.entityID == 0) { textDiv.appendChild( allCorefNode ); }
+        else { textDiv.appendChild( textNode ); }
+      }
       //textDiv.appendChild( allCorefNode );
       //allCorefText.appendChild( textNode );
       //console.log(textDiv);
-      console.log(corefText.innerHTML);
-    //});
-  });
-  }
+      //console.log(corefText.innerHTML);
+    });
+  };
 
   var randColor = (function() {
     var golden_ratio_conjugate = 0.618033988749895; // 2 / (1 + sqrt(5))
@@ -801,34 +807,35 @@
       //console.log($scope.corefEntities);
       entityCount++;
     });
-    $scope.selectedEntity = $scope.corefEntities[0];
-
-    //Render text in document to highlight with entities
-    $scope.renderPlainText('coref');
 
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
     var table = '<table class=' + style + '">';
     table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">ID</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Text</th></tr>';
-    var corefEntitiesTable = {};
 
     $scope.corefEntities.forEach(function(item) {
-      if (corefEntitiesTable[item.entityID] == undefined)
+      if ($scope.corefEntitiesTable[item.entityID] == undefined)
       {
-        corefEntitiesTable[item.entityID] = {'color' : item.color,
-        'text' : []};
+        $scope.corefEntitiesTable[item.entityID] = {'color' : item.color,
+        'text' : [], 'entities' : [], 'id' : item.entityID};
       }
-      corefEntitiesTable[item.entityID].text.push(item.text);
+      $scope.corefEntitiesTable[item.entityID].text.push(item.text);
+      $scope.corefEntitiesTable[item.entityID].entities.push(item);
     });
-    for (var i in corefEntitiesTable){
-      table += '<tr style="border-bottom: 1pt solid black;"><td style="background-color: black;color: ' + corefEntitiesTable[i].color + '; text-align: center;"><b>' + i + '</b></td>';
-      table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + corefEntitiesTable[i].text.join("<br>") + '</b></td></tr>';
+    $scope.selectedEntity = $scope.corefEntitiesTable[0];
+
+    for (var i in $scope.corefEntitiesTable){
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="background-color: black;color: ' + $scope.corefEntitiesTable[i].color + '; text-align: center;"><b>' + i + '</b></td>';
+      table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.corefEntitiesTable[i].text.join("<br>") + '</b></td></tr>';
     }
     table += '</table>';
     document.getElementById('graph').innerHTML += table;
+
+    //Render text in document to highlight with entities
+    $scope.renderPlainText('coref');
   }
 
   $scope.setEntity = function(index) {
-    $scope.selectedEntity = $scope.corefEntities[index];
+    $scope.selectedEntity = $scope.corefEntitiesTable[index];
     $scope.renderPlainText('coref');
   }
 
