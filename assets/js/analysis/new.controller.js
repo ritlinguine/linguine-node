@@ -232,7 +232,17 @@
         name: "Remove Hashtags",
         unfriendly_name: "removehashtags",
         description: "Removes the hashtag character ('#')."
-      }
+      },
+      "lemmatize_wordnet": {
+        name: "Lemmatize (WordNet)",
+        unfriendly_name: "lemmatize_wordnet",
+        description: "Lemmatizes words using NTLK. Converts inflected words in the corpus to their base form. This is a good general purpose lemmatizer to use."
+      },
+      "sentence_tokenize": {
+        name: "Sentence Tokenize",
+        unfriendly_name: "sentence_tokenize",
+        description: "Separates the text in each corpus into individual sentences, using NLTK's sent_tokenize tokenizer."
+      },
     };
 
     /*
@@ -243,8 +253,7 @@
      * Key[analysisUnfriendlyName] => value [cleanupUnfriendlyName1, unfriendlyName2, ... n]
      */
     $scope.cleanupTypes = {
-      "pos_tag": [cleanups.stem_porter, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "wordcloudop": [cleanups.stem_porter, cleanups.removecapsgreedy, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "wordcloudop": [cleanups.stem_porter, cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-disfluency": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
@@ -270,6 +279,11 @@
         name: "Word Tokenize (Penn Treebank)",
         unfriendly_name: "word_tokenize_treebank",
         description: "Separates the text in each corpus into individual word tokens, using NLTK's Penn Treebank tokenizer. This is a good general purpose tokenizer to use."
+      },
+      {
+        name: "Word Tokenize (Whitespace and Punctuation)",
+        unfriendly_name: "word_tokenize_whitespace_punct",
+        description: "Separates the text in each corpus into individual word tokens, using NLTK's Whitespace Punct tokenizer. This is a simple tokenizer to use."
       },
     ];
 
