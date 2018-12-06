@@ -1097,7 +1097,7 @@
   function visualizeWordVector() {
     console.log('word-vector');
     console.log($scope.results);
-    var instructions = "<p>To use this analysis, create a text file (.txt) with one of the following commands per line, starting with the specific command followed by its arguments. If you do not use this format, the analysis will fail to run.</p>";
+    var instructions = "<p>To use this analysis, create a text file (.txt) with one of the following commands per line, starting with the specific command followed by its arguments. Empty lines will be safely ignored. If you do not use this format, the analysis will fail to run.</p>";
     instructions += "<p>There are two available commands:</p>";
     instructions += "<dl>";
     instructions += "<dt>Similarity Score</dt><dd>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, use <kbd>sim_score universities colleges</kbd> to find the similarity between <em>universities</em> and <em>colleges</em>. The score ranges from 0 to 1, with 0 the least similar and 1 the most similar.</dd>";
