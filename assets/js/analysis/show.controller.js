@@ -512,7 +512,7 @@
 
                 tokens.forEach(function(word){
                     var wordspace = document.createElement('span');
-                    wordspace.setAttribute("title", word.token + "- Sentiment: " + word.sentiment + ", Value: " + word.sentimentValue);
+                    wordspace.setAttribute("title", word.token + ": " + word.sentiment);
                     wordspace.innerHTML += word.token + " ";
                     textNode.appendChild(wordspace);
                 });
