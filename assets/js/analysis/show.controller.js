@@ -17,8 +17,7 @@
         if(index != $scope.sentenceIndex) {
             $scope.sentenceIndex = index;
             $scope.sentenceData = $scope.analysis.result.sentences[$scope.sentenceIndex];
-            $scope.sentimentTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].sentiment_json;
-            $scope.depsTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].deps_json;
+            $scope.treeData = $scope.analysis.result.sentences[$scope.sentenceIndex].tree_json;
             $scope.visualize();
         }
     };
@@ -111,18 +110,15 @@
         $scope.results = angular.copy($scope.analysis.result);
           
         $scope.sentenceData = $scope.analysis.result.sentences[$scope.sentenceIndex];
-        $scope.sentimentTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].sentiment_json;
-        $scope.depsTreeData = $scope.analysis.result.sentences[$scope.sentenceIndex].deps_json;
+        $scope.treeData = $scope.analysis.result.sentences[$scope.sentenceIndex].tree_json;
 
         for(var i = 0; i < $scope.results.length; i++) {
-          $scope.results[i].deps_json = []; 
-          $scope.results[i].sentiment_json = []; 
+          $scope.results[i].tree_json = [];
         }
       }
 
       console.log($scope.results);
-      console.log("sentimentTreeData = ", $scope.sentimentTreeData);
-      console.log("depsTreeData = ", $scope.depsTreeData);
+      console.log("treeData = ", $scope.treeData);
 
       // create the editor
       var container = document.getElementById("jsoneditor");
@@ -271,8 +267,8 @@
     $scope.visualizeParseTree = function(sentiment) {
 
       d3.select(".svg-container").remove();
-        console.log(sentiment? $scope.sentimentTreeData : $scope.depsTreeData);
-        var dataToConvert = angular.copy(sentiment? $scope.sentimentTreeData : $scope.depsTreeData);
+        console.log( $scope.treeData );
+        var dataToConvert = angular.copy($scope.treeData );
 
         data = convertData(dataToConvert);
         renderTree();
