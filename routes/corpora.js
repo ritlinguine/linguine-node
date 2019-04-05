@@ -89,7 +89,7 @@ router.post('', function(req, res) {
           res.status(201).json(c);
         });
 
-        fs.unlink(file.path);
+        fs.unlink(file.path, () => {});
       });
     }
 
