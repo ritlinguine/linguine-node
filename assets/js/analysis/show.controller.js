@@ -1098,12 +1098,40 @@
     instructions += "<dl>";
     instructions += "<dt>Similarity Score</dt><dd>The similarity score command has two arguments, which are the two words the similarity is being calculated for. For example, use <kbd>sim_score universities colleges</kbd> to find the similarity between <em>universities</em> and <em>colleges</em>. The score ranges from 0 to 1, with 0 the least similar and 1 the most similar.</dd>";
     instructions += "<dt>Similarity Equation</dt><dd>The similarity equation command has one or more arguments, which are the words used in the equation. Each word is prefixed by its operation (+ or -). For example, use <kbd>sim_math +woman +king -man</kbd> to find the result of <em>woman + king - man</em>. The top ten most likely answers are displayed. The scores range from 0 to 1, with 0 the least likely solution and 1 the most likely solution.</dd>";
+    instructions += "<dt>Similar Words</dt><dd>The similar words command has one argument, which is the word used. For example, use <kbd>most_sim linguine</kbd> to find the most similar words to <em>linguine</em>. The top ten most similar words are displayed. The scores range from 0 to 1, with 0 the least similar and 1 the most similar.</dd>";
+    instructions += "<dt>Doesn't Match</dt><dd>The doesn't match command has one or more arguments, which are the words used. For example, use <kbd>doesnt_match breakfast cereal dinner lunch</kbd> to find the word in the set that does not belong. The not-belonging word is displayed.</dd>";
     instructions += "</dl>";
     instructions += "<p>For a better understanding of word vectors, <a href='https://www.tensorflow.org/tutorials/representation/word2vec'>Vector Representations of Words | TensorFlow</a> has some useful information and diagrams.</p>";
     document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + instructions;
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
     for (var item in $scope.results) {
-      if ($scope.results[item].type === "sim_score"){
+      if ($scope.results[item].type === "doesnt_match"){
+        var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' - Doesn\'t Match:</h3>';
+        var table0 = '<table class=' + style + '">';
+        table0 += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th></th></tr>';
+        for (var word in $scope.results[item].words) {
+          table0 += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].words[word] + '</td><td></td></tr>';
+        }
+        table0 += '</table><br>';
+        var table = '<table class=' + style + '">';
+        table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Doesn\'t Match Word</th><th></th></tr>';
+        table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].answer + '</td><td></td></tr>';
+        table += '</table><br>';
+        document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table0 + table;
+      } else if ($scope.results[item].type === "most_sim"){
+        var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' - Similar Words:</h3>';
+        var table0 = '<table class=' + style + '">';
+        table0 += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th></th></tr>';
+        table0 += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].word + '</td><td></td></tr>';
+        table0 += '</table><br>';
+        var table = '<table class=' + style + '">';
+        table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Score</th><th></th></tr>';
+        for (var ans in $scope.results[item].answer) {
+          table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;">' + $scope.results[item].answer[ans].word + '</td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[item].answer[ans].score).toFixed(8) + '</td><td></td></tr>';
+        }
+        table += '</table>';
+        document.getElementById('graph').innerHTML = document.getElementById('graph').innerHTML + title + table0 + table;
+      } else if ($scope.results[item].type === "sim_score"){
         var title = '<br><h3 class=' + style + '">Command ' + (parseInt(item) + 1) + ' - Similarity Score:</h3>';
         var table = '<table class=' + style + '">';
         table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word 1</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Word 2</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Score</th><th></th></tr>';

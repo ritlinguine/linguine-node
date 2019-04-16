@@ -3,3 +3,7 @@ sim_score universities fish
 sim_math +woman +king -man
 sim_math +strong +darker -dark
 sim_math +fish +fly -swim
+most_sim linguine
+most_sim python
+doesnt_match breakfast cereal dinner lunch
+doesnt_match washington adams jefferson truman

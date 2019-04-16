@@ -148,7 +148,7 @@
         tokenizerRequired: false
       },
       {
-        name: "Word Vectors (Gensim)",
+        name: "Word Vectors (Gensim with GLoVe)",
         unfriendly_name: "word-vector",
         description: "This operation carries out calculations on GloVe word vectors.",
         multiCorporaAllowed: false,
