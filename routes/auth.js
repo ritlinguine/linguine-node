@@ -29,8 +29,8 @@ module.exports = function(app){
     User.find({ dce: user.uid }).limit(1).exec(function(err, users){
       if(users.length === 0) {
         User.create({ dce: user.uid, name: user.cn }, function(err, user){
-          var files = ['1928 News article', '2015 News article', 'My Bondage and My Freedom excerpt',
-            'Romeo and Juliet excerpt', 'The Raven', 'Tom Sawyer excerpt',
+          var files = ['1928 News article', '2015 News article', 'My Bondage and My Freedom excerpt Long',
+            'Romeo and Juliet excerpt Long', 'The Raven', 'Tom Sawyer excerpt Long',
             '310 DementiaBank1', '310 DementiaBank2', '310 DementiaBank3', '310 DementiaBank4',
             '470 Raleigh', '470 Lennox', '470 Austen', '470 Doyle',
             '310 Very-Formal (E)', '310 Semi-Formal (E)', '310 Semi-Informal (E)', '310 Very-Informal (E)',
