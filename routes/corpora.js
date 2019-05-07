@@ -3,9 +3,10 @@ var router = express.Router();
 
 var Corpus = require('../models/corpus');
 var fs = require('fs');
+var request = require('request');
 
 //Max file size is 35Kb by default (5x length of 'The Raven')
-var maxSize = process.env.LINGUINE_MAX_FILESIZE_KB? 
+var maxSize = process.env.LINGUINE_MAX_FILESIZE_KB?
   process.env.LINGUINE_MAX_FILESIZE_KB * 1000 : 400 * 1000 
 
 // Middleware runs on all corpora API calls
@@ -72,7 +73,59 @@ router.post('', function(req, res) {
   } else {
     var file = req.files.file;
     var size = fs.statSync(file.path)['size'];
-    
+
+    if (file.type.startsWith('audio')){
+      if(size <= 1000000) {
+
+        var store_corpus = function (response_data) {
+          response_data = JSON.parse(response_data);
+          response_data = response_data['objects'];
+          response_data.shift();
+          response_data = JSON.stringify(response_data);
+
+          var corpus = {
+            user_id: req.user._id,
+            contents: response_data,
+            title: req.body.title,
+            fileSize: response_data.length,
+            fileName: file.name,
+            fileType: 'application/json'
+          };
+
+          Corpus.create(corpus, function (err, c) {
+            res.status(201).json(c);
+          });
+
+          fs.unlink(file.path, () => {
+          });
+        };
+
+        var query_server = function (data) {
+          request.post({
+              url: 'http://localhost:8081/recognize',
+              headers: {
+                'Content-Type': file.type
+              },
+              body: data
+            },
+            function (error, response, body) {
+              store_corpus(body);
+            })
+        };
+
+        fs.readFile(file.path, function (err, data) {
+          query_server(data);
+        });
+      }
+
+      else {
+        res.status(413).json({
+          message: "File size is too large!",
+          error: 413
+        });
+      }
+    }
+    else {
     if(size <= maxSize){
 
       fs.readFile(file.path, function(err, data){
@@ -99,7 +152,7 @@ router.post('', function(req, res) {
         error: 413
       });
     }
-  }
+  }}
 });
 
 router.put('/:id/addTag', function (req, res) {
