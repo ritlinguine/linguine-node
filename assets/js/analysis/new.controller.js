@@ -251,6 +251,11 @@
         unfriendly_name: "sentence_tokenize",
         description: "Separates the text in each corpus into individual sentences, using NLTK's sent_tokenize tokenizer."
       },
+      "extract_transcript": {
+        name: "Extract Transcribed Speech",
+        unfriendly_name: "extract_transcript",
+        description: "Extracts words from transcribed speech for use like any other unpunctuated text."
+      },
     };
 
     /*
@@ -261,25 +266,25 @@
      * Key[analysisUnfriendlyName] => value [cleanupUnfriendlyName1, unfriendlyName2, ... n]
      */
     $scope.cleanupTypes = {
-      "wordcloudop": [cleanups.stem_porter, cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "wordcloudop": [cleanups.extract_transcript, cleanups.stem_porter, cleanups.lemmatize_wordnet, cleanups.removecapsgreedy, cleanups.removecapsnnp, cleanups.removepunct, cleanups.stop_words, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-disfluency": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "splat-ngrams": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-ngrams": [cleanups.extract_transcript, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "splat-complexity": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "splat-pos": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "splat-syllables": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "splat-pronouns": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-pos": [cleanups.extract_transcript, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-syllables": [cleanups.extract_transcript, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "splat-pronouns": [cleanups.extract_transcript, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-ner": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-coref": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-sentiment": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "nlp-relation": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
-      "char-ngrams": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "char-ngrams": [cleanups.extract_transcript, cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "length-stats": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "topic-model-10": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "topic-model-30": [cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "word-vector": [],
       "unsup-morph": [],
-      "bigram-array": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "bigram-array": [cleanups.extract_transcript, cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
       "speech-token-stats": [],
     };
 
