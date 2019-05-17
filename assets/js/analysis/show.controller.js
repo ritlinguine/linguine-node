@@ -97,7 +97,7 @@
       if($scope.analysis.analysis.includes('splat') || $scope.analysis.analysis === 'char-ngrams'
         ||  $scope.analysis.analysis === 'length-stats' ||  $scope.analysis.analysis.includes('topic-model')
         ||  $scope.analysis.analysis === 'word-vector' ||  $scope.analysis.analysis === 'unsup-morph'
-        ||  $scope.analysis.analysis === 'bigram-array') {
+        ||  $scope.analysis.analysis === 'bigram-array' || $scope.analysis.analysis === 'speech-token-stats') {
         if (typeof $scope.analysis.result == "string") {
           $scope.results = JSON.parse(truncateSplatResponse($scope.analysis.result));
         }
@@ -1216,6 +1216,41 @@
     document.getElementById('graph').innerHTML += table;
   }
 
+  function visualizeSpeechTokenStats() {
+    console.log('speech-token-stats');
+    console.log($scope.results);
+    var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
+
+    var transcription = '<br><h3 class=' + style + '">' + 'Transcription' + ':</h3>';
+    transcription += "<p>" + $scope.results[0].transcript + "</p>";
+    document.getElementById('graph').innerHTML += transcription;
+
+    var formattedTitle = '<br><h3 class=' + style + '">' + 'Statistics' + ':</h3>';
+    var table = '<table class=' + style + '">';
+    table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Calculation</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Value</th><th></th></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The count of non-word fillers (includes silence, noise, and untranscribable speech) in the transcript"><b>Number of non-word fillers:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + $scope.results[0].base_stats.num_fillers + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The count of words in the transcript"><b>Number of words:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + $scope.results[0].base_stats.num_words + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The total duration of the audio (might be longer than non-word filler and word combined)"><b>Total time:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + $scope.results[0].base_stats.total_time + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The total duration of non-word fillers in the audio"><b>Non-word filler time:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + $scope.results[0].base_stats.filler_time + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The total duration of words in the audio"><b>Word time:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + $scope.results[0].base_stats.word_time + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="https:\/\/en.wikipedia.org/wiki/Words_per_minute" target="_blank" style="color:darkgreen !important;" title="The number of words divided by the duration of the audio"><b>Words per minute:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0].base_stats.words_per_minute).toFixed(2) + '</td><td></td></tr>';
+    table += '<tr style="border-bottom: 1px solid black;"><td style="color:darkgreen;"><a href="javascript:void(0);" target="_blank" style="color:darkgreen !important;" title="The number of syllables divided by the duration of the audio"><b>Syllables per minute:</b></a></td><td>&nbsp;&nbsp;</td><td align="right">' + parseFloat($scope.results[0].base_stats.syllables_per_minute).toFixed(2) + '</td><td></td></tr>';
+    table += '</table>';
+    document.getElementById('graph').innerHTML += formattedTitle + table;
+
+    formattedTitle = '<br><h3 class=' + style + '">' + 'Longest Words' + ':</h3>';
+    table = '<table class=' + style + '">';
+    table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">Word</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Length (seconds)</th></tr>';
+
+    for (var i in $scope.results[0].longest_tokens) {
+      table += '<tr style="border-bottom: 1pt solid black;"><td style="text-align: center;"><b>' + $scope.results[0].longest_tokens[i].word + '</b></td>';
+      table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.results[0].longest_tokens[i].length + '</b></td></tr>';
+    }
+    table += '</table>';
+    document.getElementById('graph').innerHTML += formattedTitle + table;
+
+  }
+
   $scope.visualize = function(){
       switch($scope.analysis.analysis) {
         case "tfidf":
@@ -1274,6 +1309,9 @@
           break;
         case "bigram-array":
           visualizeBigramArray();
+          break;
+        case "speech-token-stats":
+          visualizeSpeechTokenStats();
           break;
         default:
           break;

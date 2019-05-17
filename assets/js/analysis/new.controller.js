@@ -170,6 +170,14 @@
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
+      },
+      {
+        name: "Transcribed Speech Token Analysis",
+        unfriendly_name: "speech-token-stats",
+        description: "This operation displays the transcription, basic statistics for the tokens in the ASR transcript, and the list of the top 10 longest words. This should only be run on corpora transcribed by Linguine.",
+        multiCorporaAllowed: false,
+        tokenAllowed: false,
+        tokenizerRequired: false
       }
     ];
     $scope.analysisTypes.sort(function(a, b) {
@@ -272,6 +280,7 @@
       "word-vector": [],
       "unsup-morph": [],
       "bigram-array": [cleanups.removepunct, cleanups.removesilence, cleanups.remove_quotes, cleanups.remove_hashtags],
+      "speech-token-stats": [],
     };
 
     $scope.tokenizerTypes = [
