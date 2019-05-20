@@ -27,7 +27,7 @@
               div(ng-repeat="corpora_id in analysis.corpora_ids")
                 span #[b Corpora]: {{ findCorpus(corpora_id).title }}
                 br
-                span #[b Analysis]: {{analysis.analysis}}
+                span #[b Analysis]: {{analysis.analysis_name}}
                 br
                 span #[b Cleanups]:
                 span(ng-repeat="cleanup in analysis.cleanup_ids")  {{cleanup}}
