@@ -1,0 +1,518 @@
+[
+  {
+    "start": 630,
+    "filler": false,
+    "end": 1000,
+    "word": "fergus"
+  },
+  {
+    "start": 1010,
+    "filler": false,
+    "end": 1130,
+    "word": "is"
+  },
+  {
+    "start": 1140,
+    "filler": false,
+    "end": 1180,
+    "word": "a"
+  },
+  {
+    "start": 1190,
+    "filler": false,
+    "end": 1390,
+    "word": "very"
+  },
+  {
+    "start": 1400,
+    "filler": false,
+    "end": 1830,
+    "word": "clinton"
+  },
+  {
+    "start": 1840,
+    "filler": false,
+    "end": 1940,
+    "word": "in"
+  },
+  {
+    "start": 1950,
+    "filler": false,
+    "end": 2240,
+    "word": "and"
+  },
+  {
+    "start": 2250,
+    "filler": false,
+    "end": 2330,
+    "word": "you"
+  },
+  {
+    "start": 2340,
+    "filler": false,
+    "end": 2670,
+    "word": "start"
+  },
+  {
+    "start": 2680,
+    "filler": false,
+    "end": 2860,
+    "word": "out"
+  },
+  {
+    "start": 2870,
+    "filler": false,
+    "end": 2930,
+    "word": "the"
+  },
+  {
+    "start": 2940,
+    "filler": false,
+    "end": 3310,
+    "word": "last"
+  },
+  {
+    "start": 3320,
+    "filler": false,
+    "end": 3640,
+    "word": "one"
+  },
+  {
+    "start": 3650,
+    "filler": false,
+    "end": 3760,
+    "word": "to"
+  },
+  {
+    "start": 3770,
+    "filler": false,
+    "end": 3870,
+    "word": "the"
+  },
+  {
+    "start": 3880,
+    "filler": false,
+    "end": 4380,
+    "word": "audience"
+  },
+  {
+    "start": 4390,
+    "filler": true,
+    "end": 4530,
+    "word": "[NOISE]"
+  },
+  {
+    "start": 4580,
+    "filler": true,
+    "end": 4840,
+    "word": "<sil>"
+  },
+  {
+    "start": 4850,
+    "filler": false,
+    "end": 4930,
+    "word": "he"
+  },
+  {
+    "start": 4940,
+    "filler": false,
+    "end": 5160,
+    "word": "was"
+  },
+  {
+    "start": 5170,
+    "filler": false,
+    "end": 5210,
+    "word": "a"
+  },
+  {
+    "start": 5220,
+    "filler": false,
+    "end": 5450,
+    "word": "star"
+  },
+  {
+    "start": 5460,
+    "filler": false,
+    "end": 5540,
+    "word": "you"
+  },
+  {
+    "start": 5550,
+    "filler": false,
+    "end": 5680,
+    "word": "can"
+  },
+  {
+    "start": 5690,
+    "filler": false,
+    "end": 5930,
+    "word": "stir"
+  },
+  {
+    "start": 6090,
+    "filler": true,
+    "end": 6480,
+    "word": "<sil>"
+  },
+  {
+    "start": 6490,
+    "filler": true,
+    "end": 6570,
+    "word": "[SPEECH]"
+  },
+  {
+    "start": 6580,
+    "filler": true,
+    "end": 6950,
+    "word": "<sil>"
+  },
+  {
+    "start": 6960,
+    "filler": false,
+    "end": 7140,
+    "word": "and"
+  },
+  {
+    "start": 7150,
+    "filler": false,
+    "end": 7260,
+    "word": "i"
+  },
+  {
+    "start": 7270,
+    "filler": false,
+    "end": 7520,
+    "word": "headed"
+  },
+  {
+    "start": 7530,
+    "filler": false,
+    "end": 7920,
+    "word": "out"
+  },
+  {
+    "start": 7930,
+    "filler": false,
+    "end": 8090,
+    "word": "on"
+  },
+  {
+    "start": 8100,
+    "filler": false,
+    "end": 8140,
+    "word": "a"
+  },
+  {
+    "start": 8150,
+    "filler": false,
+    "end": 8570,
+    "word": "gentleman"
+  },
+  {
+    "start": 8580,
+    "filler": false,
+    "end": 8690,
+    "word": "that"
+  },
+  {
+    "start": 8700,
+    "filler": false,
+    "end": 9330,
+    "word": "wouldn't"
+  },
+  {
+    "start": 9330,
+    "filler": false,
+    "end": 9690,
+    "word": "cedric"
+  },
+  {
+    "start": 9700,
+    "filler": false,
+    "end": 10020,
+    "word": "london"
+  },
+  {
+    "start": 10390,
+    "filler": false,
+    "end": 14480,
+    "word": "that"
+  },
+  {
+    "start": 14490,
+    "filler": false,
+    "end": 14710,
+    "word": "was"
+  },
+  {
+    "start": 14720,
+    "filler": false,
+    "end": 14980,
+    "word": "about"
+  },
+  {
+    "start": 14990,
+    "filler": false,
+    "end": 15070,
+    "word": "to"
+  },
+  {
+    "start": 15080,
+    "filler": false,
+    "end": 15390,
+    "word": "say"
+  },
+  {
+    "start": 15400,
+    "filler": false,
+    "end": 15590,
+    "word": "he's"
+  },
+  {
+    "start": 15600,
+    "filler": false,
+    "end": 15780,
+    "word": "gonna"
+  },
+  {
+    "start": 15790,
+    "filler": false,
+    "end": 16090,
+    "word": "solve"
+  },
+  {
+    "start": 16100,
+    "filler": false,
+    "end": 16220,
+    "word": "that"
+  },
+  {
+    "start": 16230,
+    "filler": false,
+    "end": 16380,
+    "word": "by"
+  },
+  {
+    "start": 16390,
+    "filler": false,
+    "end": 16900,
+    "word": "repealing"
+  },
+  {
+    "start": 16910,
+    "filler": false,
+    "end": 17020,
+    "word": "it"
+  },
+  {
+    "start": 17180,
+    "filler": true,
+    "end": 17180,
+    "word": "<sil>"
+  },
+  {
+    "start": 17200,
+    "filler": false,
+    "end": 17570,
+    "word": "and"
+  },
+  {
+    "start": 17580,
+    "filler": false,
+    "end": 17820,
+    "word": "getting"
+  },
+  {
+    "start": 17830,
+    "filler": false,
+    "end": 18080,
+    "word": "rid"
+  },
+  {
+    "start": 18090,
+    "filler": false,
+    "end": 18370,
+    "word": "of"
+  },
+  {
+    "start": 18370,
+    "filler": true,
+    "end": 18400,
+    "word": "<sil>"
+  },
+  {
+    "start": 18410,
+    "filler": true,
+    "end": 18870,
+    "word": "[SPEECH]"
+  },
+  {
+    "start": 18870,
+    "filler": true,
+    "end": 19290,
+    "word": "<sil>"
+  },
+  {
+    "start": 19300,
+    "filler": false,
+    "end": 19440,
+    "word": "if"
+  },
+  {
+    "start": 19450,
+    "filler": false,
+    "end": 19640,
+    "word": "for"
+  },
+  {
+    "start": 19650,
+    "filler": false,
+    "end": 19770,
+    "word": "both"
+  },
+  {
+    "start": 19780,
+    "filler": false,
+    "end": 20060,
+    "word": "care"
+  },
+  {
+    "start": 20070,
+    "filler": false,
+    "end": 20410,
+    "word": "act"
+  },
+  {
+    "start": 20420,
+    "filler": true,
+    "end": 20480,
+    "word": "<sil>"
+  },
+  {
+    "start": 20490,
+    "filler": false,
+    "end": 20890,
+    "word": "and"
+  },
+  {
+    "start": 20900,
+    "filler": true,
+    "end": 20960,
+    "word": "<sil>"
+  },
+  {
+    "start": 20970,
+    "filler": false,
+    "end": 21230,
+    "word": "find"
+  },
+  {
+    "start": 21240,
+    "filler": false,
+    "end": 21270,
+    "word": "a"
+  },
+  {
+    "start": 21280,
+    "filler": false,
+    "end": 21620,
+    "word": "fix"
+  },
+  {
+    "start": 21630,
+    "filler": false,
+    "end": 21760,
+    "word": "it"
+  },
+  {
+    "start": 21910,
+    "filler": true,
+    "end": 22100,
+    "word": "<sil>"
+  },
+  {
+    "start": 22110,
+    "filler": false,
+    "end": 22240,
+    "word": "as"
+  },
+  {
+    "start": 22250,
+    "filler": false,
+    "end": 22360,
+    "word": "i"
+  },
+  {
+    "start": 22370,
+    "filler": false,
+    "end": 22580,
+    "word": "agree"
+  },
+  {
+    "start": 22590,
+    "filler": false,
+    "end": 22770,
+    "word": "with"
+  },
+  {
+    "start": 22780,
+    "filler": false,
+    "end": 22990,
+    "word": "you"
+  },
+  {
+    "start": 23180,
+    "filler": false,
+    "end": 24050,
+    "word": "premiums"
+  },
+  {
+    "start": 24060,
+    "filler": false,
+    "end": 24170,
+    "word": "and"
+  },
+  {
+    "start": 24180,
+    "filler": false,
+    "end": 24520,
+    "word": "onto"
+  },
+  {
+    "start": 24530,
+    "filler": false,
+    "end": 25060,
+    "word": "heiko"
+  },
+  {
+    "start": 25070,
+    "filler": false,
+    "end": 25510,
+    "word": "pays"
+  },
+  {
+    "start": 25520,
+    "filler": false,
+    "end": 26220,
+    "word": "deductibles"
+  },
+  {
+    "start": 26230,
+    "filler": false,
+    "end": 26730,
+    "word": "prescription"
+  },
+  {
+    "start": 26740,
+    "filler": false,
+    "end": 26950,
+    "word": "drug"
+  },
+  {
+    "start": 26960,
+    "filler": false,
+    "end": 27480,
+    "word": "costs"
+  }
+]

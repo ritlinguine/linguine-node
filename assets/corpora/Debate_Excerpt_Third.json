@@ -1,0 +1,650 @@
+[
+  {
+    "start": 20,
+    "filler": false,
+    "end": 60,
+    "word": "a"
+  },
+  {
+    "start": 70,
+    "filler": false,
+    "end": 330,
+    "word": "little"
+  },
+  {
+    "start": 340,
+    "filler": false,
+    "end": 660,
+    "word": "certain"
+  },
+  {
+    "start": 670,
+    "filler": false,
+    "end": 1080,
+    "word": "seeds"
+  },
+  {
+    "start": 1090,
+    "filler": false,
+    "end": 1180,
+    "word": "to"
+  },
+  {
+    "start": 1190,
+    "filler": false,
+    "end": 1270,
+    "word": "the"
+  },
+  {
+    "start": 1280,
+    "filler": false,
+    "end": 1770,
+    "word": "winner"
+  },
+  {
+    "start": 1780,
+    "filler": true,
+    "end": 1900,
+    "word": "[NOISE]"
+  },
+  {
+    "start": 1900,
+    "filler": false,
+    "end": 2240,
+    "word": "and"
+  },
+  {
+    "start": 2250,
+    "filler": false,
+    "end": 2310,
+    "word": "of"
+  },
+  {
+    "start": 2320,
+    "filler": false,
+    "end": 2410,
+    "word": "the"
+  },
+  {
+    "start": 2420,
+    "filler": false,
+    "end": 3010,
+    "word": "country"
+  },
+  {
+    "start": 3020,
+    "filler": true,
+    "end": 3140,
+    "word": "<sil>"
+  },
+  {
+    "start": 3150,
+    "filler": false,
+    "end": 3470,
+    "word": "comes"
+  },
+  {
+    "start": 3480,
+    "filler": false,
+    "end": 3980,
+    "word": "together"
+  },
+  {
+    "start": 3990,
+    "filler": false,
+    "end": 4190,
+    "word": "in"
+  },
+  {
+    "start": 4200,
+    "filler": false,
+    "end": 4540,
+    "word": "parts"
+  },
+  {
+    "start": 4550,
+    "filler": false,
+    "end": 4620,
+    "word": "of"
+  },
+  {
+    "start": 4630,
+    "filler": false,
+    "end": 4720,
+    "word": "it"
+  },
+  {
+    "start": 4730,
+    "filler": false,
+    "end": 4870,
+    "word": "but"
+  },
+  {
+    "start": 4880,
+    "filler": false,
+    "end": 4920,
+    "word": "ah"
+  },
+  {
+    "start": 4930,
+    "filler": false,
+    "end": 5020,
+    "word": "the"
+  },
+  {
+    "start": 5030,
+    "filler": false,
+    "end": 5570,
+    "word": "country"
+  },
+  {
+    "start": 5740,
+    "filler": true,
+    "end": 5870,
+    "word": "[NOISE]"
+  },
+  {
+    "start": 5880,
+    "filler": false,
+    "end": 5990,
+    "word": "are"
+  },
+  {
+    "start": 6000,
+    "filler": false,
+    "end": 6130,
+    "word": "you"
+  },
+  {
+    "start": 6140,
+    "filler": false,
+    "end": 6420,
+    "word": "saying"
+  },
+  {
+    "start": 6430,
+    "filler": false,
+    "end": 6530,
+    "word": "you're"
+  },
+  {
+    "start": 6540,
+    "filler": false,
+    "end": 6960,
+    "word": "not"
+  },
+  {
+    "start": 6960,
+    "filler": false,
+    "end": 7450,
+    "word": "they're"
+  },
+  {
+    "start": 7460,
+    "filler": true,
+    "end": 7480,
+    "word": "<sil>"
+  },
+  {
+    "start": 7490,
+    "filler": false,
+    "end": 7760,
+    "word": "not"
+  },
+  {
+    "start": 7770,
+    "filler": false,
+    "end": 7960,
+    "word": "what"
+  },
+  {
+    "start": 7970,
+    "filler": false,
+    "end": 8100,
+    "word": "i"
+  },
+  {
+    "start": 8110,
+    "filler": false,
+    "end": 8230,
+    "word": "said"
+  },
+  {
+    "start": 8240,
+    "filler": false,
+    "end": 8340,
+    "word": "i"
+  },
+  {
+    "start": 8350,
+    "filler": false,
+    "end": 8590,
+    "word": "have"
+  },
+  {
+    "start": 8600,
+    "filler": false,
+    "end": 8870,
+    "word": "just"
+  },
+  {
+    "start": 8880,
+    "filler": false,
+    "end": 9130,
+    "word": "that"
+  },
+  {
+    "start": 9140,
+    "filler": false,
+    "end": 9230,
+    "word": "i"
+  },
+  {
+    "start": 9240,
+    "filler": false,
+    "end": 9440,
+    "word": "will"
+  },
+  {
+    "start": 9450,
+    "filler": false,
+    "end": 9630,
+    "word": "tell"
+  },
+  {
+    "start": 9640,
+    "filler": false,
+    "end": 9890,
+    "word": "you"
+  },
+  {
+    "start": 9900,
+    "filler": false,
+    "end": 10030,
+    "word": "it's"
+  },
+  {
+    "start": 10040,
+    "filler": false,
+    "end": 10080,
+    "word": "a"
+  },
+  {
+    "start": 10090,
+    "filler": false,
+    "end": 10570,
+    "word": "time"
+  },
+  {
+    "start": 10580,
+    "filler": true,
+    "end": 10610,
+    "word": "<sil>"
+  },
+  {
+    "start": 10620,
+    "filler": false,
+    "end": 10710,
+    "word": "i'll"
+  },
+  {
+    "start": 10720,
+    "filler": false,
+    "end": 11010,
+    "word": "keep"
+  },
+  {
+    "start": 11020,
+    "filler": false,
+    "end": 11150,
+    "word": "you"
+  },
+  {
+    "start": 11160,
+    "filler": false,
+    "end": 11210,
+    "word": "in"
+  },
+  {
+    "start": 11220,
+    "filler": false,
+    "end": 11940,
+    "word": "suspense"
+  },
+  {
+    "start": 11950,
+    "filler": true,
+    "end": 11970,
+    "word": "<sil>"
+  },
+  {
+    "start": 11980,
+    "filler": false,
+    "end": 12190,
+    "word": "well"
+  },
+  {
+    "start": 12200,
+    "filler": false,
+    "end": 12690,
+    "word": "address"
+  },
+  {
+    "start": 12700,
+    "filler": true,
+    "end": 12730,
+    "word": "<sil>"
+  },
+  {
+    "start": 12740,
+    "filler": false,
+    "end": 12930,
+    "word": "let"
+  },
+  {
+    "start": 12940,
+    "filler": false,
+    "end": 13170,
+    "word": "me"
+  },
+  {
+    "start": 13180,
+    "filler": true,
+    "end": 13220,
+    "word": "<sil>"
+  },
+  {
+    "start": 13230,
+    "filler": false,
+    "end": 13640,
+    "word": "respond"
+  },
+  {
+    "start": 13650,
+    "filler": false,
+    "end": 13720,
+    "word": "to"
+  },
+  {
+    "start": 13730,
+    "filler": false,
+    "end": 13960,
+    "word": "that"
+  },
+  {
+    "start": 13970,
+    "filler": false,
+    "end": 14230,
+    "word": "because"
+  },
+  {
+    "start": 14240,
+    "filler": false,
+    "end": 14700,
+    "word": "that's"
+  },
+  {
+    "start": 14860,
+    "filler": false,
+    "end": 15580,
+    "word": "horrifying"
+  },
+  {
+    "start": 15760,
+    "filler": true,
+    "end": 15760,
+    "word": "[NOISE]"
+  },
+  {
+    "start": 16000,
+    "filler": true,
+    "end": 16030,
+    "word": "<sil>"
+  },
+  {
+    "start": 16040,
+    "filler": false,
+    "end": 16230,
+    "word": "now"
+  },
+  {
+    "start": 16240,
+    "filler": true,
+    "end": 16270,
+    "word": "<sil>"
+  },
+  {
+    "start": 16280,
+    "filler": false,
+    "end": 16520,
+    "word": "every"
+  },
+  {
+    "start": 16530,
+    "filler": false,
+    "end": 17160,
+    "word": "time"
+  },
+  {
+    "start": 17170,
+    "filler": true,
+    "end": 17300,
+    "word": "<sil>"
+  },
+  {
+    "start": 17310,
+    "filler": false,
+    "end": 17770,
+    "word": "donald"
+  },
+  {
+    "start": 17950,
+    "filler": false,
+    "end": 18310,
+    "word": "thinks"
+  },
+  {
+    "start": 18320,
+    "filler": false,
+    "end": 18580,
+    "word": "things"
+  },
+  {
+    "start": 18590,
+    "filler": false,
+    "end": 18650,
+    "word": "are"
+  },
+  {
+    "start": 18660,
+    "filler": false,
+    "end": 18840,
+    "word": "not"
+  },
+  {
+    "start": 18850,
+    "filler": false,
+    "end": 19240,
+    "word": "going"
+  },
+  {
+    "start": 19250,
+    "filler": false,
+    "end": 19330,
+    "word": "in"
+  },
+  {
+    "start": 19340,
+    "filler": false,
+    "end": 19560,
+    "word": "his"
+  },
+  {
+    "start": 19570,
+    "filler": false,
+    "end": 20210,
+    "word": "direction"
+  },
+  {
+    "start": 20220,
+    "filler": false,
+    "end": 20340,
+    "word": "he"
+  },
+  {
+    "start": 20350,
+    "filler": false,
+    "end": 20850,
+    "word": "claims"
+  },
+  {
+    "start": 21000,
+    "filler": true,
+    "end": 21380,
+    "word": "<sil>"
+  },
+  {
+    "start": 21390,
+    "filler": false,
+    "end": 21850,
+    "word": "whenever"
+  },
+  {
+    "start": 21860,
+    "filler": false,
+    "end": 22130,
+    "word": "is"
+  },
+  {
+    "start": 22140,
+    "filler": false,
+    "end": 22250,
+    "word": "is"
+  },
+  {
+    "start": 22260,
+    "filler": false,
+    "end": 22570,
+    "word": "rigged"
+  },
+  {
+    "start": 22580,
+    "filler": false,
+    "end": 22980,
+    "word": "against"
+  },
+  {
+    "start": 22990,
+    "filler": false,
+    "end": 23150,
+    "word": "him"
+  },
+  {
+    "start": 23300,
+    "filler": false,
+    "end": 23980,
+    "word": "ah"
+  },
+  {
+    "start": 23990,
+    "filler": false,
+    "end": 24110,
+    "word": "the"
+  },
+  {
+    "start": 24120,
+    "filler": false,
+    "end": 24680,
+    "word": "fbi"
+  },
+  {
+    "start": 24690,
+    "filler": false,
+    "end": 25200,
+    "word": "conducted"
+  },
+  {
+    "start": 25210,
+    "filler": false,
+    "end": 25320,
+    "word": "in"
+  },
+  {
+    "start": 25330,
+    "filler": false,
+    "end": 25450,
+    "word": "your"
+  },
+  {
+    "start": 25460,
+    "filler": false,
+    "end": 25770,
+    "word": "long"
+  },
+  {
+    "start": 25780,
+    "filler": false,
+    "end": 26610,
+    "word": "investigation"
+  },
+  {
+    "start": 26620,
+    "filler": false,
+    "end": 26770,
+    "word": "into"
+  },
+  {
+    "start": 26780,
+    "filler": false,
+    "end": 27020,
+    "word": "my"
+  },
+  {
+    "start": 27030,
+    "filler": false,
+    "end": 27600,
+    "word": "emails"
+  },
+  {
+    "start": 27610,
+    "filler": false,
+    "end": 27720,
+    "word": "they"
+  },
+  {
+    "start": 27730,
+    "filler": false,
+    "end": 28360,
+    "word": "concluded"
+  },
+  {
+    "start": 28500,
+    "filler": true,
+    "end": 28630,
+    "word": "<sil>"
+  },
+  {
+    "start": 28640,
+    "filler": false,
+    "end": 28760,
+    "word": "there"
+  },
+  {
+    "start": 28770,
+    "filler": false,
+    "end": 28940,
+    "word": "was"
+  },
+  {
+    "start": 28950,
+    "filler": false,
+    "end": 29110,
+    "word": "no"
+  },
+  {
+    "start": 29120,
+    "filler": false,
+    "end": 29640,
+    "word": "case"
+  }
+]

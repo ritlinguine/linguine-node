@@ -37,7 +37,8 @@ module.exports = function(app){
             '310 Very-Formal (J)', '310 Semi-Formal (J)', '310 Semi-Informal (J)', '310 Very-Informal (J)',
             'UnknownWS_Long', 'UnknownWS_Short', 'WordVector_Example',
             'Dialogue_RJ1 Short', 'Dialogue_RJ2 Short', 'Dialogue_RJ Long',
-            'Dialogue_SB1 Short', 'Dialogue_SB2 Short', 'Dialogue_SB Long'];
+            'Dialogue_SB1 Short', 'Dialogue_SB2 Short', 'Dialogue_SB Long',
+            'Debate_Excerpt_First.json', 'Debate_Excerpt_Second.json', 'Debate_Excerpt_Third.json'];
             files.forEach(function(file){
             var corpusPath = path.join('dirname', '../assets/corpora/', file);
             fs.readFile(corpusPath, function(err,data) {
