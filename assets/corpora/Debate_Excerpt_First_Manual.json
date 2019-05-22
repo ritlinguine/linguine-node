@@ -1,0 +1,662 @@
+[
+  {
+    "start": 0,
+    "filler": true,
+    "end": 43,
+    "word": "<sil>"
+  },
+  {
+    "start": 44,
+    "filler": false,
+    "end": 136,
+    "word": "and"
+  },
+  {
+    "start": 136,
+    "filler": false,
+    "end": 424,
+    "word": "Hillary"
+  },
+  {
+    "start": 424,
+    "filler": false,
+    "end": 516,
+    "word": "I'd"
+  },
+  {
+    "start": 516,
+    "filler": false,
+    "end": 722,
+    "word": "just"
+  },
+  {
+    "start": 722,
+    "filler": false,
+    "end": 960,
+    "word": "ask"
+  },
+  {
+    "start": 960,
+    "filler": false,
+    "end": 1110,
+    "word": "you"
+  },
+  {
+    "start": 1110,
+    "filler": false,
+    "end": 1330,
+    "word": "this"
+  },
+  {
+    "start": 1331,
+    "filler": true,
+    "end": 1627,
+    "word": "<sil>"
+  },
+  {
+    "start": 1628,
+    "filler": false,
+    "end": 2105,
+    "word": "you've"
+  },
+  {
+    "start": 2105,
+    "filler": false,
+    "end": 2602,
+    "word": "been"
+  },
+  {
+    "start": 2603,
+    "filler": true,
+    "end": 2952,
+    "word": "<sil>"
+  },
+  {
+    "start": 2953,
+    "filler": false,
+    "end": 3348,
+    "word": "doing"
+  },
+  {
+    "start": 3348,
+    "filler": false,
+    "end": 3799,
+    "word": "this"
+  },
+  {
+    "start": 3800,
+    "filler": true,
+    "end": 4199,
+    "word": "<sil>"
+  },
+  {
+    "start": 4200,
+    "filler": false,
+    "end": 4442,
+    "word": "for"
+  },
+  {
+    "start": 4442,
+    "filler": false,
+    "end": 4815,
+    "word": "thirty"
+  },
+  {
+    "start": 4815,
+    "filler": false,
+    "end": 5234,
+    "word": "years"
+  },
+  {
+    "start": 5235,
+    "filler": true,
+    "end": 5543,
+    "word": "<sil>"
+  },
+  {
+    "start": 5544,
+    "filler": false,
+    "end": 5850,
+    "word": "why"
+  },
+  {
+    "start": 5850,
+    "filler": false,
+    "end": 5967,
+    "word": "are"
+  },
+  {
+    "start": 5967,
+    "filler": false,
+    "end": 6095,
+    "word": "you"
+  },
+  {
+    "start": 6095,
+    "filler": false,
+    "end": 6386,
+    "word": "just"
+  },
+  {
+    "start": 6386,
+    "filler": false,
+    "end": 6582,
+    "word": "thinking"
+  },
+  {
+    "start": 6582,
+    "filler": false,
+    "end": 6859,
+    "word": "about"
+  },
+  {
+    "start": 6859,
+    "filler": false,
+    "end": 7058,
+    "word": "these"
+  },
+  {
+    "start": 7058,
+    "filler": false,
+    "end": 7573,
+    "word": "solutions"
+  },
+  {
+    "start": 7573,
+    "filler": false,
+    "end": 7776,
+    "word": "right"
+  },
+  {
+    "start": 7776,
+    "filler": false,
+    "end": 8064,
+    "word": "now"
+  },
+  {
+    "start": 8064,
+    "filler": false,
+    "end": 8256,
+    "word": "for"
+  },
+  {
+    "start": 8256,
+    "filler": false,
+    "end": 8562,
+    "word": "thirty"
+  },
+  {
+    "start": 8562,
+    "filler": false,
+    "end": 8835,
+    "word": "years"
+  },
+  {
+    "start": 8835,
+    "filler": false,
+    "end": 9017,
+    "word": "you've"
+  },
+  {
+    "start": 9017,
+    "filler": false,
+    "end": 9169,
+    "word": "been"
+  },
+  {
+    "start": 9169,
+    "filler": false,
+    "end": 9425,
+    "word": "doing"
+  },
+  {
+    "start": 9425,
+    "filler": false,
+    "end": 9553,
+    "word": "it"
+  },
+  {
+    "start": 9554,
+    "filler": true,
+    "end": 9872,
+    "word": "<sil>"
+  },
+  {
+    "start": 9873,
+    "filler": false,
+    "end": 10043,
+    "word": "and"
+  },
+  {
+    "start": 10043,
+    "filler": false,
+    "end": 10271,
+    "word": "now"
+  },
+  {
+    "start": 10271,
+    "filler": false,
+    "end": 10449,
+    "word": "you're"
+  },
+  {
+    "start": 10449,
+    "filler": false,
+    "end": 10715,
+    "word": "just"
+  },
+  {
+    "start": 10715,
+    "filler": false,
+    "end": 11078,
+    "word": "starting"
+  },
+  {
+    "start": 11078,
+    "filler": false,
+    "end": 11224,
+    "word": "to"
+  },
+  {
+    "start": 11224,
+    "filler": false,
+    "end": 11419,
+    "word": "think"
+  },
+  {
+    "start": 11419,
+    "filler": false,
+    "end": 11501,
+    "word": "of"
+  },
+  {
+    "start": 11501,
+    "filler": false,
+    "end": 12194,
+    "word": "solutions"
+  },
+  {
+    "start": 12195,
+    "filler": true,
+    "end": 12342,
+    "word": "<sil>"
+  },
+  {
+    "start": 12343,
+    "filler": false,
+    "end": 12524,
+    "word": "well"
+  },
+  {
+    "start": 12524,
+    "filler": false,
+    "end": 13007,
+    "word": "actually"
+  },
+  {
+    "start": 12563,
+    "filler": false,
+    "end": 12826,
+    "word": "I"
+  },
+  {
+    "start": 12826,
+    "filler": false,
+    "end": 13039,
+    "word": "will"
+  },
+  {
+    "start": 13039,
+    "filler": false,
+    "end": 13380,
+    "word": "bring"
+  },
+  {
+    "start": 13380,
+    "filler": false,
+    "end": 13669,
+    "word": "excuse"
+  },
+  {
+    "start": 13669,
+    "filler": false,
+    "end": 13815,
+    "word": "me"
+  },
+  {
+    "start": 13816,
+    "filler": true,
+    "end": 14144,
+    "word": "<sil>"
+  },
+  {
+    "start": 14145,
+    "filler": false,
+    "end": 14358,
+    "word": "I"
+  },
+  {
+    "start": 14358,
+    "filler": false,
+    "end": 14596,
+    "word": "will"
+  },
+  {
+    "start": 14596,
+    "filler": false,
+    "end": 14831,
+    "word": "bring"
+  },
+  {
+    "start": 14831,
+    "filler": false,
+    "end": 15041,
+    "word": "back"
+  },
+  {
+    "start": 15041,
+    "filler": false,
+    "end": 15574,
+    "word": "jobs"
+  },
+  {
+    "start": 15575,
+    "filler": true,
+    "end": 15909,
+    "word": "<sil>"
+  },
+  {
+    "start": 15910,
+    "filler": false,
+    "end": 16102,
+    "word": "you"
+  },
+  {
+    "start": 16102,
+    "filler": false,
+    "end": 16386,
+    "word": "can't"
+  },
+  {
+    "start": 16386,
+    "filler": false,
+    "end": 16585,
+    "word": "bring"
+  },
+  {
+    "start": 16585,
+    "filler": false,
+    "end": 16770,
+    "word": "back"
+  },
+  {
+    "start": 16770,
+    "filler": false,
+    "end": 17200,
+    "word": "jobs"
+  },
+  {
+    "start": 16825,
+    "filler": false,
+    "end": 17194,
+    "word": "well"
+  },
+  {
+    "start": 17194,
+    "filler": false,
+    "end": 17937,
+    "word": "actually"
+  },
+  {
+    "start": 17938,
+    "filler": true,
+    "end": 18200,
+    "word": "<sil>"
+  },
+  {
+    "start": 18201,
+    "filler": false,
+    "end": 18539,
+    "word": "um"
+  },
+  {
+    "start": 18540,
+    "filler": true,
+    "end": 18612,
+    "word": "<sil>"
+  },
+  {
+    "start": 18613,
+    "filler": false,
+    "end": 18756,
+    "word": "I"
+  },
+  {
+    "start": 18756,
+    "filler": false,
+    "end": 18986,
+    "word": "have"
+  },
+  {
+    "start": 18986,
+    "filler": false,
+    "end": 19111,
+    "word": "thought"
+  },
+  {
+    "start": 19111,
+    "filler": false,
+    "end": 19409,
+    "word": "about"
+  },
+  {
+    "start": 19409,
+    "filler": false,
+    "end": 19686,
+    "word": "this"
+  },
+  {
+    "start": 19686,
+    "filler": false,
+    "end": 19807,
+    "word": "quite"
+  },
+  {
+    "start": 19807,
+    "filler": false,
+    "end": 19935,
+    "word": "a"
+  },
+  {
+    "start": 19935,
+    "filler": false,
+    "end": 20237,
+    "word": "bit"
+  },
+  {
+    "start": 20238,
+    "filler": true,
+    "end": 20430,
+    "word": "<sil>"
+  },
+  {
+    "start": 20431,
+    "filler": false,
+    "end": 20548,
+    "word": "yeah"
+  },
+  {
+    "start": 20548,
+    "filler": false,
+    "end": 20690,
+    "word": "for"
+  },
+  {
+    "start": 20690,
+    "filler": false,
+    "end": 20992,
+    "word": "thirty"
+  },
+  {
+    "start": 20992,
+    "filler": false,
+    "end": 21262,
+    "word": "and"
+  },
+  {
+    "start": 20992,
+    "filler": false,
+    "end": 21262,
+    "word": "years"
+  },
+  {
+    "start": 21262,
+    "filler": false,
+    "end": 21607,
+    "word": "I"
+  },
+  {
+    "start": 21607,
+    "filler": false,
+    "end": 22108,
+    "word": "have"
+  },
+  {
+    "start": 22108,
+    "filler": false,
+    "end": 22438,
+    "word": "uh"
+  },
+  {
+    "start": 22439,
+    "filler": true,
+    "end": 23362,
+    "word": "<sil>"
+  },
+  {
+    "start": 23363,
+    "filler": false,
+    "end": 23498,
+    "word": "well"
+  },
+  {
+    "start": 23498,
+    "filler": false,
+    "end": 23672,
+    "word": "not"
+  },
+  {
+    "start": 23673,
+    "filler": true,
+    "end": 23831,
+    "word": "<sil>"
+  },
+  {
+    "start": 23832,
+    "filler": false,
+    "end": 24073,
+    "word": "quite"
+  },
+  {
+    "start": 24073,
+    "filler": false,
+    "end": 24276,
+    "word": "that"
+  },
+  {
+    "start": 24276,
+    "filler": false,
+    "end": 24592,
+    "word": "long"
+  },
+  {
+    "start": 24593,
+    "filler": true,
+    "end": 25045,
+    "word": "<sil>"
+  },
+  {
+    "start": 25046,
+    "filler": false,
+    "end": 25526,
+    "word": "uh"
+  },
+  {
+    "start": 25930,
+    "filler": false,
+    "end": 26047,
+    "word": "I"
+  },
+  {
+    "start": 26047,
+    "filler": false,
+    "end": 26211,
+    "word": "think"
+  },
+  {
+    "start": 26211,
+    "filler": false,
+    "end": 26353,
+    "word": "my"
+  },
+  {
+    "start": 26353,
+    "filler": false,
+    "end": 26644,
+    "word": "husband"
+  },
+  {
+    "start": 26644,
+    "filler": false,
+    "end": 26747,
+    "word": "did"
+  },
+  {
+    "start": 26747,
+    "filler": false,
+    "end": 26836,
+    "word": "a"
+  },
+  {
+    "start": 26836,
+    "filler": false,
+    "end": 27053,
+    "word": "pretty"
+  },
+  {
+    "start": 27053,
+    "filler": false,
+    "end": 27209,
+    "word": "good"
+  },
+  {
+    "start": 27209,
+    "filler": false,
+    "end": 27465,
+    "word": "job"
+  },
+  {
+    "start": 27465,
+    "filler": false,
+    "end": 27561,
+    "word": "in"
+  },
+  {
+    "start": 27561,
+    "filler": false,
+    "end": 27643,
+    "word": "the"
+  },
+  {
+    "start": 27643,
+    "filler": false,
+    "end": 28037,
+    "word": "nineteen"
+  },
+  {
+    "start": 28037,
+    "filler": false,
+    "end": 28500,
+    "word": "nineties"
+  }
+]

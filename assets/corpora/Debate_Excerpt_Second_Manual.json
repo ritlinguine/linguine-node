@@ -1,0 +1,602 @@
+[
+  {
+    "start": 0,
+    "filler": true,
+    "end": 52,
+    "word": "<sil>"
+  },
+  {
+    "start": 53,
+    "filler": false,
+    "end": 183,
+    "word": "that"
+  },
+  {
+    "start": 184,
+    "filler": true,
+    "end": 285,
+    "word": "<sil>"
+  },
+  {
+    "start": 286,
+    "filler": false,
+    "end": 426,
+    "word": "that"
+  },
+  {
+    "start": 427,
+    "filler": true,
+    "end": 484,
+    "word": "<sil>"
+  },
+  {
+    "start": 485,
+    "filler": false,
+    "end": 673,
+    "word": "first"
+  },
+  {
+    "start": 673,
+    "filler": false,
+    "end": 769,
+    "word": "one"
+  },
+  {
+    "start": 769,
+    "filler": false,
+    "end": 1002,
+    "word": "goes"
+  },
+  {
+    "start": 1002,
+    "filler": false,
+    "end": 1091,
+    "word": "to"
+  },
+  {
+    "start": 1091,
+    "filler": false,
+    "end": 1444,
+    "word": "secretary"
+  },
+  {
+    "start": 1444,
+    "filler": false,
+    "end": 1774,
+    "word": "Clinton"
+  },
+  {
+    "start": 1774,
+    "filler": false,
+    "end": 2113,
+    "word": "because"
+  },
+  {
+    "start": 2114,
+    "filler": true,
+    "end": 2198,
+    "word": "<sil>"
+  },
+  {
+    "start": 2199,
+    "filler": false,
+    "end": 2336,
+    "word": "you"
+  },
+  {
+    "start": 2336,
+    "filler": false,
+    "end": 2692,
+    "word": "started"
+  },
+  {
+    "start": 2692,
+    "filler": false,
+    "end": 2915,
+    "word": "out"
+  },
+  {
+    "start": 2915,
+    "filler": false,
+    "end": 3018,
+    "word": "the"
+  },
+  {
+    "start": 3018,
+    "filler": false,
+    "end": 3351,
+    "word": "last"
+  },
+  {
+    "start": 3351,
+    "filler": false,
+    "end": 3673,
+    "word": "one"
+  },
+  {
+    "start": 3673,
+    "filler": false,
+    "end": 3803,
+    "word": "to"
+  },
+  {
+    "start": 3803,
+    "filler": false,
+    "end": 3899,
+    "word": "the"
+  },
+  {
+    "start": 3899,
+    "filler": false,
+    "end": 4372,
+    "word": "audience"
+  },
+  {
+    "start": 4373,
+    "filler": true,
+    "end": 4857,
+    "word": "<sil>"
+  },
+  {
+    "start": 4858,
+    "filler": false,
+    "end": 4940,
+    "word": "he"
+  },
+  {
+    "start": 4940,
+    "filler": false,
+    "end": 5166,
+    "word": "wants"
+  },
+  {
+    "start": 5166,
+    "filler": false,
+    "end": 5207,
+    "word": "to"
+  },
+  {
+    "start": 5207,
+    "filler": false,
+    "end": 5499,
+    "word": "start"
+  },
+  {
+    "start": 5499,
+    "filler": false,
+    "end": 5591,
+    "word": "he"
+  },
+  {
+    "start": 5591,
+    "filler": false,
+    "end": 5701,
+    "word": "can"
+  },
+  {
+    "start": 5701,
+    "filler": false,
+    "end": 5951,
+    "word": "start"
+  },
+  {
+    "start": 5952,
+    "filler": true,
+    "end": 6981,
+    "word": "<sil>"
+  },
+  {
+    "start": 6982,
+    "filler": false,
+    "end": 7081,
+    "word": "no"
+  },
+  {
+    "start": 7081,
+    "filler": false,
+    "end": 7229,
+    "word": "go"
+  },
+  {
+    "start": 7229,
+    "filler": false,
+    "end": 7513,
+    "word": "ahead"
+  },
+  {
+    "start": 7513,
+    "filler": false,
+    "end": 7781,
+    "word": "Donald"
+  },
+  {
+    "start": 7782,
+    "filler": true,
+    "end": 7893,
+    "word": "<sil>"
+  },
+  {
+    "start": 7894,
+    "filler": false,
+    "end": 8045,
+    "word": "no"
+  },
+  {
+    "start": 8045,
+    "filler": false,
+    "end": 8106,
+    "word": "I'm"
+  },
+  {
+    "start": 8106,
+    "filler": false,
+    "end": 8164,
+    "word": "a"
+  },
+  {
+    "start": 8165,
+    "filler": true,
+    "end": 8202,
+    "word": "<sil>"
+  },
+  {
+    "start": 8203,
+    "filler": false,
+    "end": 8583,
+    "word": "gentleman"
+  },
+  {
+    "start": 8583,
+    "filler": false,
+    "end": 8857,
+    "word": "Hillary"
+  },
+  {
+    "start": 8857,
+    "filler": false,
+    "end": 8977,
+    "word": "go"
+  },
+  {
+    "start": 8977,
+    "filler": false,
+    "end": 9149,
+    "word": "ahead"
+  },
+  {
+    "start": 9150,
+    "filler": true,
+    "end": 9308,
+    "word": "<sil>"
+  },
+  {
+    "start": 9309,
+    "filler": false,
+    "end": 9676,
+    "word": "secretary"
+  },
+  {
+    "start": 9676,
+    "filler": false,
+    "end": 10043,
+    "word": "Clinton"
+  },
+  {
+    "start": 10044,
+    "filler": true,
+    "end": 13898,
+    "word": "<sil>"
+  },
+  {
+    "start": 13899,
+    "filler": false,
+    "end": 14002,
+    "word": "well"
+  },
+  {
+    "start": 14002,
+    "filler": false,
+    "end": 14088,
+    "word": "I"
+  },
+  {
+    "start": 14088,
+    "filler": false,
+    "end": 14312,
+    "word": "think"
+  },
+  {
+    "start": 14312,
+    "filler": false,
+    "end": 14578,
+    "word": "Donald"
+  },
+  {
+    "start": 14578,
+    "filler": false,
+    "end": 14722,
+    "word": "was"
+  },
+  {
+    "start": 14722,
+    "filler": false,
+    "end": 14962,
+    "word": "about"
+  },
+  {
+    "start": 14962,
+    "filler": false,
+    "end": 15082,
+    "word": "to"
+  },
+  {
+    "start": 15082,
+    "filler": false,
+    "end": 15432,
+    "word": "say"
+  },
+  {
+    "start": 15432,
+    "filler": false,
+    "end": 15631,
+    "word": "he's"
+  },
+  {
+    "start": 15631,
+    "filler": false,
+    "end": 15720,
+    "word": "going"
+  },
+  {
+    "start": 15720,
+    "filler": false,
+    "end": 15792,
+    "word": "to"
+  },
+  {
+    "start": 15792,
+    "filler": false,
+    "end": 16104,
+    "word": "solve"
+  },
+  {
+    "start": 16104,
+    "filler": false,
+    "end": 16216,
+    "word": "it"
+  },
+  {
+    "start": 16217,
+    "filler": true,
+    "end": 16295,
+    "word": "<sil>"
+  },
+  {
+    "start": 16296,
+    "filler": false,
+    "end": 16412,
+    "word": "by"
+  },
+  {
+    "start": 16412,
+    "filler": false,
+    "end": 16903,
+    "word": "repealing"
+  },
+  {
+    "start": 16903,
+    "filler": false,
+    "end": 17019,
+    "word": "it"
+  },
+  {
+    "start": 17020,
+    "filler": true,
+    "end": 17196,
+    "word": "<sil>"
+  },
+  {
+    "start": 17197,
+    "filler": false,
+    "end": 17591,
+    "word": "and"
+  },
+  {
+    "start": 17591,
+    "filler": false,
+    "end": 17794,
+    "word": "getting"
+  },
+  {
+    "start": 17794,
+    "filler": false,
+    "end": 18099,
+    "word": "rid"
+  },
+  {
+    "start": 18099,
+    "filler": false,
+    "end": 18411,
+    "word": "of"
+  },
+  {
+    "start": 18411,
+    "filler": false,
+    "end": 18829,
+    "word": "uh"
+  },
+  {
+    "start": 18830,
+    "filler": true,
+    "end": 19317,
+    "word": "<sil>"
+  },
+  {
+    "start": 19318,
+    "filler": false,
+    "end": 19390,
+    "word": "the"
+  },
+  {
+    "start": 19390,
+    "filler": false,
+    "end": 19780,
+    "word": "affordable"
+  },
+  {
+    "start": 19780,
+    "filler": false,
+    "end": 20038,
+    "word": "care"
+  },
+  {
+    "start": 20038,
+    "filler": false,
+    "end": 20408,
+    "word": "act"
+  },
+  {
+    "start": 20409,
+    "filler": true,
+    "end": 20499,
+    "word": "<sil>"
+  },
+  {
+    "start": 20500,
+    "filler": false,
+    "end": 20902,
+    "word": "and"
+  },
+  {
+    "start": 20903,
+    "filler": true,
+    "end": 20993,
+    "word": "<sil>"
+  },
+  {
+    "start": 20994,
+    "filler": false,
+    "end": 21159,
+    "word": "and"
+  },
+  {
+    "start": 21159,
+    "filler": false,
+    "end": 21222,
+    "word": "going"
+  },
+  {
+    "start": 21222,
+    "filler": false,
+    "end": 21290,
+    "word": "to"
+  },
+  {
+    "start": 21290,
+    "filler": false,
+    "end": 21613,
+    "word": "fix"
+  },
+  {
+    "start": 21613,
+    "filler": false,
+    "end": 21743,
+    "word": "it"
+  },
+  {
+    "start": 21744,
+    "filler": true,
+    "end": 22013,
+    "word": "<sil>"
+  },
+  {
+    "start": 22014,
+    "filler": false,
+    "end": 22233,
+    "word": "because"
+  },
+  {
+    "start": 22234,
+    "filler": true,
+    "end": 22431,
+    "word": "<sil>"
+  },
+  {
+    "start": 22432,
+    "filler": false,
+    "end": 22614,
+    "word": "agree"
+  },
+  {
+    "start": 22614,
+    "filler": false,
+    "end": 22816,
+    "word": "with"
+  },
+  {
+    "start": 22816,
+    "filler": false,
+    "end": 23015,
+    "word": "you"
+  },
+  {
+    "start": 23634,
+    "filler": false,
+    "end": 24056,
+    "word": "premiums"
+  },
+  {
+    "start": 24056,
+    "filler": false,
+    "end": 24159,
+    "word": "have"
+  },
+  {
+    "start": 24159,
+    "filler": false,
+    "end": 24405,
+    "word": "gotten"
+  },
+  {
+    "start": 24405,
+    "filler": false,
+    "end": 24539,
+    "word": "too"
+  },
+  {
+    "start": 24539,
+    "filler": false,
+    "end": 24872,
+    "word": "high"
+  },
+  {
+    "start": 24872,
+    "filler": false,
+    "end": 25523,
+    "word": "copays"
+  },
+  {
+    "start": 25523,
+    "filler": false,
+    "end": 26251,
+    "word": "deductibles"
+  },
+  {
+    "start": 26251,
+    "filler": false,
+    "end": 26751,
+    "word": "prescription"
+  },
+  {
+    "start": 26751,
+    "filler": false,
+    "end": 27005,
+    "word": "drug"
+  },
+  {
+    "start": 27005,
+    "filler": false,
+    "end": 27500,
+    "word": "cost"
+  }
+]
