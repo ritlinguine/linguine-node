@@ -37,7 +37,7 @@
     "passport": "^0.3.2",
     "passport-ldapauth": "^0.4.0",
     "pooling": "^0.4.6",
-    "request": "~2.47.0"
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "chai": "~1.9.2",
