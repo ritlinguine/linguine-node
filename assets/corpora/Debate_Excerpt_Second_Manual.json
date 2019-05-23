@@ -477,7 +477,7 @@
     "start": 20994,
     "filler": false,
     "end": 21159,
-    "word": "and"
+    "word": "I'm"
   },
   {
     "start": 21159,
@@ -516,10 +516,10 @@
     "word": "because"
   },
   {
-    "start": 22234,
-    "filler": true,
-    "end": 22431,
-    "word": "<sil>"
+    "start": 22233,
+    "filler": false,
+    "end": 22432,
+    "word": "I"
   },
   {
     "start": 22432,

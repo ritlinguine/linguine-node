@@ -174,7 +174,7 @@
       {
         name: "Transcribed Speech Token Analysis",
         unfriendly_name: "speech-token-stats",
-        description: "This operation displays the transcription, basic statistics for the tokens in the ASR transcript, and the list of the top 10 longest words. This should only be run on corpora transcribed for use in Linguine.",
+        description: "This operation displays the transcription, statistics for the tokens in the speech transcript, and the 10 longest words. It should only be applied to corpora transcribed for use in Linguine.",
         multiCorporaAllowed: false,
         tokenAllowed: false,
         tokenizerRequired: false
@@ -254,7 +254,7 @@
       "extract_transcript": {
         name: "Extract Transcribed Speech",
         unfriendly_name: "extract_transcript",
-        description: "Extracts words from speech transcripts. Running this option on corpora not in the proper JSON format will cause the analysis to fail."
+        description: "Extracts words from speech transcripts. Transcripts must be in the appropriate JSON format."
       },
     };
 
