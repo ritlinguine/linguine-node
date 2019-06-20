@@ -3,7 +3,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var del = require('del');
-var watch = require('gulp-watch');
 var less = require('gulp-less');
 var istanbul = require('gulp-istanbul');
 var mocha = require('gulp-mocha');
@@ -14,71 +13,70 @@ var paths = {
   scripts: ['assets/js/linguine.module.js', 'assets/js/corpora/corpora.module.js', 'assets/js/analysis/analysis.module.js', 'assets/js/**/*.js'],
   stylesheets: 'assets/stylesheets/**/*.less',
   images: 'assets/img/*'
-}
+};
 
-gulp.task('clean', function(cb){
-  del(['public/js', 'public/css'], cb);
-});
+clean = function(){
+  return del(['public/js', 'public/css']);
+};
 
-gulp.task('scripts', function(){
-  gulp.src(paths.scripts)
+scripts = function(){
+  return gulp.src(paths.scripts)
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(concat('app.min.js'))
     .pipe(gulp.dest('public/js'));
-});
+};
 
-gulp.task('scripts-dev', function(){
-  gulp.src(paths.scripts)
+scripts_dev = function(){
+  return gulp.src(paths.scripts)
     .pipe(ngAnnotate())
     .pipe(concat('app.min.js'))
     .pipe(gulp.dest('public/js'));
-});
+};
 
-gulp.task('stylesheets', function(){
-  gulp.src(paths.stylesheets)
+stylesheets = function(){
+  return gulp.src(paths.stylesheets)
     .pipe(less())
     .pipe(gulp.dest('public/css'));
-});
+};
 
-gulp.task('images', function() {
-  gulp.src(paths.images)
+images = function() {
+  return gulp.src(paths.images)
     .pipe(gulp.dest('public/img'));
-});
+};
 
 
-gulp.task('watch', function(){
-  watch(paths.scripts, function(files, cb){
-    gulp.start('scripts-dev', cb);
-  });
-  watch(paths.stylesheets, function(files, cb){
-    gulp.start('stylesheets', cb);
-  });
-});
+watch = function(){
+  gulp.watch(paths.scripts, { ignoreInitial: false }, scripts_dev);
+  gulp.watch(paths.stylesheets, { ignoreInitial: false }, stylesheets);
+  gulp.watch(paths.images, { ignoreInitial: false }, images);
+};
 
-gulp.task('mocha', function () {
-  gulp.src(['models/*.js', 'routes/*.js', 'app.js'])
+mocha_tests = function () {
+  return gulp.src(['models/*.js', 'routes/*.js', 'app.js'])
     .pipe(istanbul())
     .on('finish', function () {
       gulp.src(['test/**/*.js', '!test/angular/**/*.js'])
         .pipe(mocha())
         .pipe(istanbul.writeReports())
     });
-});
+};
 
 /**
  * Run test once and exit
  */
-gulp.task('karma', function (done) {
+karma_tests = function (done) {
   var server = new karma.Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
-  server.start();
-});
+  return server.start();
+};
 
-gulp.task('test', ['mocha', 'karma']);
+exports.clean = clean;
 
-gulp.task('build', ['scripts', 'stylesheets', 'images'])
+exports.test = gulp.series(mocha_tests, karma_tests);
 
-gulp.task('default',['watch', 'scripts-dev', 'stylesheets', 'images']);
+exports.build = gulp.series(scripts, stylesheets, images);
+
+exports.default = watch;
