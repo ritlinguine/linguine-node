@@ -7,7 +7,7 @@ var watch = require('gulp-watch');
 var less = require('gulp-less');
 var istanbul = require('gulp-istanbul');
 var mocha = require('gulp-mocha');
-var karma = require('karma').server;
+var karma = require('karma');
 
 
 var paths = {
@@ -70,10 +70,11 @@ gulp.task('mocha', function () {
  * Run test once and exit
  */
 gulp.task('karma', function (done) {
-  karma.start({
+  var server = new karma.Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done);
+  server.start();
 });
 
 gulp.task('test', ['mocha', 'karma']);

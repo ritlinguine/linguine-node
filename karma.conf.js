@@ -15,10 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'public/bower_components/ng-file-upload/angular-file-upload-html5-shim.min.js',
       'public/bower_components/angular/angular.min.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
-      'public/bower_components/d3-cloud/d3.layout.cloud.js',
       'public/bower_components/d3/d3.min.js',
       'public/bower_components/d3-cloud/build/d3.layout.cloud.js',
       'public/bower_components/lodash/dist/lodash.min.js',
