@@ -1079,7 +1079,7 @@
     console.log($scope.results);
     var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-j2zy{background-color:#FCFBE3;vertical-align:top} .tg .tg-yw4l{vertical-align:top}';
     for (var item in $scope.results) {
-      var title = '<br><h3 class=' + style + '">' + item + ':</h3>';
+      var title = '<br><h3 class=' + style + '">Topic ' + item + ':</h3>';
       var table = '<table class=' + style + '">';
       table += '<tr style="border-bottom: 1px solid black;"><th class="tg-y4wl">Word</th><th class="tg-y4wl">&nbsp;&nbsp;</th><th class="tg-y4wl">Probability</th><th></th></tr>';
       for (var word in $scope.results[item]) {
