@@ -1,24 +1,18 @@
 describe('CorporaNewController', function() {
-    var createController, $controller, $scope, $rootScope, $httpBackend, $upload, $state;
+    var createController, $controller, $scope, $rootScope, $httpBackend, $upload, $state, flash;
 
     beforeEach(module('linguine'));
     beforeEach(inject(function($injector) {
         $rootScope = $injector.get('$rootScope');
-        $scope = $rootScope.$new;
+        $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
         $controller = $injector.get('$controller');
         $upload = $injector.get('$upload');
         $state = $injector.get('$state');
-        createController = function() {
-            return $controller('CorporaNewController', {
-                $scope: $scope,
-                $uplaod: $upload,
-                $state: $state
-            });
-        }
-        $httpBackend.whenGET('/templates/home/index').respond(200, '');
-        $httpBackend.whenGET('/templates/corpora/index').respond(200, '');
-        $httpBackend.whenGET('/api/logged_in').respond(200, {
+        flash = $injector.get('flash');
+        $httpBackend.whenGET('templates/home/index').respond(200, '');
+        $httpBackend.whenGET('templates/corpora/index').respond(200, '');
+        $httpBackend.whenGET('api/logged_in').respond(200, {
             loggedIn: true,
             user: {
                 dce: 'jd1234',
@@ -26,6 +20,14 @@ describe('CorporaNewController', function() {
                 _id: 1
             }
         });
+        createController = function() {
+            return $controller('CorporaNewController', {
+                $scope: $scope,
+                $upload: $upload,
+                $state: $state,
+                flash: flash
+            });
+        }
     }));
 
     describe('onCreateCorpus', function() {
