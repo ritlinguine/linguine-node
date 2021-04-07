@@ -12,6 +12,7 @@
     $scope.sentenceIndex = 0;
     $scope.corefEntities = [];
     $scope.corefEntitiesTable = [];
+    $scope.relationTriples = [];
 
     $scope.setSentence = function(index) {
         if(index != $scope.sentenceIndex) {
@@ -836,7 +837,83 @@
   }
 
   $scope.visualizeRelation = function() {
-    $scope.renderPlainText('relation');
+      var canvas = document.getElementById('plaintext-canvas');
+      if (canvas) {
+          canvas.remove();
+      }
+
+      var textDiv = document.getElementById("graph");
+      var textNode = document.createElement('div');
+
+      textNode.setAttribute("class", "ner-text");
+      textNode.setAttribute("id", "plaintext-canvas");
+
+      var tokens = {};
+      var colors = []
+      var relationId = 1;
+
+      $scope.analysis.result.sentences.forEach(function (obj, sentenceIndex){
+         tokens[sentenceIndex] = {};
+         obj.tokens.forEach(function (word, tokenIndex) {
+            tokens[sentenceIndex][tokenIndex] = word;
+          })
+
+          var color = getColor(sentenceIndex + 1);
+          colors.push(color);
+          obj.relations.forEach(function (relation, relationIndex) {
+              $scope.relationTriples.push({
+                  'relation': relation.relation.lemma,
+                  'subject': relation.subject.lemma,
+                  'object': relation.object.lemma,
+                  'color': color,
+                  'id': relationId
+              })
+              relationId += 1;
+          })
+      });
+
+      Object.keys(tokens).forEach(function(sk) {
+
+          Object.keys(tokens[sk]).forEach(function (wk) {
+             var word = tokens[sk][wk];
+             var wordspace = document.createElement('span');
+
+              var relationTitle = '';
+              wordspace.innerHTML += word.token + " ";
+
+              $scope.analysis.result.sentences[sk].relations.forEach(function(relation) {
+                  var startInd = relation.subject.start;
+                  var endInd = relation.object.end - 1;
+
+                  if(wk >= startInd && wk <= endInd) {
+                      wordspace.style.fontWeight = 'bold';
+                      wordspace.style.textDecoration = 'underline';
+                      wordspace.style.backgroundColor = colors[sk];
+
+                      var relationTriple = relation.relation.lemma + ' (' + relation.subject.lemma + ', ' + relation.object.lemma + ')';
+                      relationTitle += relationTriple + '\n';
+                  }
+              });
+
+              wordspace.setAttribute('title', relationTitle);
+              textNode.appendChild(wordspace);
+          })
+      });
+      textDiv.appendChild(textNode);
+
+      // build the table
+      var style = '.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;} .tg td{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;border-top-width:1px;border-bottom-width:1px;} .tg th{font-family:"Lucida Console", Monaco, monospace !important;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;border-top-width:1px;border-bottom-width:1px;} .tg .tg-yw4l{vertical-align:top}';
+      var table = '<table class="' + style + '">';
+      table += '<tr style="border-bottom: 1pt solid black;"><th class="tg-031e" style="text-align: center;">ID</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Relation</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">First Argument</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class="tg-yw4l">Second Argument</th></tr>';
+
+      for(var i in $scope.relationTriples) {
+          table += '<tr style="border-bottom: 1pt solid black;"><td style="background-color: black; color: ' + $scope.relationTriples[i].color + '; text-align: center;"><b>' + $scope.relationTriples[i].id + '</b></td>';
+          table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.relationTriples[i].relation + '</b></td>';
+          table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.relationTriples[i].subject + '</b></td>';
+          table += '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><b>' + $scope.relationTriples[i].object + '</b></td>';
+      }
+      table += '</table>';
+      document.getElementById('graph').innerHTML += table;
   }
 
   function sortObjectByKey(obj) {
